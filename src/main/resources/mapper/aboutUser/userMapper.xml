@@ -10,11 +10,11 @@
     </select>
     <resultMap id="getUserInfo" type="com.coco.model.dto.User">
         <id property="id" column="id"/>
-        <result property="userAccount" column="userAccount" />
-        <result property="userPass" column="userPass" />
-        <result property="phone" column="phone" />
-        <result property="email" column="email" />
-        <result property="joinData" column="joinData" />
+        <result property="userAccount" column="userAccount"/>
+        <result property="userPass" column="userPass"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="joinData" column="joinData"/>
         <collection property="roleTables" ofType="com.coco.model.dto.RoleTable">
             <id column="roleId" property="id"/>
             <result column="role" property="role"/>
@@ -57,6 +57,17 @@
         where userId=#{userId}
     </update>
 
+    <insert id="insertUserInfos">
+        insert into userinfors values(null,NOW(),18,"男","暂无兴趣爱好","这个人很懒,什么都没有留下...",#{userId})
+    </insert>
+
+    <select id="getUserDataByUserAccount" resultType="com.coco.model.dto.UserData">
+        select u.userAccount userAccount,u.phone userPhone,u.email userEmail,u.joinData userJoinData,ui.birth userBirth,ui.age userAge,uh.url userHeadImage
+        from user u,userinfors ui,userheadimg uh
+        where u.userAccount=#{userAccount}
+        and ui.userId=u.id
+        and uh.userId=u.id
+    </select>
     <!--<select id="getUserByUserAccount" resultMap="getUserInfo">
         select u.*,r.*,p.*,r.id as roleId,p.id as permId
         from user u,roletable r,userrole ur,permissiontable p,rolepermission rp

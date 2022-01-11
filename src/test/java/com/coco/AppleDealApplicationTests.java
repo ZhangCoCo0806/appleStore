@@ -43,7 +43,8 @@ class AppleDealApplicationTests {
         String newUrl=oldUrl.substring(57);
         System.out.println(newUrl);*/
 //        System.out.println(userDao.getUserInfosByUserId(userDao.getUserIdByUserAccount("zhangshiqi")));
-        System.out.println(userDao.updateUserInfosByUserId(new UserInfos(null, DateUtil.util2sql(DateUtil.str2util("1997-08-08")),10,"男","踢足球","阿萨德很骄傲开始",22)));
+//        System.out.println(userDao.updateUserInfosByUserId(new UserInfos(null, DateUtil.util2sql(DateUtil.str2util("1997-08-08")),10,"男","踢足球","阿萨德很骄傲开始",22)));
+//        System.out.println(userDao.insertUserInfos(24));
     }
 
 }

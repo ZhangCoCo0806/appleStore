@@ -8,9 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/swiper-3.4.2.min.css">
@@ -26,14 +29,15 @@
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand glyphicon glyphicon-plane" href="index">
-                        <span ></span>
+                        <span></span>
                     </a>
                 </div>
 
@@ -43,7 +47,8 @@
                         <li class=""><a href="index">首页 <span class="sr-only">(current)</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        <li v-for="type in goodsType"><a :href="'getGoodsByTypeId?typeId='+type.id">{{type.typename}}</a></li>
+                        <li v-for="type in goodsType"><a
+                                :href="'getGoodsByTypeId?typeId='+type.id">{{type.typename}}</a></li>
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="form-group">
@@ -56,14 +61,17 @@
                             <a href="#">欢迎您:[[${session.userLoginName}]]</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle personal-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人中心 <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle personal-center" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">个人中心 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="btnSelf" @click="showSelfInfos"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;修改个人信息</a></li>
-                                <li class=""><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;查看个人信息</a></li>
+                                <li class="checkUserInfo" @click="getUserData"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;查看个人详细信息</a></li>
+                                <li class=""><a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;添加地址信息</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a></li>
-                                <li><a href="logOut"><span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a></li>
+                                <li><a href="logOut"><span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a>
+                                </li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;其他</a></li>
                             </ul>
@@ -71,7 +79,8 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right" th:unless="${session.userLoginName}">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">请登录或注册 <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">请登录或注册 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="toLogin">登录</a></li>
                                 <li><a class="signBtn">注册</a></li>
@@ -85,7 +94,8 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">用户注册</h4>
                     </div>
                     <div class="modal-body">
@@ -94,40 +104,53 @@
                                 <label class="control-label" for="userName">请设置用户名</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')" v-model.trim="userInfo.userAccount" class="form-control" id="userName" placeholder="请设置用户名" aria-describedby="inputGroupSuccess1Status">
+                                    <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
+                                           v-model.trim="userInfo.userAccount" class="form-control" id="userName"
+                                           placeholder="请设置用户名" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
                                 <label class="control-label" for="userPass1">请设置登录密码</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')" v-model.trim="userInfo.userPass" class="form-control" id="userPass1" placeholder="请设置登录密码" aria-describedby="inputGroupSuccess1Status">
+                                    <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
+                                           v-model.trim="userInfo.userPass" class="form-control" id="userPass1"
+                                           placeholder="请设置登录密码" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
                                 <label class="control-label" for="userPass2">请再次输入密码</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')" class="form-control" id="userPass2" placeholder="请再次输入密码" aria-describedby="inputGroupSuccess1Status">
+                                    <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
+                                           class="form-control" id="userPass2" placeholder="请再次输入密码"
+                                           aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
                                 <label class="control-label" for="userEmail">请输入您的邮箱</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input type="email" onkeyup="this.value=this.value.replace(/[, ]/g,'')" v-model.trim="userInfo.email" class="form-control" id="userEmail" placeholder="请输入您的邮箱" aria-describedby="inputGroupSuccess1Status">
+                                    <input type="email" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
+                                           v-model.trim="userInfo.email" class="form-control" id="userEmail"
+                                           placeholder="请输入您的邮箱" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
                                 <label class="control-label" for="userPhone">请输入您的手机号</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                    <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')" v-model.trim="userInfo.phone" class="form-control" id="userPhone" placeholder="请输入您的手机号" aria-describedby="inputGroupSuccess1Status">
+                                    <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
+                                           v-model.trim="userInfo.phone" class="form-control" id="userPhone"
+                                           placeholder="请输入您的手机号" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
-                            <!--<button type="submit" class="btn btn-primary">确认注册</button>-->
-                            <button type="button" @click="sendUserInfo" class="btn userIn btn-primary" data-toggle="tooltip" data-placement="top" title="同意获取您的信息">确认注册</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="tooltip" data-placement="top" title="确认取消注册?">取消注册</button>
+                            <button type="button" @click="sendUserInfo" class="btn userIn btn-primary"
+                                    data-toggle="tooltip" data-placement="top" title="同意获取您的信息">确认注册
+                            </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="tooltip"
+                                    data-placement="top" title="确认取消注册?">取消注册
+                            </button>
                         </form>
                     </div>
                 </div><!-- /.modal-content -->
@@ -137,7 +160,8 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">修改个人信息</h4>
                     </div>
                     <div class="modal-body">
@@ -150,11 +174,13 @@
                         <form>
                             <div class="form-group">
                                 <label for="birth">生日</label>
-                                <input type="date" class="form-control" id="birth" v-model="userInfos.birth" placeholder="生日">
+                                <input type="date" class="form-control" id="birth" v-model="userInfos.birth"
+                                       placeholder="生日">
                             </div>
                             <div class="form-group">
                                 <label for="age">年龄</label>
-                                <input type="number" class="form-control" v-model="userInfos.age" id="age" placeholder="年龄">
+                                <input type="number" class="form-control" v-model="userInfos.age" id="age"
+                                       placeholder="年龄">
                             </div>
                             <div class="form-group">
                                 <label for="age">性别:</label>
@@ -164,18 +190,17 @@
                             </div>
                             <div class="form-group">
                                 <label for="hobbies">兴趣爱好</label>
-                                <input type="text" class="form-control" v-model="userInfos.hobbies" id="hobbies" placeholder="兴趣爱好">
+                                <input type="text" class="form-control" v-model="userInfos.hobbies" id="hobbies"
+                                       placeholder="兴趣爱好">
                             </div>
                             <div class="form-group">
                                 <label for="introduce">个人介绍</label>
                                 <textarea id="introduce" v-model="userInfos.introduce" placeholder="个人介绍"></textarea>
                             </div>
-                            <!--<button type="button"  class="btn btn-default " data-dismiss="modal">确认</button>-->
-                            <el-button @click="sendUserInfos" type="success" round v-loading.fullscreen.lock="fullscreenLoading">提交</el-button>
-                            <!--<el-button type="primary" @click="openFullScreen1" v-loading.fullscreen.lock="fullscreenLoading">指令方式</el-button>-->
+                            <el-button @click="sendUserInfos" type="success" round
+                                       v-loading.fullscreen.lock="fullscreenLoading">提交
+                            </el-button>
                         </form>
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
@@ -184,6 +209,69 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+
+        <div class="modal fade checkUserInfos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">基本信息</h4>
+                        <img id="selfImage" :src="userData.userHeadImage"  class="img-circle">
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <el-descriptions class="margin-top" title="" :column="3" border>
+                                <el-descriptions-item>
+                                    <template slot="label">
+                                        <i class="el-icon-user"></i>
+                                        用户名
+                                    </template>
+                                    {{userData.userAccount}}
+                                </el-descriptions-item>
+                                <el-descriptions-item>
+                                    <template slot="label">
+                                        <i class="el-icon-mobile-phone"></i>
+                                        手机号
+                                    </template>
+                                    {{userData.userPhone}}
+                                </el-descriptions-item>
+                                <el-descriptions-item>
+                                    <template slot="label">
+                                        <i class="el-icon-s-promotion"></i>
+                                        邮箱
+                                    </template>
+                                    {{userData.userEmail}}
+                                </el-descriptions-item>
+                                <el-descriptions-item>
+                                    <template slot="label">
+                                        <i class="el-icon-loading"></i>
+                                        注册日期
+                                    </template>
+                                    {{userData.userJoinData}}
+                                </el-descriptions-item>
+                                <el-descriptions-item>
+                                    <template slot="label">
+                                        <i class="el-icon-loading"></i>
+                                        生日
+                                    </template>
+                                    {{userData.userBirth}}
+                                </el-descriptions-item>
+                                <el-descriptions-item>
+                                    <template slot="label">
+                                        <i class="el-icon-loading"></i>
+                                        年龄
+                                    </template>
+                                    {{userData.userAge}}
+                                </el-descriptions-item>
+                            </el-descriptions>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="slider-box">
         <div class="swiper-container">
@@ -213,88 +301,87 @@
 
 
 <script>
-    var vm=new Vue({
-        el:'#app',
-        data:{
-            goodsType:'',
-            userInfo:{
-                userAccount:'',
-                userPass:'',
-                phone:'',
-                email:''
-            },
-            userInfos:{
-                id:"",
-                birth:'1997-08-06',
-                age:18,
-                sex:'男',
-                hobbies:'打游戏',
-                introduce:'这个人很懒',
-                userId:""
-            },
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            goodsType: '',
+            userInfo: {},
+            userInfos: {},
+            userData:{},
             fullscreenLoading: false
         },
-        methods:{
-            /*openFullScreen1() {
-                this.fullscreenLoading = true;
-                setTimeout(() => {
-                    this.fullscreenLoading = false;
-                }, 2000);
-            },*/
-            sendUserInfos:function(){
+        methods: {
+            getUserData:function(){
                 let _this=this
-                let user =JSON.stringify(_this.userInfos);
                 $.ajax({
-                    type:"put",
-                    url:"updateUserInfos",
-                    data:user,
-                    contentType: "application/json;charset=utf-8",
+                    url:"getUserDataByUserId",
+                    type:"get",
                     success:function (date) {
-                        _this.fullscreenLoading = true;
+                        console.log(date)
+                        _this.userData=date
+                    }
+                })
+            },
+            sendUserInfos: function () {
+                let _this = this
+                let user = JSON.stringify(_this.userInfos);
+                $.ajax({
+                    type: "put",
+                    url: "updateUserInfos",
+                    data: user,
+                    contentType: "application/json;charset=utf-8",
+                    success: function (date) {
+                        const loading = _this.$loading({
+                            lock: true,
+                            text: '正在提交中,爱你呦小宝贝!',
+                            spinner: 'el-icon-loading',
+                            background: 'rgba(0, 0, 0, 0.7)'
+                        });
                         setTimeout(() => {
-                            _this.fullscreenLoading = false;
-                            _this.userInfos=date
+                            loading.close();
                             _this.$notify({
                                 title: '恭喜您,基础资料修改成功',
                                 message: '一生败在太要脸，爱钱爱得不明显!恭喜你小可爱,基础资料修改成功!!!!',
                                 type: 'success'
                             });
+
+                            _this.userInfos = date
                         }, 2000);
                     }
                 })
             },
-            showSelfInfos:function(){
-                let _this=this
+            showSelfInfos: function () {
+                let _this = this
                 console.log(_this.userInfos)
                 $.ajax({
-                    type:"get",
-                    url:"getUserInfos",
-                    success:function (date) {
+                    type: "get",
+                    url: "getUserInfos",
+                    success: function (date) {
                         console.log(date)
-                        _this.userInfos=date
+                        _this.userInfos = date
                     }
 
                 })
                 console.log("asdk")
             },
-            sendUserInfo:function () {
-                let _this=this;
-                let userInfo=_this.userInfo
-                let user=JSON.stringify(userInfo);
+            sendUserInfo: function () {
+                let _this = this;
+                let userInfo = _this.userInfo
+                let user = JSON.stringify(userInfo);
                 $.ajax({
                     type: "POST",
                     url: "getUserInfo",
-                    data:user,
+                    data: user,
                     contentType: "application/json;charset=utf-8",
-                    success:function (data) {
-                        if(data==='ok'){
+                    success: function (data) {
+                        if (data === 'ok') {
                             _this.$notify({
                                 title: '注册成功',
                                 message: '恭喜您注册成功!快去完善你的基本信息叭!!!!',
                                 type: 'success'
                             });
                             $(".userSign").modal('hide')
-                        }else {
+                        } else {
                             _this.$notify.error({
                                 title: '注册失败',
                                 message: '对不起,小可爱,您注册账号失败!注册账号也要讲究天时,地利,人和呀!!!'
@@ -303,8 +390,8 @@
                     }
                 })
             },
-            upLoadUserImg:function () {
-                let _this=this
+            upLoadUserImg: function () {
+                let _this = this
                 let formData = new FormData();
                 formData.append("file", $(".fileInputImg")[0].files[0]);
                 $.ajax({
@@ -314,15 +401,15 @@
                     processData: false, // 告诉jQuery不要去处理发送的数据
                     contentType: false, // 告诉jQuery不要去设置Content-Type请求头
                     dataType: 'text',
-                    success: function(data) {
-                        if(data!=='no'){
+                    success: function (data) {
+                        if (data !== 'no') {
                             $("#userHeadImages").attr("src", data);
                             _this.$message({
                                 showClose: true,
                                 message: '恭喜你，头像修改成功!!!!',
                                 type: 'success'
                             });
-                        }else {
+                        } else {
                             _this.$message({
                                 showClose: true,
                                 message: '警告哦,头像修改失败!!!!',
@@ -333,20 +420,24 @@
                 });
             }
         },
-        mounted:function () {
-            let _this=this;
+        mounted: function () {
+            let _this = this;
             $.ajax({
-                url:'getAllGoodsType',
-                dataType:'json',
-                type:'get',
-                success:function (data) {
-                    _this.goodsType=data
+                url: 'getAllGoodsType',
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    _this.goodsType = data
                 }
             })
         }
 
     })
-    $(document).ready(function(){
+    $(document).ready(function () {
+
+        $(".checkUserInfo").click(function () {
+            $(".checkUserInfos").modal('show')
+        })
         $(".signBtn").click(function () {
             $(".userSign").modal('show')
         })
@@ -356,9 +447,9 @@
         })
         $(".personal-center").click(function () {
             $.ajax({
-                url:"getUserHeadImage",
-                type:'get',
-                success:function (data) {
+                url: "getUserHeadImage",
+                type: 'get',
+                success: function (data) {
                     $("#userHeadImages").attr("src", data);
                 }
             })
@@ -380,7 +471,7 @@
             stretch: 0,
             depth: 50,
             modifier: 1,
-            slideShadows : true
+            slideShadows: true
         }
     });
 </script>
