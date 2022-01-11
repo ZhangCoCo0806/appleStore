@@ -48,6 +48,15 @@
         insert into userheadimg values(null,#{userId},'http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/morenImageHead.png')
     </insert>
 
+    <select id="getUserInfosByUserId" resultType="com.coco.model.pojo.UserInfos">
+        select * from userInfors where userId=#{userId};
+    </select>
+
+    <update id="updateUserInfosByUserId">
+        update userinfors set birth=#{birth},age=#{age},sex=#{sex},hobbies=#{hobbies},introduce=#{introduce}
+        where userId=#{userId}
+    </update>
+
     <!--<select id="getUserByUserAccount" resultMap="getUserInfo">
         select u.*,r.*,p.*,r.id as roleId,p.id as permId
         from user u,roletable r,userrole ur,permissiontable p,rolepermission rp

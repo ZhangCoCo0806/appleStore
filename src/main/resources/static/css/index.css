@@ -54,3 +54,10 @@ body{
     width: 60px;
     height: 60px;
 }
+#introduce{
+    width: 507px;
+    height: 106px;
+    border: 1px gray solid;
+    border-radius: 5px;
+    resize: none;
+}

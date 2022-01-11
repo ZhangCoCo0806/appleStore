@@ -1,6 +1,7 @@
 package com.coco.service.aboutUser;
 
 import com.coco.model.dto.User;
+import com.coco.model.pojo.UserInfos;
 import com.coco.model.pojo.UserPojo;
 import com.coco.model.pojo.UserRolePojo;
 import org.apache.ibatis.annotations.Param;
@@ -55,4 +56,18 @@ public interface IUserService {
      * @return 受影响记录数
      */
     int insertUserHeadImage(int userId);
+
+    /**
+     * 根据用户id获取用户的个人资料
+     * @param userId 用户id
+     * @return 用户个人资料
+     */
+    UserInfos getUserInfosByUserId(int userId);
+
+    /**
+     * 根据用户id修改用户的个人资料
+     * @param userInfos 用户提交的个人资料
+     * @return 受影响记录数
+     */
+    int updateUserInfosByUserId(UserInfos userInfos);
 }

@@ -58,7 +58,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle personal-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人中心 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li class="btnSelf"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;修改个人信息</a></li>
+                                <li class="btnSelf" @click="showSelfInfos"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;修改个人信息</a></li>
                                 <li class=""><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;查看个人信息</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
@@ -94,7 +94,7 @@
                                 <label class="control-label" for="userName">请设置用户名</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')" @click="checkContext" v-model.trim="userInfo.userAccount" class="form-control" id="userName" placeholder="请设置用户名" aria-describedby="inputGroupSuccess1Status">
+                                    <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')" v-model.trim="userInfo.userAccount" class="form-control" id="userName" placeholder="请设置用户名" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
@@ -143,31 +143,38 @@
                     <div class="modal-body">
                         <h3>修改头像</h3>
                         <div class="user_img">
-                            <img id="userHeadImages" src="img/demo-1-bg.jpg" alt="" class="img-circle">
+                            <img id="userHeadImages" src="" alt="" class="img-circle">
                         </div>
                         <p><input type="file" class="fileInputImg"></p>
                         <el-button @click="upLoadUserImg" type="primary">确认修改头像</el-button>
                         <form>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                <label for="birth">生日</label>
+                                <input type="date" class="form-control" id="birth" v-model="userInfos.birth" placeholder="生日">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="age">年龄</label>
+                                <input type="number" class="form-control" v-model="userInfos.age" id="age" placeholder="年龄">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputFile">File input</label>
-                                <input type="file" id="exampleInputFile">
-                                <p class="help-block">Example block-level help text here.</p>
+                                <label for="age">性别:</label>
+
+                                <label for="nan">男</label><input type="radio" v-model="userInfos.sex" value="男" id="nan" name="sex">
+                                <label for="nv">女</label><input type="radio" v-model="userInfos.sex" value="女" id="nv" name="sex">
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Check me out
-                                </label>
+                            <div class="form-group">
+                                <label for="hobbies">兴趣爱好</label>
+                                <input type="text" class="form-control" v-model="userInfos.hobbies" id="hobbies" placeholder="兴趣爱好">
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <div class="form-group">
+                                <label for="introduce">个人介绍</label>
+                                <textarea id="introduce" v-model="userInfos.introduce" placeholder="个人介绍"></textarea>
+                            </div>
+                            <!--<button type="button"  class="btn btn-default " data-dismiss="modal">确认</button>-->
+                            <el-button @click="sendUserInfos" type="success" round v-loading.fullscreen.lock="fullscreenLoading">提交</el-button>
+                            <!--<el-button type="primary" @click="openFullScreen1" v-loading.fullscreen.lock="fullscreenLoading">指令方式</el-button>-->
                         </form>
+
 
                     </div>
                     <div class="modal-footer">
@@ -215,13 +222,65 @@
                 userPass:'',
                 phone:'',
                 email:''
-            }
+            },
+            userInfos:{
+                id:"",
+                birth:'1997-08-06',
+                age:18,
+                sex:'男',
+                hobbies:'打游戏',
+                introduce:'这个人很懒',
+                userId:""
+            },
+            fullscreenLoading: false
         },
         methods:{
+            /*openFullScreen1() {
+                this.fullscreenLoading = true;
+                setTimeout(() => {
+                    this.fullscreenLoading = false;
+                }, 2000);
+            },*/
+            sendUserInfos:function(){
+                let _this=this
+                let user =JSON.stringify(_this.userInfos);
+                $.ajax({
+                    type:"put",
+                    url:"updateUserInfos",
+                    data:user,
+                    contentType: "application/json;charset=utf-8",
+                    success:function (date) {
+                        _this.fullscreenLoading = true;
+                        setTimeout(() => {
+                            _this.fullscreenLoading = false;
+                            _this.userInfos=date
+                            _this.$notify({
+                                title: '恭喜您,基础资料修改成功',
+                                message: '一生败在太要脸，爱钱爱得不明显!恭喜你小可爱,基础资料修改成功!!!!',
+                                type: 'success'
+                            });
+                        }, 2000);
+                    }
+                })
+            },
+            showSelfInfos:function(){
+                let _this=this
+                console.log(_this.userInfos)
+                $.ajax({
+                    type:"get",
+                    url:"getUserInfos",
+                    success:function (date) {
+                        console.log(date)
+                        _this.userInfos=date
+                    }
+
+                })
+                console.log("asdk")
+            },
             sendUserInfo:function () {
-                var _this=this;
-                var userInfo=_this.userInfo
-                var user=JSON.stringify(userInfo);
+                let _this=this;
+                let userInfo=_this.userInfo
+                let user=JSON.stringify(userInfo);
                 $.ajax({
                     type: "POST",
                     url: "getUserInfo",
@@ -245,8 +304,8 @@
                 })
             },
             upLoadUserImg:function () {
-                var _this=this
-                var formData = new FormData();
+                let _this=this
+                let formData = new FormData();
                 formData.append("file", $(".fileInputImg")[0].files[0]);
                 $.ajax({
                     url: "userImgUpload",
@@ -275,7 +334,7 @@
             }
         },
         mounted:function () {
-            var _this=this;
+            let _this=this;
             $.ajax({
                 url:'getAllGoodsType',
                 dataType:'json',
@@ -309,7 +368,7 @@
 </script>
 <script src="js/swiper-3.4.2.min.js"></script>
 <script>
-    var swiper = new Swiper('.swiper-container', {
+    let swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         effect: 'coverflow',
         grabCursor: true,
@@ -326,7 +385,8 @@
     });
 </script>
 <script>
-    window.onload=function(){
+    // 禁止查看源代码
+    /*window.onload=function(){
         document.onkeydown=function(){
             var e=window.event||arguments[0];
             if(e.keyCode==123){
@@ -341,7 +401,7 @@
             alert("小样不给你看");
             return false;
         }
-    }
+    }*/
 
 </script>
 </body>

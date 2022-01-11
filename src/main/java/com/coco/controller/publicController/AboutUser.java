@@ -1,5 +1,6 @@
 package com.coco.controller.publicController;
 
+import com.coco.model.pojo.UserInfos;
 import com.coco.model.pojo.UserPojo;
 import com.coco.model.pojo.UserRolePojo;
 import com.coco.service.aboutUser.OssUpLoad;
@@ -92,13 +93,12 @@ public class AboutUser {
      */
     @ApiOperation("用户头像修改接口")
     @PutMapping("/userImgUpload")
-    @ResponseBody//MultipartFile
+    @ResponseBody
     public String userImgUpload(@ApiParam("MultipartFile对象") MultipartFile file,HttpSession session){
         String userName=(String) session.getAttribute("userLoginName");
         String urlStr="";
         try{
             String oldImageUrl = userService.getUserHeadImageUrl(userService.getUserIdByUserAccount(userName));
-
             if ("http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/morenImageHead.png".equals(oldImageUrl)){
                 //   如果是默认头像的url,则直接修改
                 urlStr = ossUpLoad.upload(file, "apple-shop-all-images", "userHeaderImages");
@@ -109,7 +109,6 @@ public class AboutUser {
                 urlStr = ossUpLoad.upload(file, "apple-shop-all-images", "userHeaderImages");
                 userService.updateUserHeadImage(userService.getUserIdByUserAccount(userName),urlStr);
             }
-
         }catch (Exception e){
             return "no";
         }
@@ -121,6 +120,7 @@ public class AboutUser {
      * @param session session
      * @return 用户的url
      */
+    @ApiOperation("用户登录以后获取用户的头像url用于显示")
     @GetMapping("/getUserHeadImage")
     @ResponseBody
     public String getUserHeadImage(HttpSession session){
@@ -128,9 +128,46 @@ public class AboutUser {
         return userService.getUserHeadImageUrl(userService.getUserIdByUserAccount(userName));
     }
 
+    /**
+     * 用户退出
+     * @param session session
+     * @return 退出到首页
+     */
+    @ApiOperation("用户退出")
     @GetMapping("/logOut")
     public String logOut(HttpSession session){
         session.removeAttribute("userLoginName");
         return "redirect:/index";
+    }
+
+    /**
+     * 获取用户个人资料用于显示
+     * @param session session
+     * @return 用户的个人资料
+     */
+    @ApiOperation("获取用户的个人信息")
+    @GetMapping("/getUserInfos")
+    @ResponseBody
+    public UserInfos getUserInfos(HttpSession session){
+        String userName=(String) session.getAttribute("userLoginName");
+        UserInfos userInfosByUserId = userService.getUserInfosByUserId(userService.getUserIdByUserAccount(userName));
+//        System.out.println(userInfosByUserId);
+        return userInfosByUserId;
+    }
+
+    /**
+     * 用户基础信息修改
+     * @param userInfos 用户基础信息
+     * @return 修改成功后的新的信息
+     */
+    @PutMapping("/updateUserInfos")
+    @ResponseBody
+    public UserInfos updateUserInfos(@RequestBody UserInfos userInfos){
+        if (userService.updateUserInfosByUserId(userInfos)>0){
+            UserInfos userInfo = userService.getUserInfosByUserId(userInfos.getUserId());
+            return userInfo;
+        }else {
+            return new UserInfos();
+        }
     }
 }

@@ -3,9 +3,11 @@ package com.coco;
 import com.coco.dao.aboutGoods.GoodsTypeDao;
 import com.coco.dao.aboutUser.IUserDao;
 import com.coco.dao.test.ItestDao;
+import com.coco.model.pojo.UserInfos;
 import com.coco.model.pojo.UserPojo;
 import com.coco.model.pojo.UserRolePojo;
 import com.coco.service.aboutUser.IUserService;
+import com.coco.utils.DateUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +22,9 @@ class AppleDealApplicationTests {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IUserDao userDao;
     @Test
     void contextLoads() {
 //        itestDao.getAll().forEach(System.out::println);
@@ -34,9 +39,11 @@ class AppleDealApplicationTests {
         /*   String objectName = "image_test01/ba4a54af-22b0-4d2e-885a-d5e1d0870af1.jpeg";
         http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/morenImageHead.png
         http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/fc227efe-e6c0-410e-97b8-6b9dbf89b81d.jpg*/
-        String oldUrl="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/morenImageHead.png";
+        /*String oldUrl="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/morenImageHead.png";
         String newUrl=oldUrl.substring(57);
-        System.out.println(newUrl);
+        System.out.println(newUrl);*/
+//        System.out.println(userDao.getUserInfosByUserId(userDao.getUserIdByUserAccount("zhangshiqi")));
+        System.out.println(userDao.updateUserInfosByUserId(new UserInfos(null, DateUtil.util2sql(DateUtil.str2util("1997-08-08")),10,"男","踢足球","阿萨德很骄傲开始",22)));
     }
 
 }
