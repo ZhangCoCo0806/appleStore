@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/swiper-3.4.2.min.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="header-title">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand glyphicon glyphicon-plane" href="index">
+                        <span ></span>
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class=""><a href="index">首页 <span class="sr-only">(current)</span></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li v-for="type in goodsType"><a :href="'getGoodsByTypeId?typeId='+type.id">{{type.typename}}</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="搜索商品">
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right" th:if="${session.userLoginName}">
+                        <li>
+                            <a href="#">欢迎您:[[${session.userLoginName}]]</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle personal-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人中心 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="btnSelf"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;修改个人信息</a></li>
+                                <li class=""><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;查看个人信息</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a></li>
+                                <li><a href="logOut"><span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;其他</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" th:unless="${session.userLoginName}">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">请登录或注册 <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="toLogin">登录</a></li>
+                                <li><a class="signBtn">注册</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="modal fade userSign" tabindex="1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">用户注册</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post">
+                            <div class="form-group has-feedback">
+                                <label class="control-label" for="userName">请设置用户名</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')" @click="checkContext" v-model.trim="userInfo.userAccount" class="form-control" id="userName" placeholder="请设置用户名" aria-describedby="inputGroupSuccess1Status">
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label class="control-label" for="userPass1">请设置登录密码</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')" v-model.trim="userInfo.userPass" class="form-control" id="userPass1" placeholder="请设置登录密码" aria-describedby="inputGroupSuccess1Status">
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label class="control-label" for="userPass2">请再次输入密码</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')" class="form-control" id="userPass2" placeholder="请再次输入密码" aria-describedby="inputGroupSuccess1Status">
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label class="control-label" for="userEmail">请输入您的邮箱</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                    <input type="email" onkeyup="this.value=this.value.replace(/[, ]/g,'')" v-model.trim="userInfo.email" class="form-control" id="userEmail" placeholder="请输入您的邮箱" aria-describedby="inputGroupSuccess1Status">
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label class="control-label" for="userPhone">请输入您的手机号</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                                    <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')" v-model.trim="userInfo.phone" class="form-control" id="userPhone" placeholder="请输入您的手机号" aria-describedby="inputGroupSuccess1Status">
+                                </div>
+                            </div>
+                            <!--<button type="submit" class="btn btn-primary">确认注册</button>-->
+                            <button type="button" @click="sendUserInfo" class="btn userIn btn-primary" data-toggle="tooltip" data-placement="top" title="同意获取您的信息">确认注册</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="tooltip" data-placement="top" title="确认取消注册?">取消注册</button>
+                        </form>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div class="modal fade userInfoMo" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">修改个人信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h3>修改头像</h3>
+                        <div class="user_img">
+                            <img id="userHeadImages" src="img/demo-1-bg.jpg" alt="" class="img-circle">
+                        </div>
+                        <p><input type="file" class="fileInputImg"></p>
+                        <el-button @click="upLoadUserImg" type="primary">确认修改头像</el-button>
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <input type="file" id="exampleInputFile">
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Check me out
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                        <button type="button" class="btn btn-primary">关闭</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+    <div class="slider-box">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="http://zhangshiqitest.oss-cn-beijing.aliyuncs.com/userHeaderImages/%E6%B2%A1%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%AC%94%E8%AE%B0.png">
+                </div>
+                <div class="swiper-slide">
+                    <img src="http://zhangshiqitest.oss-cn-beijing.aliyuncs.com/userHeaderImages/%E6%B2%A1%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%AC%94%E8%AE%B0.png">
+                </div>
+                <div class="swiper-slide">
+                    <img src="http://zhangshiqitest.oss-cn-beijing.aliyuncs.com/userHeaderImages/%E6%B2%A1%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%AC%94%E8%AE%B0.png">
+                </div>
+                <div class="swiper-slide">
+                    <img src="http://zhangshiqitest.oss-cn-beijing.aliyuncs.com/userHeaderImages/%E6%B2%A1%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%AC%94%E8%AE%B0.png">
+                </div>
+                <div class="swiper-slide">
+                    <img src="http://zhangshiqitest.oss-cn-beijing.aliyuncs.com/userHeaderImages/%E6%B2%A1%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%AC%94%E8%AE%B0.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="context-box">
+
+    </div>
+</div>
+
+
+<script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            goodsType:'',
+            userInfo:{
+                userAccount:'',
+                userPass:'',
+                phone:'',
+                email:''
+            }
+        },
+        methods:{
+            sendUserInfo:function () {
+                var _this=this;
+                var userInfo=_this.userInfo
+                var user=JSON.stringify(userInfo);
+                $.ajax({
+                    type: "POST",
+                    url: "getUserInfo",
+                    data:user,
+                    contentType: "application/json;charset=utf-8",
+                    success:function (data) {
+                        if(data==='ok'){
+                            _this.$notify({
+                                title: '注册成功',
+                                message: '恭喜您注册成功!快去完善你的基本信息叭!!!!',
+                                type: 'success'
+                            });
+                            $(".userSign").modal('hide')
+                        }else {
+                            _this.$notify.error({
+                                title: '注册失败',
+                                message: '对不起,小可爱,您注册账号失败!注册账号也要讲究天时,地利,人和呀!!!'
+                            });
+                        }
+                    }
+                })
+            },
+            upLoadUserImg:function () {
+                var _this=this
+                var formData = new FormData();
+                formData.append("file", $(".fileInputImg")[0].files[0]);
+                $.ajax({
+                    url: "userImgUpload",
+                    type: "put",
+                    data: formData,
+                    processData: false, // 告诉jQuery不要去处理发送的数据
+                    contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                    dataType: 'text',
+                    success: function(data) {
+                        if(data!=='no'){
+                            $("#userHeadImages").attr("src", data);
+                            _this.$message({
+                                showClose: true,
+                                message: '恭喜你，头像修改成功!!!!',
+                                type: 'success'
+                            });
+                        }else {
+                            _this.$message({
+                                showClose: true,
+                                message: '警告哦,头像修改失败!!!!',
+                                type: 'warning'
+                            });
+                        }
+                    }
+                });
+            }
+        },
+        mounted:function () {
+            var _this=this;
+            $.ajax({
+                url:'getAllGoodsType',
+                dataType:'json',
+                type:'get',
+                success:function (data) {
+                    _this.goodsType=data
+                }
+            })
+        }
+
+    })
+    $(document).ready(function(){
+        $(".signBtn").click(function () {
+            $(".userSign").modal('show')
+        })
+        $('[data-toggle="tooltip"]').tooltip()
+        $(".btnSelf").click(function () {
+            $(".userInfoMo").modal('show')
+        })
+        $(".personal-center").click(function () {
+            $.ajax({
+                url:"getUserHeadImage",
+                type:'get',
+                success:function (data) {
+                    $("#userHeadImages").attr("src", data);
+                }
+            })
+        })
+    });
+
+</script>
+<script src="js/swiper-3.4.2.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        autoplay: 500,
+        coverflow: {
+            rotate: 50,
+            stretch: 0,
+            depth: 50,
+            modifier: 1,
+            slideShadows : true
+        }
+    });
+</script>
+<script>
+    window.onload=function(){
+        document.onkeydown=function(){
+            var e=window.event||arguments[0];
+            if(e.keyCode==123){
+                alert("小样你想干嘛？");
+                return false;
+            }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+                alert("还是不给你看。。");
+                return false;
+            }
+        };
+        document.oncontextmenu=function(){
+            alert("小样不给你看");
+            return false;
+        }
+    }
+
+</script>
+</body>
+</html>

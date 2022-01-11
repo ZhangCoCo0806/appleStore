@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    username: root
+    password: zsq662663
+    url: jdbc:mysql://localhost:3306/apple?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 1GB
+      max-file-size: 1GB
+      file-size-threshold: 30MB
+mybatis:
+  mapper-locations: classpath:mapper/**/*Mapper.xml
+  type-aliases-package: com.coco.model
+
+
+#spring:
+#  servlet:
+#    multipart:
+#      enabled: true #是否启用http上传处理
+#      max-request-size: 100MB #最大请求文件的大小
+#      max-file-size: 20MB #设置单个文件最大长度
+#      file-size-threshold: 20MB #当文件达到多少时进行磁盘写入
+#  ————————————————
+#  版权声明：本文为CSDN博主「羽毛_Feather」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+#  原文链接：https://blog.csdn.net/qq_33243189/article/details/89631495

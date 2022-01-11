@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coco.dao.aboutUser.IUserDao">
+    <select id="getUserByUserAccount" resultMap="getUserInfo">
+        select u.*,r.*,r.id as roleId
+        from user u,roletable r,userrole ur
+        where u.id=ur.userId and r.id=ur.roleId and u.userAccount=#{userAccount}
+    </select>
+    <resultMap id="getUserInfo" type="com.coco.model.dto.User">
+        <id property="id" column="id"/>
+        <result property="userAccount" column="userAccount" />
+        <result property="userPass" column="userPass" />
+        <result property="phone" column="phone" />
+        <result property="email" column="email" />
+        <result property="joinData" column="joinData" />
+        <collection property="roleTables" ofType="com.coco.model.dto.RoleTable">
+            <id column="roleId" property="id"/>
+            <result column="role" property="role"/>
+        </collection>
+    </resultMap>
+
+    <insert id="insertUser">
+        <selectKey keyProperty="id" keyColumn="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into user values(null,#{userAccount},#{userPass},#{phone},#{email},NOW());
+    </insert>
+
+    <insert id="insertUserRole">
+        insert into userrole values(null,#{userId},#{roleId})
+    </insert>
+
+    <select id="getUserIdByUserAccount" resultType="java.lang.Integer">
+        select id from user where userAccount=#{userAccount}
+    </select>
+
+    <select id="getUserHeadImageUrl" resultType="java.lang.String">
+        select url from userHeadImg where userId=#{id}
+    </select>
+
+    <update id="updateUserHeadImage">
+        update userheadimg set url=#{urlStr} where userId=#{userId}
+    </update>
+
+    <insert id="insertUserHeadImage">
+        insert into userheadimg values(null,#{userId},'http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/morenImageHead.png')
+    </insert>
+
+    <!--<select id="getUserByUserAccount" resultMap="getUserInfo">
+        select u.*,r.*,p.*,r.id as roleId,p.id as permId
+        from user u,roletable r,userrole ur,permissiontable p,rolepermission rp
+        where u.id=ur.userId and r.id=ur.roleId and r.id=rp.roleId and p.id=rp.permId;
+    </select>
+    <resultMap id="getUserInfo" type="com.coco.model.dto.User">
+        <id property="id" column="id"/>
+        <result property="userAccount" column="userAccount" />
+        <result property="userPass" column="userPass" />
+        <result property="sex" column="sex" />
+        <result property="age" column="age" />
+        <result property="birth" column="birth" />
+        <result property="phone" column="phone" />
+        <result property="email" column="email" />
+        <collection property="roleTables" ofType="com.coco.model.dto.RoleTable">
+            <id column="roleId" property="id"/>
+            <result column="role" property="role"/>
+            <collection property="permissionTable" ofType="com.coco.model.pojo.PermissionTable">
+                <id column="permId" property="id"/>
+                <result column="perm" property="perm" />
+            </collection>
+        </collection>
+    </resultMap>-->
+</mapper>
