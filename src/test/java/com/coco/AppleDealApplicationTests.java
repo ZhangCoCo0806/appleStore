@@ -15,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import java.util.Random;
+
 @SpringBootTest
 class AppleDealApplicationTests {
     @Autowired
@@ -59,8 +61,12 @@ class AppleDealApplicationTests {
         simpleMailMessage.setTo("2231925844@qq.com");
         simpleMailMessage.setFrom("3030223488@qq.com");
         mailSender.send(simpleMailMessage);*/
-        System.out.println("asjdl");
-        System.out.println(emailTools.sendEmailCode("验证码", "1500", "2231925844@qq.com", "2231925844@qq.com"));
+        /*System.out.println("asjdl");
+        System.out.println(emailTools.sendEmailCode("验证码", "1500", "2231925844@qq.com", "2231925844@qq.com"));*/
+        /*Random random=new Random();
+        System.out.println(random.nextInt(4));*/
+        System.out.println((int)((Math.random()*9+1)*100000));
+
     }
 
 }

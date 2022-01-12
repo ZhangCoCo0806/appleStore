@@ -7,6 +7,7 @@ import com.coco.model.pojo.UserPojo;
 import com.coco.model.pojo.UserRolePojo;
 import com.coco.service.aboutUser.OssUpLoad;
 import com.coco.service.aboutUser.IUserService;
+import com.coco.service.sendEmail.EmailTools;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.Random;
 
 @Api("和用户有关的控制类")
 @Controller
@@ -30,6 +32,8 @@ public class AboutUser {
     private IUserService userService;
     @Autowired
     private OssUpLoad ossUpLoad;
+    @Autowired
+    private EmailTools emailTools;
 
     /**
      * 跳转到用户登录界面
@@ -216,5 +220,14 @@ public class AboutUser {
         }catch (Exception e){
             return "no";
         }
+    }
+
+    @GetMapping("/sendEmail")
+    @ResponseBody
+    public String sendEmail(@RequestParam("UserEmail") String userEmail){
+        System.out.println(userEmail);
+        String code = String.valueOf((int)((Math.random()*9+1)*100000));
+        emailTools.sendEmailCode("小可爱,欢迎你注册本网站,以下是邮箱验证码!",code,userEmail,"2231925844@qq.com");
+        return code;
     }
 }

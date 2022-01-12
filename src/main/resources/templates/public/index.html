@@ -131,6 +131,16 @@
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
+                                <label class="control-label" for="userEmailCode">请输入验证码</label>
+                                <div class="input-group col-xs-6">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                    <input type="text" @blur="checkEmailCode" ref="getCode" onkeyup="this.value=this.value.replace(/[, ]/g,'')" class="form-control" id="userEmailCode" placeholder="请输入验证码" aria-describedby="inputGroupSuccess1Status">
+                                </div>
+                                <div id="sendEmailBtn">
+                                    <el-button @click="sendEmail" type="info">发送验证码至邮箱</el-button>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
                                 <label class="control-label" for="userPhone">请输入您的手机号</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
@@ -349,11 +359,49 @@
             userInfos: {},
             userData:{},
             userAddress:{},
+            emailCode:"",
             fullscreenLoading: false,
             drawer: false,
 
         },
         methods: {
+            checkEmailCode:function(){
+                /*alert(this.$refs.getCode.value)
+                alert(this.emailCode)*/
+                if (this.$refs.getCode.value===this.emailCode&&this.$refs.getCode.value!=""&&this.emailCode!=""){
+                    this.$notify({
+                        title: '验证码正确',
+                        message: '唯女人与英雄难过也,唯对象与工作难找也!验证码正确!',
+                        type: 'success'
+                    });
+                }else if (this.$refs.getCode.value===""){
+                    this.$notify({
+                        title: '警告,验证码不能为空',
+                        message: '药不医假病,酒不解真愁!宝贝,验证码不能为空!',
+                        type: 'warning'
+                    });
+                }else {
+                    this.$notify.error({
+                        title: '验证码错误',
+                        message: '黄瓜在于拍,人生在于嗨!验证码错误!请重新输入....',
+                        type: 'warning'
+                    });
+                }
+            },
+            sendEmail:function(){
+                // alert(this.userInfo.email)
+                let _this=this
+                $.ajax({
+                    url:'sendEmail',
+                    type:'get',
+                    data:{
+                        UserEmail:_this.userInfo.email
+                    },
+                    success:function (data) {
+                        _this.emailCode=data
+                    }
+                })
+            },
             sendUserAddress:function(){
                 let _this=this
                 let userAddressInfo = JSON.stringify(_this.userAddress);
