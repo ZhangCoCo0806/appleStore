@@ -3,6 +3,7 @@ package com.coco.service.aboutUser.impl;
 import com.coco.dao.aboutUser.IUserDao;
 import com.coco.model.dto.User;
 import com.coco.model.dto.UserData;
+import com.coco.model.pojo.UserAddress;
 import com.coco.model.pojo.UserInfos;
 import com.coco.model.pojo.UserPojo;
 import com.coco.model.pojo.UserRolePojo;
@@ -68,6 +69,11 @@ public class IUserServiceImpl implements IUserService {
     @Override
     public UserData getUserDataByUserAccount(String userAccount) {
         return userDao.getUserDataByUserAccount(userAccount);
+    }
+
+    @Override
+    public int insertUserAddress(UserAddress userAddress) {
+        return userDao.insertUserAddress(userAddress);
     }
 
 

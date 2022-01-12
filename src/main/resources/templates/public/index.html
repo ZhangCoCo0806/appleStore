@@ -6,15 +6,11 @@
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-            crossorigin="anonymous"></script>
-
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/swiper-3.4.2.min.css">
     <!-- 引入样式 -->
@@ -40,15 +36,13 @@
                         <span></span>
                     </a>
                 </div>
-
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class=""><a href="index">首页 <span class="sr-only">(current)</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        <li v-for="type in goodsType"><a
-                                :href="'getGoodsByTypeId?typeId='+type.id">{{type.typename}}</a></li>
+                        <li v-for="type in goodsType"><a :href="'getGoodsByTypeId?typeId='+type.id">{{type.typename}}</a></li>
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="form-group">
@@ -66,7 +60,7 @@
                             <ul class="dropdown-menu">
                                 <li class="btnSelf" @click="showSelfInfos"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;修改个人信息</a></li>
                                 <li class="checkUserInfo" @click="getUserData"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;查看个人详细信息</a></li>
-                                <li class=""><a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;添加地址信息</a></li>
+                                <li class="insertAddress"><a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;添加地址信息</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a></li>
@@ -203,8 +197,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
-                        <button type="button" class="btn btn-primary">关闭</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -263,6 +256,15 @@
                                     </template>
                                     {{userData.userAge}}
                                 </el-descriptions-item>
+                                <el-descriptions-item>
+                                    <template slot="label">
+                                        <i class="el-icon-loading"></i>
+                                        会员等级
+                                    </template>
+                                    <span v-if="userData.userRole=='vip1'"><i class="roleLeave"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/uservipleavel/%E8%88%AA%E7%A9%BA%E8%88%AA%E5%A4%A9-aerospace-%E5%AE%87%E8%88%AA%E5%91%98-a.png"></i><span style="color: #F56C6C">白银</span></span>
+                                    <span v-else-if="userData.userRole=='vip2'"><i class="roleLeave"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/uservipleavel/%E7%BB%BF%E5%B7%A8%E4%BA%BA.png"></i><span style="color: #F56C6C">黄金</span></span>
+                                    <span v-else-if="userData.userRole=='vip3'"><i class="roleLeave"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/uservipleavel/%E8%B6%85%E4%BA%BA.png"></i><span style="color: #F56C6C">铂金</span></span>
+                                </el-descriptions-item>
                             </el-descriptions>
                         </div>
                     </div>
@@ -271,7 +273,42 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!-- /.modal -->
+
+        <div class="modal fade userAddress" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">添加地址信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="province">请输入所在省份</label>
+                                <input v-model="userAddress.provice" type="email" class="form-control" id="province" placeholder="如:甘肃省">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">请输入所在市</label>
+                                <input v-model="userAddress.city" type="text" class="form-control" id="city" placeholder="如:兰州市">
+                            </div>
+                            <div class="form-group">
+                                <label for="county">请输入所在区县</label>
+                                <input v-model="userAddress.county" type="text" class="form-control" id="county" placeholder="如:永登县">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">请输入详细地址</label>
+                                <input v-model="userAddress.detailedAddress" type="text" class="form-control" id="address" placeholder="如:城关镇人民街102号">
+                            </div>
+                            <el-button @click="sendUserAddress" type="primary">上传地址信息<i class="el-icon-upload el-icon--right"></i></el-button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
     <div class="slider-box">
         <div class="swiper-container">
@@ -294,9 +331,12 @@
             </div>
         </div>
     </div>
-    <div class="context-box">
 
+    <div class="context-box">
+        <p>iPhone13</p>
     </div>
+
+    <div class="left-tools-box"></div>
 </div>
 
 
@@ -308,9 +348,40 @@
             userInfo: {},
             userInfos: {},
             userData:{},
-            fullscreenLoading: false
+            userAddress:{},
+            fullscreenLoading: false,
+            drawer: false,
+
         },
         methods: {
+            sendUserAddress:function(){
+                let _this=this
+                let userAddressInfo = JSON.stringify(_this.userAddress);
+                $.ajax({
+                    type: "post",
+                    url: "getUserAddress",
+                    data: userAddressInfo,
+                    contentType: "application/json;charset=utf-8",
+                    success:function (data) {
+                        if("ok"===data){
+                            const loading = _this.$loading({
+                                lock: true,
+                                text: '地址信息正在提交中,爱你呦小宝贝!',
+                                spinner: 'el-icon-loading',
+                                background: 'rgba(0, 0, 0, 0.7)'
+                            });
+                            setTimeout(() => {
+                                loading.close();
+                                _this.$notify({
+                                    title: '地址添加成功!!!',
+                                    message: '喜欢的姑娘是别人的，不喜欢的姑娘也他妈是别人的。恭喜你,地址添加成功!!!',
+                                    type: 'success'
+                                });
+                            }, 2000);
+                        }
+                    }
+                })
+            },
             getUserData:function(){
                 let _this=this
                 $.ajax({
@@ -333,7 +404,7 @@
                     success: function (date) {
                         const loading = _this.$loading({
                             lock: true,
-                            text: '正在提交中,爱你呦小宝贝!',
+                            text: '您的基础资料正在提交中,爱你呦小宝贝!',
                             spinner: 'el-icon-loading',
                             background: 'rgba(0, 0, 0, 0.7)'
                         });
@@ -434,6 +505,12 @@
 
     })
     $(document).ready(function () {
+        $(".insertAddress").click(function () {
+            $(".userAddress").modal('show')
+        })
+        $(".gotop").bind("click",function(){
+            $('html, body').animate({scrollTop: 0},300);
+        });
 
         $(".checkUserInfo").click(function () {
             $(".checkUserInfos").modal('show')

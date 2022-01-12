@@ -22,4 +22,5 @@ public class UserData {
     private java.sql.Date userBirth;
     private Integer userAge;
     private String userHeadImage;
+    private String userRole;
 }

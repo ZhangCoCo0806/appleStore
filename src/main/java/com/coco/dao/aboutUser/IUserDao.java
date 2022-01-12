@@ -2,6 +2,7 @@ package com.coco.dao.aboutUser;
 
 import com.coco.model.dto.User;
 import com.coco.model.dto.UserData;
+import com.coco.model.pojo.UserAddress;
 import com.coco.model.pojo.UserInfos;
 import com.coco.model.pojo.UserPojo;
 import com.coco.model.pojo.UserRolePojo;
@@ -87,4 +88,12 @@ public interface IUserDao {
      * @return 用户基本信息
      */
     UserData getUserDataByUserAccount(String userAccount);
+
+
+    /**
+     * 用户地址添加
+     * @param userAddress 用户地址实体类
+     * @return 受影响记录数
+     */
+    int insertUserAddress(UserAddress userAddress);
 }

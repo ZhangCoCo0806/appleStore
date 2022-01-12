@@ -1,6 +1,7 @@
 package com.coco.controller.publicController;
 
 import com.coco.model.dto.UserData;
+import com.coco.model.pojo.UserAddress;
 import com.coco.model.pojo.UserInfos;
 import com.coco.model.pojo.UserPojo;
 import com.coco.model.pojo.UserRolePojo;
@@ -53,7 +54,7 @@ public class AboutUser {
      * @return 根据验证情况返回对应的界面
      */
     @ApiOperation("用户登录验证接口")
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String login(@ApiParam("用户名") String name, @ApiParam("用户密码") String pass, @ApiParam("model") Model model, HttpSession session) {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(name, pass);
@@ -128,7 +129,7 @@ public class AboutUser {
      * @param session session
      * @return 用户的url
      */
-    @ApiOperation("用户登录以后获取用户的头像url用于显示")
+    @ApiOperation("用户登录以后获取用户的头像url用于显示-接口")
     @GetMapping("/getUserHeadImage")
     @ResponseBody
     public String getUserHeadImage(HttpSession session) {
@@ -142,7 +143,7 @@ public class AboutUser {
      * @param session session
      * @return 退出到首页
      */
-    @ApiOperation("用户退出")
+    @ApiOperation("用户退出接口")
     @GetMapping("/logOut")
     public String logOut(HttpSession session) {
         session.removeAttribute("userLoginName");
@@ -155,7 +156,7 @@ public class AboutUser {
      * @param session session
      * @return 用户的个人资料
      */
-    @ApiOperation("获取用户的个人信息")
+    @ApiOperation("获取用户的个人信息接口")
     @GetMapping("/getUserInfos")
     @ResponseBody
     public UserInfos getUserInfos(HttpSession session) {
@@ -171,9 +172,11 @@ public class AboutUser {
      * @param userInfos 用户基础信息
      * @return 修改成功后的新的信息
      */
+    @ApiOperation("用户基础信息修改接口")
     @PutMapping("/updateUserInfos")
     @ResponseBody
-    public UserInfos updateUserInfos(@RequestBody UserInfos userInfos) {
+    public UserInfos updateUserInfos(@ApiParam("用户提交的基础信息") @RequestBody UserInfos userInfos) {
+        System.out.println(userInfos);
         if (userService.updateUserInfosByUserId(userInfos) > 0) {
             UserInfos userInfo = userService.getUserInfosByUserId(userInfos.getUserId());
             return userInfo;
@@ -182,10 +185,36 @@ public class AboutUser {
         }
     }
 
+    /**
+     * 根据账号获取用户基础信息
+     * @param session session
+     * @return 用户基础信息
+     */
+    @ApiOperation("根据账号获取用户基础信息接口")
     @GetMapping("/getUserDataByUserId")
     @ResponseBody
     public UserData getUserDataByUserId(HttpSession session){
         String userName = (String) session.getAttribute("userLoginName");
         return userService.getUserDataByUserAccount(userName);
+    }
+
+    /**
+     * 用户新增地址
+     * @param userAddressInfo 用户地址信息
+     * @param session session
+     * @return 是否新增成功
+     */
+    @ApiOperation("用户新增地址")
+    @RequestMapping("/getUserAddress")
+    @ResponseBody
+    public String getUserAddress(@RequestBody UserAddress userAddressInfo,HttpSession session){
+        String userName = (String) session.getAttribute("userLoginName");
+        try{
+            userAddressInfo.setUserId(userService.getUserIdByUserAccount(userName));
+            userService.insertUserAddress(userAddressInfo);
+            return "ok";
+        }catch (Exception e){
+            return "no";
+        }
     }
 }

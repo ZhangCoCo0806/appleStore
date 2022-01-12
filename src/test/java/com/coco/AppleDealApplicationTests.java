@@ -7,14 +7,21 @@ import com.coco.model.pojo.UserInfos;
 import com.coco.model.pojo.UserPojo;
 import com.coco.model.pojo.UserRolePojo;
 import com.coco.service.aboutUser.IUserService;
+import com.coco.service.sendEmail.EmailTools;
 import com.coco.utils.DateUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @SpringBootTest
 class AppleDealApplicationTests {
+    @Autowired
+    JavaMailSenderImpl mailSender;
 
+    @Autowired
+    private EmailTools emailTools;
     @Autowired
     private ItestDao itestDao;
     @Autowired
@@ -45,6 +52,15 @@ class AppleDealApplicationTests {
 //        System.out.println(userDao.getUserInfosByUserId(userDao.getUserIdByUserAccount("zhangshiqi")));
 //        System.out.println(userDao.updateUserInfosByUserId(new UserInfos(null, DateUtil.util2sql(DateUtil.str2util("1997-08-08")),10,"男","踢足球","阿萨德很骄傲开始",22)));
 //        System.out.println(userDao.insertUserInfos(24));
+//        System.out.println(userService.getUserDataByUserAccount("zhangshiqi"));
+        /*SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setSubject("asjdjaskldjk");
+        simpleMailMessage.setText("asjdklasjdkl");
+        simpleMailMessage.setTo("2231925844@qq.com");
+        simpleMailMessage.setFrom("3030223488@qq.com");
+        mailSender.send(simpleMailMessage);*/
+        System.out.println("asjdl");
+        System.out.println(emailTools.sendEmailCode("验证码", "1500", "2231925844@qq.com", "2231925844@qq.com"));
     }
 
 }

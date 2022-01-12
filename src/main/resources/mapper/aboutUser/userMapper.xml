@@ -61,13 +61,23 @@
         insert into userinfors values(null,NOW(),18,"男","暂无兴趣爱好","这个人很懒,什么都没有留下...",#{userId})
     </insert>
 
+    <!--/*select u.userAccount userAccount,u.phone userPhone,u.email userEmail,u.joinData userJoinData,ui.birth userBirth,ui.age userAge,uh.url userHeadImage
+    from user u,userinfors ui,userheadimg uh
+    where u.userAccount=#{userAccount}
+    and ui.userId=u.id
+    and uh.userId=u.id*/-->
     <select id="getUserDataByUserAccount" resultType="com.coco.model.dto.UserData">
-        select u.userAccount userAccount,u.phone userPhone,u.email userEmail,u.joinData userJoinData,ui.birth userBirth,ui.age userAge,uh.url userHeadImage
-        from user u,userinfors ui,userheadimg uh
+        select u.userAccount userAccount,u.phone userPhone,u.email userEmail,u.joinData userJoinData,ui.birth userBirth,ui.age userAge,uh.url userHeadImage,rt.role userRole
+        from user u,userinfors ui,userheadimg uh,roletable rt
         where u.userAccount=#{userAccount}
         and ui.userId=u.id
         and uh.userId=u.id
+        and rt.id=(select max(ur.roleId) from userrole ur where ur.userId=u.id)
     </select>
+
+    <insert id="insertUserAddress">
+        insert into useraddress values(null,#{provice},#{city},#{county},#{detailedAddress},#{userId})
+    </insert>
     <!--<select id="getUserByUserAccount" resultMap="getUserInfo">
         select u.*,r.*,p.*,r.id as roleId,p.id as permId
         from user u,roletable r,userrole ur,permissiontable p,rolepermission rp
