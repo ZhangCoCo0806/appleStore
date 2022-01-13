@@ -1,5 +1,6 @@
 package com.coco;
 
+import com.coco.dao.aboutGoods.GoodsDao;
 import com.coco.dao.aboutGoods.GoodsTypeDao;
 import com.coco.dao.aboutUser.IUserDao;
 import com.coco.dao.test.ItestDao;
@@ -34,6 +35,9 @@ class AppleDealApplicationTests {
 
     @Autowired
     private IUserDao userDao;
+
+    @Autowired
+    private GoodsDao goodsDao;
     @Test
     void contextLoads() {
 //        itestDao.getAll().forEach(System.out::println);
@@ -65,8 +69,8 @@ class AppleDealApplicationTests {
         System.out.println(emailTools.sendEmailCode("验证码", "1500", "2231925844@qq.com", "2231925844@qq.com"));*/
         /*Random random=new Random();
         System.out.println(random.nextInt(4));*/
-        System.out.println((int)((Math.random()*9+1)*100000));
-
+//        System.out.println((int)((Math.random()*9+1)*100000));
+        goodsDao.getAllGoods().forEach(System.out::println);
     }
 
 }

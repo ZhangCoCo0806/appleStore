@@ -6,4 +6,41 @@
     <select id="getAllGoodsType" resultType="com.coco.model.pojo.GoodsType">
         select * from goodstype
     </select>
+    <select id="getAllGoods" resultMap="getAllGoodsResultMap">
+        select * from goods g,user u,goodsimage gi where g.goodsByUserId =u.id and g.id=gi.goodsId
+    </select>
+    <resultMap id="getAllGoodsResultMap" type="com.coco.model.dto.GoodsUserImage">
+        <id property="id" column="id" />
+        <result property="goodsName" column="goodsName"/>
+        <result property="goodsPrice" column="goodsPrice"/>
+        <result property="goodsText" column="goodsText"/>
+        <result property="goodsDate" column="goodsDate"/>
+        <result property="goodsStart" column="goodsStart"/>
+        <result property="goodsTypeId" column="goodsTypeId"/>
+        <result property="goodsByUserId" column="goodsByUserId"/>
+    </resultMap>
+
+    <!--<select id="getUserByUserAccount" resultMap="getUserInfo">
+        select u.*,r.*,p.*,r.id as roleId,p.id as permId
+        from user u,roletable r,userrole ur,permissiontable p,rolepermission rp
+        where u.id=ur.userId and r.id=ur.roleId and r.id=rp.roleId and p.id=rp.permId;
+    </select>
+    <resultMap id="getUserInfo" type="com.coco.model.dto.User">
+        <id property="id" column="id"/>
+        <result property="userAccount" column="userAccount" />
+        <result property="userPass" column="userPass" />
+        <result property="sex" column="sex" />
+        <result property="age" column="age" />
+        <result property="birth" column="birth" />
+        <result property="phone" column="phone" />
+        <result property="email" column="email" />
+        <collection property="roleTables" ofType="com.coco.model.dto.RoleTable">
+            <id column="roleId" property="id"/>
+            <result column="role" property="role"/>
+            <collection property="permissionTable" ofType="com.coco.model.pojo.PermissionTable">
+                <id column="permId" property="id"/>
+                <result column="perm" property="perm" />
+            </collection>
+        </collection>
+    </resultMap>-->
 </mapper>

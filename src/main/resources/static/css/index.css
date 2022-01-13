@@ -7,7 +7,7 @@
     background-color: #383a3c;
 }*/
 body {
-    background: url("../img/indexBg.jpg") no-repeat center;
+    background: url("../img/indexBg2.jpg") no-repeat center;
     background-size: 100%;
     background-attachment: fixed;
 }
@@ -46,14 +46,7 @@ body {
     border-radius: 5px;
 }
 
-.context-box {
-    width: 60%;
-    height: 900px;
-    margin: auto;
-    border-radius: 10px;
-    /*background-color: rgba(247, 247, 247, 0.9);*/
-    background-color: #fff;
-}
+
 
 .user_img {
     margin: 1px 1px;
@@ -103,4 +96,69 @@ body {
     margin-top: -40px;
     margin-bottom: 9px;
     margin-left: 300px;
+}
+.context-box {
+    width: 60%;
+    height: auto;
+    margin: auto;
+    border-radius: 10px;
+    background-color: rgba(247, 247, 247, 0.6);
+    /*background-color: #fff;*/
+}
+.context-box .context-box-title{
+    width: 100%;
+    height: 40px;
+    background-color: green;
+}
+.content-goods-list{
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+}
+.content-goods-list ul{
+    list-style: none;
+}
+.content-goods-list ul li{
+    float: left;
+    width: 240px;
+    height: 500px;
+    margin: 10px 22px;
+    padding: 10px 10px;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+.content-goods-list ul li a{
+    text-decoration: none;
+    color: black;
+}
+.content-goods-list ul li:hover{
+    background-color: white;
+    transition: 1s;
+}
+.content-goods-list ul li .img-box{
+    width: 100%;
+    height: 240px;
+    /*background-color: blue;*/
+}
+.content-goods-list ul li .img-box img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.content-goods-list ul li .goodsName{
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.content-goods-list ul li .goods-price{
+    margin-top: 5px;
+    /*background-color: #007aff;*/
+}
+.content-goods-list ul li .goods-price p{
+    font-size: 22px;
+    color: orangered;
+}
+.content-goods-list ul li .goods-data,.content-goods-list ul li .goods-user{
+    font-size: 18px;
+    margin-top: 5px;
 }

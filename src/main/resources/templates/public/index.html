@@ -99,7 +99,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
-                                           v-model.trim="userInfo.userAccount" class="form-control" id="userName"
+                                           v-model.trim="userInfo.userAccount" class="form-control checkEmpty" id="userName"
                                            placeholder="请设置用户名" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
-                                           v-model.trim="userInfo.userPass" class="form-control" id="userPass1"
+                                           v-model.trim="userInfo.userPass" class="form-control checkEmpty" id="userPass1"
                                            placeholder="请设置登录密码" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
-                                           class="form-control" id="userPass2" placeholder="请再次输入密码"
+                                           class="form-control checkEmpty" id="userPass2" placeholder="请再次输入密码"
                                            aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                     <input type="email" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
-                                           v-model.trim="userInfo.email" class="form-control" id="userEmail"
+                                           v-model.trim="userInfo.email" class="form-control checkEmpty" id="userEmail"
                                            placeholder="请输入您的邮箱" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                 <label class="control-label" for="userEmailCode">请输入验证码</label>
                                 <div class="input-group col-xs-6">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input type="text" @blur="checkEmailCode" ref="getCode" onkeyup="this.value=this.value.replace(/[, ]/g,'')" class="form-control" id="userEmailCode" placeholder="请输入验证码" aria-describedby="inputGroupSuccess1Status">
+                                    <input type="text" @blur="checkEmailCode" ref="getCode" onkeyup="this.value=this.value.replace(/[, ]/g,'')" class="form-control checkEmpty" id="userEmailCode" placeholder="请输入验证码" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                                 <div id="sendEmailBtn">
                                     <el-button @click="sendEmail" type="info">发送验证码至邮箱</el-button>
@@ -145,7 +145,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                                     <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
-                                           v-model.trim="userInfo.phone" class="form-control" id="userPhone"
+                                           v-model.trim="userInfo.phone" class="form-control checkEmpty" id="userPhone"
                                            placeholder="请输入您的手机号" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
@@ -343,7 +343,37 @@
     </div>
 
     <div class="context-box">
-        <p>iPhone13</p>
+        <div class="context-box-title"></div>
+        <div class="content-goods-list">
+            <ul>
+                <li>
+                    <a href="#">
+                        <div class="goodsName">iPhone13</div>
+                        <div class="img-box">
+                            <img src="img/indexBg.jpg">
+                        </div>
+                        <div class="goods-price">
+                            <p>¥6799.00</p>
+                        </div>
+                        <div class="goods-text">
+                            Apple iPhone 13 (A2634) 256GB 星光色 支持移动联通电信5G 双卡双待手机
+                        </div>
+                        <div class="goods-data">
+                            发布日期:2000-01-13
+                        </div>
+                        <div class="goods-user">
+                            发布用户:zhangsan
+                        </div>
+                        <div class="goods-start">
+                            <el-rate
+                                    v-model="value"
+                                    show-text>
+                            </el-rate>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="left-tools-box"></div>
@@ -362,6 +392,7 @@
             emailCode:"",
             fullscreenLoading: false,
             drawer: false,
+            value: 4
 
         },
         methods: {
@@ -484,30 +515,46 @@
                 console.log("asdk")
             },
             sendUserInfo: function () {
-                let _this = this;
-                let userInfo = _this.userInfo
-                let user = JSON.stringify(userInfo);
-                $.ajax({
-                    type: "POST",
-                    url: "getUserInfo",
-                    data: user,
-                    contentType: "application/json;charset=utf-8",
-                    success: function (data) {
-                        if (data === 'ok') {
-                            _this.$notify({
-                                title: '注册成功',
-                                message: '恭喜您注册成功!快去完善你的基本信息叭!!!!',
-                                type: 'success'
-                            });
-                            $(".userSign").modal('hide')
-                        } else {
-                            _this.$notify.error({
-                                title: '注册失败',
-                                message: '对不起,小可爱,您注册账号失败!注册账号也要讲究天时,地利,人和呀!!!'
-                            });
-                        }
+                let inputBox=$(".checkEmpty")
+                let flag=true
+                for (let i = 0; i < inputBox.length; i++) {
+                    if(inputBox[i].value==""||inputBox[i].value==undefined||inputBox[i].value==null){
+                        flag=false
                     }
-                })
+                }
+                if (flag===false){
+                    this.$notify({
+                        title: '注册信息不能为空呦!',
+                        message: '宝儿,你的头发好香呦!注册信息不能为空呀!!!!',
+                        type: 'warning'
+                    });
+                }else {
+                    let _this = this;
+                    let userInfo = _this.userInfo
+                    let user = JSON.stringify(userInfo);
+                    $.ajax({
+                        type: "POST",
+                        url: "getUserInfo",
+                        data: user,
+                        contentType: "application/json;charset=utf-8",
+                        success: function (data) {
+                            if (data === 'ok') {
+                                _this.$notify({
+                                    title: '注册成功',
+                                    message: '恭喜您注册成功!快去登录并完善你的基本信息叭!!!!',
+                                    type: 'success'
+                                });
+                                $(".userSign").modal('hide')
+                            } else {
+                                _this.$notify.error({
+                                    title: '注册失败',
+                                    message: '对不起,小可爱,您注册账号失败!注册账号也要讲究天时,地利,人和呀!!!'
+                                });
+                            }
+                        }
+                    })
+                }
+
             },
             upLoadUserImg: function () {
                 let _this = this

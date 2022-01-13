@@ -1,5 +1,6 @@
 package com.coco.dao.aboutGoods;
 
+import com.coco.model.dto.GoodsUserImage;
 import com.coco.model.pojo.GoodsType;
 import org.apache.ibatis.annotations.Mapper;
 

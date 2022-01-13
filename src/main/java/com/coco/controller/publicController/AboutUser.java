@@ -222,12 +222,18 @@ public class AboutUser {
         }
     }
 
+    /**
+     * 用户注册邮箱验证码接口
+     * @param userEmail 用户输入的邮箱
+     * @return 验证码
+     */
+    @ApiOperation("用户注册邮箱验证码接口")
     @GetMapping("/sendEmail")
     @ResponseBody
     public String sendEmail(@RequestParam("UserEmail") String userEmail){
         System.out.println(userEmail);
         String code = String.valueOf((int)((Math.random()*9+1)*100000));
-        emailTools.sendEmailCode("小可爱,欢迎你注册本网站,以下是邮箱验证码!",code,userEmail,"2231925844@qq.com");
+        emailTools.sendEmailCode("小可爱,欢迎你注册本网站,以下是邮箱验证码!","宝儿,欢迎注册本网站,验证码是:"+code,userEmail,"2231925844@qq.com");
         return code;
     }
 }
