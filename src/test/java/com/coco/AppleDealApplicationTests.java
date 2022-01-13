@@ -7,6 +7,7 @@ import com.coco.dao.test.ItestDao;
 import com.coco.model.pojo.UserInfos;
 import com.coco.model.pojo.UserPojo;
 import com.coco.model.pojo.UserRolePojo;
+import com.coco.service.aboutGoods.GoodsService;
 import com.coco.service.aboutUser.IUserService;
 import com.coco.service.sendEmail.EmailTools;
 import com.coco.utils.DateUtil;
@@ -37,7 +38,7 @@ class AppleDealApplicationTests {
     private IUserDao userDao;
 
     @Autowired
-    private GoodsDao goodsDao;
+    private GoodsService goodsServicel;
     @Test
     void contextLoads() {
 //        itestDao.getAll().forEach(System.out::println);
@@ -70,7 +71,7 @@ class AppleDealApplicationTests {
         /*Random random=new Random();
         System.out.println(random.nextInt(4));*/
 //        System.out.println((int)((Math.random()*9+1)*100000));
-        goodsDao.getAllGoods().forEach(System.out::println);
+        goodsServicel.getAllGoods().forEach(System.out::println);
     }
 
 }
