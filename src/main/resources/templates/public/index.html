@@ -343,40 +343,78 @@
     </div>
 
     <div class="context-box">
-        <div class="context-box-title"></div>
+        <div class="context-box-title">
+            <ul>
+                <li>综合</li>
+                <li>价格</li>
+                <li>新品</li>
+                <li>其他1</li>
+                <li>其他2</li>
+            </ul>
+        </div>
         <div class="content-goods-list">
             <ul>
-                <li>
+                <li v-for="goods in allGoods">
                     <a href="#">
-                        <div class="goodsName">iPhone13</div>
+                        <div class="goodsName">{{goods.goodsName}}</div>
                         <div class="img-box">
-                            <img src="img/indexBg.jpg">
+                            <img :src="goods.goodsImages[0].imgUrl">
                         </div>
                         <div class="goods-price">
-                            <p>¥6799.00</p>
+                            <p>¥{{goods.goodsPrice}}</p>
                         </div>
                         <div class="goods-text">
-                            Apple iPhone 13 (A2634) 256GB 星光色 支持移动联通电信5G 双卡双待手机
+                            <!--Apple iPhone 13 (A2634) 256GB 星光色 支持移动联通电信5G 双卡双待手机-->
+                            {{goods.goodsText}}
                         </div>
                         <div class="goods-data">
-                            发布日期:2000-01-13
+                            发布日期:{{goods.goodsDate}}
                         </div>
                         <div class="goods-user">
-                            发布用户:zhangsan
+                            <span @mouseover="mouseover" @mouseleave="mouseLeave">发布用户:{{goods.userHandImg.userAccount}}</span>
+                            <div class="goods-user-info" ref="showUserInfoImage">
+                                <div class="goods-user-img">
+                                    <img :src="goods.userHandImg.headImage.url">
+                                </div>
+                                <div class="goods-user-userAccount">
+                                    用户名:{{goods.userHandImg.userAccount}}
+                                </div>
+                                <div class="goods-user-phone">
+                                    手机号:{{goods.userHandImg.phone}}
+                                </div>
+                                <div class="goods-user-email">
+                                    邮箱:{{goods.userHandImg.email}}
+                                </div>
+                            </div>
                         </div>
                         <div class="goods-start">
-                            <el-rate
-                                    v-model="value"
-                                    show-text>
-                            </el-rate>
+                            <el-rate v-model="goods.goodsStart" show-text></el-rate>
                         </div>
                     </a>
                 </li>
             </ul>
         </div>
+        <div class="pageBtn-box">
+            <div class="page-box-context">
+                <el-pagination
+                        background
+                        layout="prev, pager, next"
+                        @prev-click="changePages('l')"
+                        @next-click="changePages('n')"
+                        @current-change="sendPageSize"
+                        :current-page="pageInfos.pageNum"
+                        ref="pagination"
+                        :total="pageInfos.pages*10">
+                </el-pagination>
+            </div>
+        </div>
     </div>
-
-    <div class="left-tools-box"></div>
+    <div class="footer-box">
+        <h1>底部版权信息以及网站介绍相关(待开发中).....</h1>
+    </div>
+    <div class="left-tools-box">
+        <h4>广告位(待开发)....</h4>
+    </div>
 </div>
 
 
@@ -390,15 +428,59 @@
             userData:{},
             userAddress:{},
             emailCode:"",
+            allGoods:"",
+            pageInfos:[],
             fullscreenLoading: false,
             drawer: false,
             value: 4
-
         },
         methods: {
+            sendPageSize:function(){
+                let currentPage=this.$refs.pagination.internalCurrentPage;
+                var _this=this;
+                $.ajax({
+                    url:'goods/getAllGoodsAndGoodsUserAndUserHeadUrl',
+                    type:'get',
+                    dataType:'json',
+                    data:{
+                        pn:currentPage
+                    },
+                    success:function (data) {
+                        _this.pageInfos=data
+                        _this.allGoods=data.list
+                    }
+                })
+            },
+            changePages:function(flag){
+                var pageNumber;
+                var _this=this;
+                if('l'===flag){
+                    pageNumber=this.pageInfos.prePage;
+                }else if('n'===flag){
+                    pageNumber=this.pageInfos.nextPage;
+                }
+                $.ajax({
+                    url:'goods/getAllGoodsAndGoodsUserAndUserHeadUrl',
+                    type:'get',
+                    dataType:'json',
+                    data:{
+                        pn:pageNumber
+                    },
+                    success:function (data) {
+                        _this.pageInfos=data
+                        _this.allGoods=data.list
+                    }
+                })
+            },
+            mouseover:function(e){
+                e.target.style.color='red'
+                e.currentTarget.nextElementSibling.style.display='block'
+            },
+            mouseLeave:function(e){
+                e.target.style.color='black'
+                e.currentTarget.nextElementSibling.style.display='none'
+            },
             checkEmailCode:function(){
-                /*alert(this.$refs.getCode.value)
-                alert(this.emailCode)*/
                 if (this.$refs.getCode.value===this.emailCode&&this.$refs.getCode.value!=""&&this.emailCode!=""){
                     this.$notify({
                         title: '验证码正确',
@@ -420,7 +502,6 @@
                 }
             },
             sendEmail:function(){
-                // alert(this.userInfo.email)
                 let _this=this
                 $.ajax({
                     url:'sendEmail',
@@ -502,7 +583,6 @@
             },
             showSelfInfos: function () {
                 let _this = this
-                console.log(_this.userInfos)
                 $.ajax({
                     type: "get",
                     url: "getUserInfos",
@@ -594,6 +674,20 @@
                 type: 'get',
                 success: function (data) {
                     _this.goodsType = data
+                }
+            })
+            $.ajax({
+                url:'goods/getAllGoodsAndGoodsUserAndUserHeadUrl',
+                type:'get',
+                dataType:'json',
+                data:{
+                    pn:1
+                },
+                success:function (data) {
+                    _this.pageInfos=data
+                    _this.allGoods=data.list
+                    console.log(_this.pageInfos)
+                    console.log(_this.allGoods)
                 }
             })
         }

@@ -3,8 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.coco.dao.aboutGoods.GoodsDao">
-    <select id="getAllGoods" resultMap="getAllGoodsResultMap">
-        select *,gi.id as goodsimageId,u.id as userId from goods g,user u,goodsimage gi where g.goodsByUserId =u.id and g.id=gi.goodsId
+    <!--<select id="getAllGoods" resultMap="getAllGoodsResultMap">
+        select *,gi.id as goodsimageId,u.id as userId,uh.id as imgId
+        from goods g,user u,goodsimage gi,userheadimg uh
+        where g.goodsByUserId =u.id
+        and g.id=gi.goodsId
+        and u.id=uh.userId
+        order by g.id,gi.id
     </select>
     <resultMap id="getAllGoodsResultMap" type="com.coco.model.dto.GoodsUserImage">
         <id property="id" column="id" />
@@ -15,19 +20,60 @@
         <result property="goodsStart" column="goodsStart"/>
         <result property="goodsTypeId" column="goodsTypeId"/>
         <result property="goodsByUserId" column="goodsByUserId"/>
-        <association property="userPojo" javaType="com.coco.model.pojo.UserPojo">
+        <association property="userHandImg" javaType="com.coco.model.dto.UserHandImg">
             <id column="userId" property="id" />
             <result column="userAccount" property="userAccount" />
             <result column="phone" property="phone" />
             <result column="email" property="email" />
             <result column="joinData" property="joinData" />
+            <association property="headImage" javaType="com.coco.model.pojo.HeadImage">
+                <id column="imgId" property="id" />
+                <result column="userId" property="userId" />
+                <result column="userId" property="userId" />
+                <result column="url" property="url" />
+            </association>
         </association>
         <collection property="goodsImages" ofType="com.coco.model.pojo.GoodsImage">
             <id column="goodsimageId" property="id"/>
             <result column="imgUrl" property="imgUrl" />
             <result column="goodsId" property="goodsId" />
         </collection>
-    </resultMap>
+    </resultMap>-->
 
+
+
+    <select id="getAllGoods" resultMap="getAllGoodsResultMap">
+        select *,u.id as userId,uh.id as imgId
+        from goods g,user u,userheadimg uh
+        where g.goodsByUserId =u.id
+        and u.id=uh.userId
+    </select>
+    <resultMap id="getAllGoodsResultMap" type="com.coco.model.dto.GoodsUserImage">
+        <id property="id" column="id" />
+        <result property="goodsName" column="goodsName"/>
+        <result property="goodsPrice" column="goodsPrice"/>
+        <result property="goodsText" column="goodsText"/>
+        <result property="goodsDate" column="goodsDate"/>
+        <result property="goodsStart" column="goodsStart"/>
+        <result property="goodsTypeId" column="goodsTypeId"/>
+        <result property="goodsByUserId" column="goodsByUserId"/>
+        <association property="userHandImg" javaType="com.coco.model.dto.UserHandImg">
+            <id column="userId" property="id" />
+            <result column="userAccount" property="userAccount" />
+            <result column="phone" property="phone" />
+            <result column="email" property="email" />
+            <result column="joinData" property="joinData" />
+            <association property="headImage" javaType="com.coco.model.pojo.HeadImage">
+                <id column="imgId" property="id" />
+                <result column="userId" property="userId" />
+                <result column="userId" property="userId" />
+                <result column="url" property="url" />
+            </association>
+        </association>
+        <collection property="goodsImages" column="id" select="getGoodsImage" ofType="com.coco.model.pojo.GoodsImage" />
+    </resultMap>
+    <select id="getGoodsImage" resultType="com.coco.model.pojo.GoodsImage">
+        select * from goodsimage gi where gi.goodsId=#{id}
+    </select>
 
 </mapper>

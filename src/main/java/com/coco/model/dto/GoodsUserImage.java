@@ -19,6 +19,6 @@ public class GoodsUserImage {
     private Integer goodsStart;
     private Integer goodsTypeId;
     private Integer goodsByUserId;
-    private UserPojo userPojo;
+    private UserHandImg userHandImg;
     private List<GoodsImage> goodsImages;
 }
