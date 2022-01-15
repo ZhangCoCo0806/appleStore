@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>apple二手交易平台</title>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -42,7 +42,9 @@
                         <li class=""><a href="index">首页 <span class="sr-only">(current)</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        <li v-for="type in goodsType"><a :href="'getGoodsByTypeId?typeId='+type.id">{{type.typename}}</a></li>
+                        <li v-for="type in goodsType">
+                            <a @click="getGoodsByTypeId(type.id)">{{type.typename}}</a>
+                        </li>
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="form-group">
@@ -122,12 +124,12 @@
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
-                                <label class="control-label" for="userEmail">请输入您的邮箱</label>
+                                <label class="control-label" for="userEmail">请输入您的QQ邮箱</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                     <input type="email" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
                                            v-model.trim="userInfo.email" class="form-control checkEmpty" id="userEmail"
-                                           placeholder="请输入您的邮箱" aria-describedby="inputGroupSuccess1Status">
+                                           placeholder="请输入您的QQ邮箱" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
@@ -212,7 +214,6 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-
         <div class="modal fade checkUserInfos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -284,7 +285,6 @@
                 </div>
             </div>
         </div><!-- /.modal -->
-
         <div class="modal fade userAddress" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -321,37 +321,33 @@
         </div><!-- /.modal -->
     </div>
     <div class="slider-box">
-        <div class="swiper-container">
+        <div class="swiper-container slider-01">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="http://zhangshiqitest.oss-cn-beijing.aliyuncs.com/userHeaderImages/%E6%B2%A1%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%AC%94%E8%AE%B0.png">
+                    <img src="">
                 </div>
                 <div class="swiper-slide">
-                    <img src="http://zhangshiqitest.oss-cn-beijing.aliyuncs.com/userHeaderImages/%E6%B2%A1%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%AC%94%E8%AE%B0.png">
+                    <img src="">
                 </div>
                 <div class="swiper-slide">
-                    <img src="http://zhangshiqitest.oss-cn-beijing.aliyuncs.com/userHeaderImages/%E6%B2%A1%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%AC%94%E8%AE%B0.png">
+                    <img src="">
                 </div>
                 <div class="swiper-slide">
-                    <img src="http://zhangshiqitest.oss-cn-beijing.aliyuncs.com/userHeaderImages/%E6%B2%A1%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%AC%94%E8%AE%B0.png">
+                    <img src="">
                 </div>
                 <div class="swiper-slide">
-                    <img src="http://zhangshiqitest.oss-cn-beijing.aliyuncs.com/userHeaderImages/%E6%B2%A1%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%AC%94%E8%AE%B0.png">
+                    <img src="">
                 </div>
             </div>
         </div>
     </div>
-
     <div class="context-box">
         <div class="context-box-title">
-            <ul>
-                <li>综合</li>
-                <li>价格</li>
-                <li>新品</li>
-                <li>其他1</li>
-                <li>其他2</li>
-            </ul>
+
         </div>
+        <form class="hack" method="post" action="hack">
+            <input type="submit" value="点我有彩蛋">
+        </form>
         <div class="content-goods-list">
             <ul>
                 <li v-for="goods in allGoods">
@@ -364,7 +360,6 @@
                             <p>¥{{goods.goodsPrice}}</p>
                         </div>
                         <div class="goods-text">
-                            <!--Apple iPhone 13 (A2634) 256GB 星光色 支持移动联通电信5G 双卡双待手机-->
                             {{goods.goodsText}}
                         </div>
                         <div class="goods-data">
@@ -413,7 +408,27 @@
         <h1>底部版权信息以及网站介绍相关(待开发中).....</h1>
     </div>
     <div class="left-tools-box">
-        <h4>广告位(待开发)....</h4>
+        <div class="left-tools-box-title">
+            最新消息
+        </div>
+        <div class="left-tools-box-title-item">
+            <div class="swiper-container slider-02">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>张三:哈哈哈啊哈666</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>李四:456465哈哈哈</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>zhangsan:apple真是太好了</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>lisi:iphone12太香了吧也</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>xixi:好喜欢iphone12呀</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>zhangshiqi:刚买了iPhone12mini,手感不错呦</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>xixi:好开心呀,终于抢到了</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>lixi:刚收到货,九九新呐!</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>admin:今年的第二个iPhone</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>zhangshiqi:终于可以好好打游戏了</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>zhangshiqi:终于可以好好打游戏了</div></div>
+                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>zhangshiqi:终于可以好好打游戏了</div></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -423,6 +438,7 @@
         el: '#app',
         data: {
             goodsType: '',
+            goodsForSlider:[],
             userInfo: {},
             userInfos: {},
             userData:{},
@@ -435,6 +451,22 @@
             value: 4
         },
         methods: {
+            getGoodsByTypeId:function(id){
+                let _this=this
+                $.ajax({
+                    url:'goods/getGoodsByTypeId',
+                    type:'get',
+                    dataType:'json',
+                    data:{
+                        typeId:id
+                    },
+                    success:function (data) {
+                        console.log(data)
+                        _this.allGoods=data
+                        $(".pageBtn-box").fadeOut();
+                    }
+                })
+            },
             sendPageSize:function(){
                 let currentPage=this.$refs.pagination.internalCurrentPage;
                 var _this=this;
@@ -667,6 +699,17 @@
             }
         },
         mounted: function () {
+            /*const loading = this.$loading({
+                lock: true,
+                text: '系统加载中....',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+            });
+            setTimeout(() => {
+                loading.close();
+            }, 12000);*/
+
+
             let _this = this;
             $.ajax({
                 url: 'getAllGoodsType',
@@ -686,8 +729,20 @@
                 success:function (data) {
                     _this.pageInfos=data
                     _this.allGoods=data.list
-                    console.log(_this.pageInfos)
-                    console.log(_this.allGoods)
+                }
+            })
+            $.ajax({
+                url:'goods/getSliderGoods',
+                type:'get',
+                dataType:'json',
+                success:function (data) {
+                    _this.goodsForSlider=data
+                    for (let i = 0; i < _this.goodsForSlider.length; i++) {
+                        for (let j = 0; j < _this.goodsForSlider[i].goodsImages.length; j++) {
+                            // console.log(_this.goodsForSlider[i].goodsImages[0].imgUrl)
+                            $(".slider-01 .swiper-wrapper .swiper-slide img")[i].src=_this.goodsForSlider[i].goodsImages[0].imgUrl
+                        }
+                    }
                 }
             })
         }
@@ -725,7 +780,7 @@
 </script>
 <script src="js/swiper-3.4.2.min.js"></script>
 <script>
-    let swiper = new Swiper('.swiper-container', {
+    let swiper1 = new Swiper('.slider-01', {
         pagination: '.swiper-pagination',
         effect: 'coverflow',
         grabCursor: true,
@@ -739,6 +794,15 @@
             modifier: 1,
             slideShadows: true
         }
+    });
+    var swiper = new Swiper('.slider-02', {
+        loop: true, // 循环模式选项
+        direction: 'vertical', // 垂直切换选项
+        slidesPerView: 9,
+        autoplay: {
+            delay: 1000,//1秒切换一次
+        },
+        mousewheel: false,
     });
 </script>
 <script>
@@ -759,7 +823,104 @@
             return false;
         }
     }*/
-
+    $(window).scroll(function(){
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()-300) {
+            $(".left-tools-box").fadeOut(1000);
+        }else {
+            $(".left-tools-box").fadeIn(1000);
+        }
+    });
+    let aaa = $(".context-box-title")
+    let timeid = 0
+    let i = 0
+    timeid = setInterval(function() {
+        i++
+        if(i == 1) {
+            aaa.get(0).innerHTML = "我"
+        } else if(i == 2) {
+            aaa.get(0).innerHTML = "我叫"
+        } else if(i == 3) {
+            aaa.get(0).innerHTML = "我叫张"
+        } else if(i == 4) {
+            aaa.get(0).innerHTML = "我叫张世"
+        } else if(i == 5) {
+            aaa.get(0).innerHTML = "我叫张世琪"
+        } else if(i == 6) {
+            aaa.get(0).innerHTML = "我叫张世琪,"
+        } else if(i == 7) {
+            aaa.get(0).innerHTML = "我叫张世琪,我"
+        } else if(i == 8) {
+            aaa.get(0).innerHTML = "我叫张世琪,我是"
+        } else if(i == 9) {
+            aaa.get(0).innerHTML = "我叫张世琪,我是一"
+        } else if(i == 10) {
+            aaa.get(0).innerHTML = "我叫张世琪,我是一名"
+        } else if(i == 11) {
+            aaa.get(0).innerHTML = "我叫张世琪,我是一名后"
+        } else if(i == 12) {
+            aaa.get(0).innerHTML = "我叫张世琪,我是一名后端"
+        } else if(i == 13) {
+            aaa.get(0).innerHTML = "我叫张世琪,我是一名后端程"
+        } else if(i == 14) {
+            aaa.get(0).innerHTML = "我叫张世琪,我是一名后端程序"
+        } else if(i == 15) {
+            aaa.get(0).innerHTML = "我叫张世琪,我是一名后端程序员"
+        } else if(i == 20) {
+            aaa.get(0).innerHTML = "我"
+        } else if(i == 21) {
+            aaa.get(0).innerHTML = "我们"
+        } else if(i == 22) {
+            aaa.get(0).innerHTML = "我们在"
+        } else if(i == 23) {
+            aaa.get(0).innerHTML = "我们在这里"
+        } else if(i == 24) {
+            aaa.get(0).innerHTML = "我们在这里不是"
+        } else if(i == 25) {
+            aaa.get(0).innerHTML = "我们在这里不是因"
+        } else if(i == 26) {
+            aaa.get(0).innerHTML = "我们在这里不是因为"
+        } else if(i == 27) {
+            aaa.get(0).innerHTML = "我们在这里不是因为我"
+        } else if(i == 28) {
+            aaa.get(0).innerHTML = "我们在这里不是因为我们"
+        } else if(i == 29) {
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自"
+        } else if(i == 30) {
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由"
+        } else if(i == 31) {
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，"
+        } else if(i == 35) {
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我"
+        } else if(i == 36) {
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们"
+        } else if(i == 37) {
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在"
+        }else if(i == 38){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这"
+        } else if(i == 39){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这里"
+        }else if(i == 40){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这里是"
+        }else if (i == 41){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这里是因"
+        }else if (i == 42){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这里是因为"
+        }else if (i == 43){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这里是因为我"
+        }else if (i == 44){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这里是因为我们"
+        }else if (i == 45){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这里是因为我们不"
+        }else if (i == 46){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这里是因为我们不自"
+        }else if (i == 47){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这里是因为我们不自由"
+        } else if (i == 48){
+            aaa.get(0).innerHTML = "我们在这里不是因为我们自由，我们在这里是因为我们不自由!"
+        } else if(i == 53) {
+            i = 0
+        }
+    }, 200)
 </script>
 </body>
 </html>

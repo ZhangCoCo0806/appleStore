@@ -27,22 +27,22 @@ body {
     background-size: 100%;
 }
 
-.swiper-container {
+.slider-01 {
     width: 100%;
     height: 100%;
     padding-top: 50px;
     padding-bottom: 50px;
 }
 
-.swiper-slide {
+.slider-01 .swiper-wrapper .swiper-slide {
     width: 300px !important;
     height: 300px !important;
     background-size: 100%;
 }
 
-.swiper-slide img {
-    width: 80%;
-    height: 80%;
+.slider-01 .swiper-wrapper .swiper-slide img {
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
 }
 
@@ -95,13 +95,49 @@ body {
     /*background-color: rgba(247, 247, 247, 0.6);*/
     /*background-color: #fff;*/
 }
+@font-face {
+    font-family:"zhangsan";
+    src: url(../fonts/font02.ttf);
+}
 .context-box .context-box-title{
     width: 100%;
     height: 40px;
-    background-color: white;
+    background-color: black;
     border-radius: 5px;
+    font-family: "zhangsan";
+    color: white;
+    line-height: 40px;
+    text-align: center;
+    font-size: 16px;
 }
-.context-box .context-box-title ul{
+.hack{
+    width: 100px;
+    height: 100px;
+    margin-top: -30px;
+    margin-left: 10px;
+}
+.hack input{
+    width: 100px;
+    height: 22px;
+    line-height: 22px;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    background-color: black;
+    animation: myfirst 5s;
+    -webkit-animation: myfirst 1s infinite linear;
+
+}
+@keyframes myfirst
+{
+    /*from {background: black;}
+    to {background: orangered;}*/
+    0% {left: 0; }
+    20%{color: yellow; width: 120px;}
+    50% {left: 200px; color: #009a61; width: 140px;}
+    100% {left: 400px; color: orange; width: 150px;}
+}
+/*.context-box .context-box-title ul{
     list-style: none;
 }
 .context-box .context-box-title ul li{
@@ -112,16 +148,15 @@ body {
     line-height: 40px;
     text-align: center;
     font-size: 15px;
-}
+}*/
 .content-goods-list{
     width: 100%;
     height: auto;
-    margin-top: 40px;
 }
 .context-box .pageBtn-box{
     width: 100%;
     height: 50px;
-    margin-top: 20px;
+    margin-top: 35px;
     box-sizing: border-box;
     display: inline-block;
 }
@@ -170,6 +205,10 @@ body {
 .content-goods-list ul li .goods-price{
     margin-top: 5px;
     /*background-color: #007aff;*/
+}
+.content-goods-list ul li .goods-text{
+    height: 40px;
+    overflow: hidden;
 }
 .content-goods-list ul li .goods-price p{
     font-size: 22px;
@@ -227,10 +266,42 @@ body {
 }
 .left-tools-box{
     position: fixed;
-    left: 90px;
+    left: 20px;
     top: 517px;
-    width: 200px;
+    width: 270px;
     height: 350px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+}
+.left-tools-box .left-tools-box-title{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    text-align: center;
+}
+.left-tools-box-title-item .slider-02{
+    width: 200px;
+    height: 350px;
+}
+.left-tools-box-title-item .slider-02 .swiper-wrapper .swiper-slide{
+    height: 40px !important;
+    margin-top: 20px;
+}
+.left-tools-box-title-item .slider-02 .swiper-wrapper .swiper-slide div{
+    float: left;
+}
+.left-tools-box-title-item .slider-02 .swiper-wrapper .swiper-slide div:nth-of-type(2){
+    height: 35px;
+    width: 155px;
+    margin-left: 5px;
+    line-height: 35px;
+    overflow: hidden;
+}
+.left-tools-box-title-item .slider-02 .swiper-wrapper .swiper-slide div img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 5px;
 }

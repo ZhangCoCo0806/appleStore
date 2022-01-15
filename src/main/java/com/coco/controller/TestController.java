@@ -2,6 +2,7 @@ package com.coco.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -26,5 +27,15 @@ public class TestController {
     public String vip3page(Model model){
         model.addAttribute("vip","会员3");
         return "vipTest";
+    }
+
+    @GetMapping("/toHack")
+    public String toHack(){
+        System.out.println("this is hack");
+        return "hackPage";
+    }
+    @RequestMapping("/hack")
+    public String hack(){
+        return "redirect:/toHack";
     }
 }

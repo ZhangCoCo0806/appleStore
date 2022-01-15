@@ -44,6 +44,9 @@ class AppleDealApplicationTests {
 
     @Autowired
     private GoodsService goodsServicel;
+
+    @Autowired
+    private GoodsDao goodsDao;
     @Test
     void contextLoads() {
         /*itestDao.getAll().forEach(System.out::println);
@@ -80,10 +83,11 @@ class AppleDealApplicationTests {
         List<GoodsUserImage> allGoods = goodsService.getAllGoods();
         PageInfo<GoodsUserImage> pageInfo=new PageInfo<>(allGoods);
         goodsServicel.getAllGoods().forEach(System.out::println);*/
-        PageHelper.startPage(1,4);
+        /*PageHelper.startPage(1,4);
         List<GoodsUserImage> allGoods = goodsServicel.getAllGoods();
         PageInfo<GoodsUserImage> pageInfo=new PageInfo<>(allGoods);
-        pageInfo.getList().forEach(System.out::println);
+        pageInfo.getList().forEach(System.out::println);*/
+        goodsDao.getAllGoodsANDImageForSlider().forEach(System.out::println);
     }
 
 }

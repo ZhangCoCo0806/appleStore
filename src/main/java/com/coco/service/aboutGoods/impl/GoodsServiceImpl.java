@@ -1,6 +1,7 @@
 package com.coco.service.aboutGoods.impl;
 
 import com.coco.dao.aboutGoods.GoodsDao;
+import com.coco.model.dto.GoodsANDImageForSlider;
 import com.coco.model.dto.GoodsUserImage;
 import com.coco.service.aboutGoods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,12 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsDao goodsDao;
     @Override
-    public List<GoodsUserImage> getAllGoods() {
-        return goodsDao.getAllGoods();
+    public List<GoodsUserImage> getAllGoods(int typeId) {
+        return goodsDao.getAllGoods(typeId);
+    }
+
+    @Override
+    public List<GoodsANDImageForSlider> getAllGoodsANDImageForSlider() {
+        return goodsDao.getAllGoodsANDImageForSlider();
     }
 }

@@ -39,14 +39,23 @@
             <result column="goodsId" property="goodsId" />
         </collection>
     </resultMap>-->
+    <select id="getAllGoodsANDImageForSlider" resultMap="getAllGoodsInfos">
+        select g.id from goods g order by g.id limit 0,5
+    </select>
+    <resultMap id="getAllGoodsInfos" type="com.coco.model.dto.GoodsANDImageForSlider">
+        <id property="id" column="id" />
+        <collection property="goodsImages" column="id" select="getGoodsImage" ofType="com.coco.model.pojo.GoodsImage" />
+    </resultMap>
 
 
-
-    <select id="getAllGoods" resultMap="getAllGoodsResultMap">
+    <select id="getAllGoods" resultMap="getAllGoodsResultMap" parameterType="int">
         select *,u.id as userId,uh.id as imgId
         from goods g,user u,userheadimg uh
         where g.goodsByUserId =u.id
-        and u.id=uh.userId
+        <if test="typeId!=0">
+            and g.goodsTypeId=#{typeId}
+        </if>
+        and u.id=uh.userId order by g.id
     </select>
     <resultMap id="getAllGoodsResultMap" type="com.coco.model.dto.GoodsUserImage">
         <id property="id" column="id" />

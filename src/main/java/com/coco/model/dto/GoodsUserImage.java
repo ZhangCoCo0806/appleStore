@@ -5,6 +5,7 @@ import com.coco.model.pojo.UserPojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.List;
 @Data
@@ -15,6 +16,7 @@ public class GoodsUserImage {
     private String goodsName;
     private Double goodsPrice;
     private String goodsText;
+    @DateTimeFormat(pattern = "yyyy-MM-dd MM:SS:HH")
     private java.sql.Date goodsDate;
     private Integer goodsStart;
     private Integer goodsTypeId;
