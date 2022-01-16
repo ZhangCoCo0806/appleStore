@@ -330,15 +330,15 @@
                         <form>
                             <div class="form-group">
                                 <label for="goodsName">请输入商品名称</label>
-                                <input type="text" v-model="insertGoods.goodsName" class="form-control" id="goodsName" placeholder="请输入商品名称">
+                                <input type="text" v-model="insertGoods.goodsName" class="form-control checkGoods" id="goodsName" placeholder="请输入商品名称">
                             </div>
                             <div class="form-group">
                                 <label for="goodsPrice">请输入商品价格</label>
-                                <input type="number" v-model="insertGoods.goodsPrice" class="form-control" id="goodsPrice" placeholder="请输入商品价格">
+                                <input type="number" v-model="insertGoods.goodsPrice" class="form-control checkGoods" id="goodsPrice" placeholder="请输入商品价格">
                             </div>
                             <div class="form-group">
                                 <label for="goodsText">请输入商品描述信息</label>
-                                <input type="text" v-model="insertGoods.goodsText" class="form-control" id="goodsText" placeholder="请输入商品描述信息">
+                                <input type="text" v-model="insertGoods.goodsText" class="form-control checkGoods" id="goodsText" placeholder="请输入商品描述信息">
                             </div>
                             <div class="form-group">
                                 <label for="goodsStar">请选择商品星级</label>
@@ -356,7 +356,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="goodsImg">请选择商品图片</label>
-                                <input type="file" class="fileImages" multiple="multiple" id="goodsImg">
+                                <input type="file" class="fileImages checkGoods" multiple="multiple" id="goodsImg">
                                 <p class="help-block">至少五张商品相关图片</p>
                             </div>
                             <button @click="insertGoodsInfos" type="button" class="btn btn-default">发布</button>
@@ -508,41 +508,66 @@
         },
         methods: {
             insertGoodsInfos:function(){
-                let _this = this
-                let formData = new FormData();
-                for (let j = 0; j < $(".fileImages")[0].files.length; j++) {
-                    formData.append("file", $(".fileImages")[0].files[j]);
-                }
-                formData.append("goodsName",_this.insertGoods.goodsName)
-                formData.append("goodsPrice",_this.insertGoods.goodsPrice)
-                formData.append("goodsText",_this.insertGoods.goodsText)
-                formData.append("goodsStar",_this.insertGoods.goodsStar)
-                formData.append("goodsType",_this.insertGoods.goodsType)
-                $.ajax({
-                    url: "goods/pushGoods",
-                    type: "post",
-                    data: formData,
-                    processData: false, // 告诉jQuery不要去处理发送的数据
-                    contentType: false, // 告诉jQuery不要去设置Content-Type请求头
-                    dataType: 'text',
-                    success: function (data) {
-                        console.log(data)
-                        if('ok'===data){
-                            $(".insertGoods").modal('hide')
-                            _this.$notify({
-                                title: '发布成功!',
-                                message: '恭喜您,商品发布成功!',
-                                type: 'success'
-                            });
-                        }else {
-                            this.$notify({
-                                title: '发布失败!',
-                                message: '对不起,商品发布失败!',
-                                type: 'warning'
-                            });
-                        }
+                //checkGoods
+                let inputBox=$(".checkGoods")
+                let flag=true
+                for (let i = 0; i < inputBox.length; i++) {
+                    if(inputBox[i].value==""||inputBox[i].value==undefined||inputBox[i].value==null){
+                        flag=false
                     }
-                });
+                }
+                if (flag===false){
+                    this.$notify({
+                        title: '商品信息不能为空哦!',
+                        message: '宝儿,你的头发好香呦!商品信息不能为空哦!!!!',
+                        type: 'warning'
+                    });
+                }else{
+                    const loading = this.$loading({
+                        lock: true,
+                        text: '商品发布中,请稍等...',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    let _this = this
+                    let formData = new FormData();
+                    for (let j = 0; j < $(".fileImages")[0].files.length; j++) {
+                        formData.append("file", $(".fileImages")[0].files[j]);
+                    }
+                    formData.append("goodsName",_this.insertGoods.goodsName)
+                    formData.append("goodsPrice",_this.insertGoods.goodsPrice)
+                    formData.append("goodsText",_this.insertGoods.goodsText)
+                    formData.append("goodsStar",_this.insertGoods.goodsStar)
+                    formData.append("goodsType",_this.insertGoods.goodsType)
+                    $.ajax({
+                        url: "goods/pushGoods",
+                        type: "post",
+                        data: formData,
+                        processData: false, // 告诉jQuery不要去处理发送的数据
+                        contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                        dataType: 'text',
+                        success: function (data) {
+                            console.log(data)
+                            if('ok'===data){
+                                $(".insertGoods").modal('hide')
+                                _this.$notify({
+                                    title: '发布成功!',
+                                    message: '恭喜您,商品发布成功!',
+                                    type: 'success'
+                                });
+                            }else {
+                                this.$notify({
+                                    title: '发布失败!',
+                                    message: '对不起,商品发布失败!',
+                                    type: 'warning'
+                                });
+                            }
+                        }
+                    });
+                    setTimeout(() => {
+                        loading.close();
+                    }, 1500);
+                }
             },
             getGoodsByTypeId:function(id){
                 let _this=this
