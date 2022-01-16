@@ -5,6 +5,7 @@ import com.coco.dao.aboutGoods.GoodsTypeDao;
 import com.coco.dao.aboutUser.IUserDao;
 import com.coco.dao.test.ItestDao;
 import com.coco.model.dto.GoodsUserImage;
+import com.coco.model.pojo.Goods;
 import com.coco.model.pojo.UserInfos;
 import com.coco.model.pojo.UserPojo;
 import com.coco.model.pojo.UserRolePojo;
@@ -21,6 +22,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.awt.print.Pageable;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -87,7 +89,12 @@ class AppleDealApplicationTests {
         List<GoodsUserImage> allGoods = goodsServicel.getAllGoods();
         PageInfo<GoodsUserImage> pageInfo=new PageInfo<>(allGoods);
         pageInfo.getList().forEach(System.out::println);*/
-        goodsDao.getAllGoodsANDImageForSlider().forEach(System.out::println);
+       /* goodsDao.getAllGoodsANDImageForSlider().forEach(System.out::println);*/
+        String str = "2019-08-06";
+        System.out.println(str);
+        Goods aaa = new Goods(null, "aaa", 123.0, "", null, 4, 1, 1);
+        System.out.println(goodsDao.insertGoods(aaa));
+        System.out.println(aaa);
     }
 
 }

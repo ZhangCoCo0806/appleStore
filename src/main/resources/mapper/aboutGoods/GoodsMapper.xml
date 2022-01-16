@@ -85,4 +85,15 @@
         select * from goodsimage gi where gi.goodsId=#{id}
     </select>
 
+
+    <insert id="insertGoods">
+        <selectKey keyProperty="id" keyColumn="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into goods values (null,#{goodsName},#{goodsPrice},#{goodsText},now(),#{goodsStart},#{goodsTypeId},#{goodsByUserId});
+    </insert>
+
+    <insert id="insertGoodsImage">
+        insert into goodsimage value(null,#{imgUrl},#{goodsId})
+    </insert>
 </mapper>

@@ -2,6 +2,8 @@ package com.coco.service.aboutGoods;
 
 import com.coco.model.dto.GoodsANDImageForSlider;
 import com.coco.model.dto.GoodsUserImage;
+import com.coco.model.pojo.Goods;
+import com.coco.model.pojo.GoodsImage;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,4 +21,18 @@ public interface GoodsService {
      * @return
      */
     List<GoodsANDImageForSlider> getAllGoodsANDImageForSlider();
+
+    /**
+     * 发布商品
+     * @param goods 要发布的商品实体类
+     * @return 是否发布成功
+     */
+    int insertGoods(Goods goods);
+
+    /**
+     * 发布商品:商品图片上传
+     * @param goodsImage 商品图片对象
+     * @return 受影响记录数
+     */
+    int insertGoodsImage(GoodsImage goodsImage);
 }

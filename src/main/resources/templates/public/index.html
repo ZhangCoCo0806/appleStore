@@ -63,7 +63,7 @@
                                 <li class="btnSelf" @click="showSelfInfos"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;修改个人信息</a></li>
                                 <li class="checkUserInfo" @click="getUserData"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;查看个人详细信息</a></li>
                                 <li class="insertAddress"><a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;添加地址信息</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
+                                <li class="showPushGoods"><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a></li>
                                 <li><a href="logOut"><span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a>
@@ -319,6 +319,55 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        <div class="modal fade insertGoods" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">发布商品</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="goodsName">请输入商品名称</label>
+                                <input type="text" v-model="insertGoods.goodsName" class="form-control" id="goodsName" placeholder="请输入商品名称">
+                            </div>
+                            <div class="form-group">
+                                <label for="goodsPrice">请输入商品价格</label>
+                                <input type="number" v-model="insertGoods.goodsPrice" class="form-control" id="goodsPrice" placeholder="请输入商品价格">
+                            </div>
+                            <div class="form-group">
+                                <label for="goodsText">请输入商品描述信息</label>
+                                <input type="text" v-model="insertGoods.goodsText" class="form-control" id="goodsText" placeholder="请输入商品描述信息">
+                            </div>
+                            <div class="form-group">
+                                <label for="goodsStar">请选择商品星级</label>
+                                <el-rate
+                                        v-model="insertGoods.goodsStar"
+                                        show-text>
+                                </el-rate>
+                            </div>
+                            <div class="form-group">
+                                <label for="goodsTypeName">请选择商品所属类别</label>
+                                <el-select v-model="insertGoods.goodsType" placeholder="请选择">
+                                    <el-option v-for="type in goodsType" :key="type.id" :label="type.typename" :value="type.id">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                            <div class="form-group">
+                                <label for="goodsImg">请选择商品图片</label>
+                                <input type="file" class="fileImages" multiple="multiple" id="goodsImg">
+                                <p class="help-block">至少五张商品相关图片</p>
+                            </div>
+                            <button @click="insertGoodsInfos" type="button" class="btn btn-default">发布</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
     <div class="slider-box">
         <div class="swiper-container slider-01">
@@ -437,6 +486,13 @@
     var vm = new Vue({
         el: '#app',
         data: {
+            insertGoods:{
+                goodsName:'',
+                goodsPrice:'',
+                goodsText:'',
+                goodsStar:0,
+                goodsType:""
+            },
             goodsType: '',
             goodsForSlider:[],
             userInfo: {},
@@ -451,6 +507,43 @@
             value: 4
         },
         methods: {
+            insertGoodsInfos:function(){
+                let _this = this
+                let formData = new FormData();
+                for (let j = 0; j < $(".fileImages")[0].files.length; j++) {
+                    formData.append("file", $(".fileImages")[0].files[j]);
+                }
+                formData.append("goodsName",_this.insertGoods.goodsName)
+                formData.append("goodsPrice",_this.insertGoods.goodsPrice)
+                formData.append("goodsText",_this.insertGoods.goodsText)
+                formData.append("goodsStar",_this.insertGoods.goodsStar)
+                formData.append("goodsType",_this.insertGoods.goodsType)
+                $.ajax({
+                    url: "goods/pushGoods",
+                    type: "post",
+                    data: formData,
+                    processData: false, // 告诉jQuery不要去处理发送的数据
+                    contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                    dataType: 'text',
+                    success: function (data) {
+                        console.log(data)
+                        if('ok'===data){
+                            $(".insertGoods").modal('hide')
+                            _this.$notify({
+                                title: '发布成功!',
+                                message: '恭喜您,商品发布成功!',
+                                type: 'success'
+                            });
+                        }else {
+                            this.$notify({
+                                title: '发布失败!',
+                                message: '对不起,商品发布失败!',
+                                type: 'warning'
+                            });
+                        }
+                    }
+                });
+            },
             getGoodsByTypeId:function(id){
                 let _this=this
                 $.ajax({
@@ -749,6 +842,9 @@
 
     })
     $(document).ready(function () {
+        $(".showPushGoods").click(function () {
+            $(".insertGoods").modal('show')
+        })
         $(".insertAddress").click(function () {
             $(".userAddress").modal('show')
         })

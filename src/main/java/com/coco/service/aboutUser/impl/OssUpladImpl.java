@@ -39,35 +39,6 @@ public class OssUpladImpl implements OssUpLoad {
         }finally {
             ossClient.shutdown();
         }
-        /*String endpoint = "oss-cn-beijing.aliyuncs.com";
-        String accessKeyId = "LTAI5tKJuYsxT3tsd2qcJoki";
-        String accessKeySecret = "R7ruaAXTktZcJTvnQkgBMHFyVH3129";
-        String bucketName = "zhangshiqitest";
-        OSS ossClient = null;
-        try {
-            // 创建OSSClient实例。
-            ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
-            //获取文件上传的流
-            InputStream inputStream = multipartFile.getInputStream();
-            //设置响应头,如果不设置点击链接后直接就是下载该文件
-            ObjectMetadata objectMetadata=new ObjectMetadata();
-            objectMetadata.setContentType("image/jpg");
-            //构建目录
-            String filePath="image_test";
-            //获取到文件名
-            String originName=multipartFile.getOriginalFilename();
-            String fileName= UUID.randomUUID().toString();
-            String suffix=originName.substring(originName.lastIndexOf("."));
-            String newName=fileName+suffix;
-            String fileUrl= filePath+"/"+newName;
-            ossClient.putObject(bucketName, fileUrl, inputStream,objectMetadata);
-            return "https://"+bucketName+"."+endpoint+"/"+fileUrl;
-        } catch (Exception e){
-            e.printStackTrace();
-            return "fail";
-        } finally {
-            ossClient.shutdown();
-        }*/
     }
 
     @Override
