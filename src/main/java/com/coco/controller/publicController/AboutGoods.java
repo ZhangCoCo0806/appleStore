@@ -4,7 +4,6 @@ import com.coco.model.dto.GoodsANDImageForSlider;
 import com.coco.model.dto.GoodsUserImage;
 import com.coco.model.pojo.Goods;
 import com.coco.model.pojo.GoodsImage;
-import com.coco.model.pojo.UserInfos;
 import com.coco.service.aboutGoods.GoodsService;
 import com.coco.service.aboutUser.IUserService;
 import com.coco.service.aboutUser.OssUpLoad;
@@ -13,11 +12,11 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -26,13 +25,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/goods")
 public class AboutGoods {
-    @Autowired
+    @Resource
     private GoodsService goodsService;
 
-    @Autowired
+    @Resource
     private IUserService userService;
 
-    @Autowired
+    @Resource
     private OssUpLoad ossUpLoad;
     /**
      * 显示所有商品信息,是哪一个用户发布的,该用户的信息和头像接口
@@ -64,6 +63,7 @@ public class AboutGoods {
      * @param typeId 类型id
      * @return 对应类型的所有商品
      */
+    @ApiOperation("根据商品类型或去该类型下所有商品")
     @GetMapping("/getGoodsByTypeId")
     @ResponseBody
     public List<GoodsUserImage> getGoodsByTypeId(@RequestParam("typeId") int typeId){
@@ -82,6 +82,7 @@ public class AboutGoods {
      * @param goodsType 商品类别
      * @return 是否添加成功
      */
+    @ApiOperation("发布商品接口")
     @PostMapping("/pushGoods")
     @ResponseBody
     public String insertGoods(MultipartFile[] file,

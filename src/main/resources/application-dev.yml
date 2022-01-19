@@ -1,5 +1,8 @@
 spring:
   datasource:
+#    username: zhangshiqi
+#    password: zsq0806CoCo
+#    url: jdbc:mysql://rm-bp1z6l7991398vbymco.mysql.rds.aliyuncs.com:3306/apple?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     username: root
     password: zsq662663
     url: jdbc:mysql://localhost:3306/apple?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
@@ -24,10 +27,3 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/**/*Mapper.xml
   type-aliases-package: com.coco.model
-
-#  spring.mail.properties.mail.smtp.starttls.enable=true
-#  spring.mail.properties.mail.smtp.starttls.required=true
-#  spring.mail.default-encoding=UTF-8
-#  ————————————————
-#  版权声明：本文为CSDN博主「墨9」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-#  原文链接：https://blog.csdn.net/m0_37732829/article/details/90637922

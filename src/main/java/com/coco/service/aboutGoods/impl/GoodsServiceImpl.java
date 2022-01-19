@@ -9,10 +9,11 @@ import com.coco.service.aboutGoods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 @Service
 public class GoodsServiceImpl implements GoodsService {
-    @Autowired
+    @Resource
     private GoodsDao goodsDao;
     @Override
     public List<GoodsUserImage> getAllGoods(int typeId) {

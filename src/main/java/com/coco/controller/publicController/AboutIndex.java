@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 @Api("用于商城首页展示相关的控制层")
 @Controller//相当于<bean .... />
 public class AboutIndex {
-    @Autowired
+    @Resource
     private IGoodsTypeService goodsTypeService;
 
     @ApiOperation("跳转首页接口")

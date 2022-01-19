@@ -11,9 +11,11 @@ import com.coco.service.aboutUser.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service
 public class IUserServiceImpl implements IUserService {
-    @Autowired
+    @Resource
     private IUserDao userDao;;
     @Override
     public User getUserByUserAccount(String userAccount) {

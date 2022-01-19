@@ -16,23 +16,23 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Random;
 
 @Api("和用户有关的控制类")
 @Controller
 public class AboutUser {
-    @Autowired
+    @Resource
     private IUserService userService;
-    @Autowired
+    @Resource
     private OssUpLoad ossUpLoad;
-    @Autowired
+    @Resource
     private EmailTools emailTools;
 
     /**

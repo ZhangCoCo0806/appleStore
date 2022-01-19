@@ -271,7 +271,7 @@ body {
     width: 270px;
     height: 350px;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 1);
     overflow: hidden;
 }
 .left-tools-box .left-tools-box-title{
