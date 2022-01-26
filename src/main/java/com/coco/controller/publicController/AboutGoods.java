@@ -82,9 +82,7 @@ public class AboutGoods {
     @GetMapping("/getGoodsByGoodsName")
     @ResponseBody
     public List<GoodsUserImage> getGoodsByGoodsName(@RequestParam("goodsName") String goodsName){
-        System.out.println(goodsName);
         List<GoodsUserImage> goods=goodsService.getAllGoods(0,goodsName);
-        goods.forEach(goodsUserImage -> System.out.println(goodsUserImage));
         return goods;
     }
     /**

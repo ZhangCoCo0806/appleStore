@@ -3,9 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${goodsInfosById.goodsName}"></title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/swiper-3.4.2.min.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="../css/goodsInfoPage.css">
 </head>
 <body>
-<h1>this is 商品详情页面</h1>
+<!--<h1>this is 商品详情页面</h1>-->
 <p th:text="${goodsInfosById}"></p>
+<div id="app">
+    <div class="title-box"></div>
+    <div class="content-box">
+        <div class="left-slider-box">
+            <div class="swiper-container gallery-top">
+                <div class="swiper-wrapper">
+                    <div th:each="goodsImg : ${goodsInfosById.goodsImages}" class="swiper-slide"><img th:src="${goodsImg.imgUrl}"></div>
+                </div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next swiper-button-black"></div>
+                <div class="swiper-button-prev swiper-button-black"></div>
+            </div>
+            <div class="swiper-container gallery-thumbs">
+                <div class="swiper-wrapper">
+                    <div th:each="goodsImg : ${goodsInfosById.goodsImages}" class="swiper-slide"><img th:src="${goodsImg.imgUrl}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="right-goodsInfo-box">
+            <div class="goods-name">商品名称</div>
+        </div>
+    </div>
+</div>
+<script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            name:'zhangsan'
+        },
+        methods:{
+
+        },
+        mounted:function(){
+
+        }
+    })
+</script>
+<script src="../js/swiper-3.4.2.min.js"></script>
+<script>
+    var galleryTop = new Swiper('.gallery-top', {
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        spaceBetween: 10,
+    });
+    var galleryThumbs = new Swiper('.gallery-thumbs', {
+        spaceBetween: 10,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        touchRatio: 0.2,
+        slideToClickedSlide: true
+    });
+    galleryTop.params.control = galleryThumbs;
+    galleryThumbs.params.control = galleryTop;
+
+</script>
 </body>
 </html>

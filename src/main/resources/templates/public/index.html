@@ -519,7 +519,9 @@
                         goodsName:$(".searchGoods").val()
                     },
                     success:function (data) {
-                        console.log(data)
+                        if(data.length<=0){
+                            $(".content-goods-list").html('<h1>对不起，没有该商品！</h1>')
+                        }
                         _this.allGoods=data
                         $(".pageBtn-box").fadeOut();
                     }

@@ -53,7 +53,7 @@ public class OssUpladImpl implements OssUpLoad {
         // 填写文件完整路径。文件完整路径中不能包含Bucket名称。
 //        String objectName = "image_test01/ba4a54af-22b0-4d2e-885a-d5e1d0870af1.jpeg";
         String objectName = filePath;
-        System.out.println(filePath);
+        /*System.out.println(filePath);*/
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
         // 删除文件或目录。如果要删除目录，目录必须为空。
