@@ -15,8 +15,8 @@ public class GoodsServiceImpl implements GoodsService {
     @Resource
     private GoodsDao goodsDao;
     @Override
-    public List<GoodsUserImage> getAllGoods(int typeId) {
-        return goodsDao.getAllGoods(typeId);
+    public List<GoodsUserImage> getAllGoods(int typeId,String goodsName) {
+        return goodsDao.getAllGoods(typeId,goodsName);
     }
 
     @Override

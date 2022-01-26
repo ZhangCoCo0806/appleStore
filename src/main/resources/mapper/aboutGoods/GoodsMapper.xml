@@ -67,6 +67,9 @@
         <if test="typeId!=0">
             and g.goodsTypeId=#{typeId}
         </if>
+        <if test="goodsName!=null">
+            and g.goodsName like concat('%',#{goodsName},'%')
+        </if>
         and u.id=uh.userId order by g.id
     </select>
     <resultMap id="getAllGoodsResultMap" type="com.coco.model.dto.GoodsUserImage">

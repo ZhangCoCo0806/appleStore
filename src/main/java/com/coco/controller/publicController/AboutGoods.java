@@ -43,7 +43,7 @@ public class AboutGoods {
     @ResponseBody
     public PageInfo<GoodsUserImage> getAllGoodsAndGoodsUserAndUserHeadUrl(@ApiParam("分页页码") @RequestParam("pn") int pageNum){
         PageHelper.startPage(pageNum,8);
-        List<GoodsUserImage> allGoods = goodsService.getAllGoods(0);
+        List<GoodsUserImage> allGoods = goodsService.getAllGoods(0,null);
         PageInfo<GoodsUserImage> pageInfo=new PageInfo<>(allGoods);
         return pageInfo;
     }
@@ -60,19 +60,33 @@ public class AboutGoods {
     }
 
     /**
-     * 根据商品类型或去该类型下所有商品
+     * 根据商品类型id该类型下所有商品
      * @param typeId 类型id
      * @return 对应类型的所有商品
      */
-    @ApiOperation("根据商品类型或去该类型下所有商品")
+    @ApiOperation("根据商品类型id该类型下所有商品")
     @GetMapping("/getGoodsByTypeId")
     @ResponseBody
     public List<GoodsUserImage> getGoodsByTypeId(@RequestParam("typeId") int typeId){
         System.out.println(typeId);
-        List<GoodsUserImage> allGoods = goodsService.getAllGoods(typeId);
+        List<GoodsUserImage> allGoods = goodsService.getAllGoods(typeId,null);
         return allGoods;
     }
 
+    /**
+     * 根据商品名称进行模糊查询商品
+     * @param goodsName 商品名称
+     * @return 模糊匹配到的商品
+     */
+    @ApiOperation("根据商品名称进行模糊查询商品")
+    @GetMapping("/getGoodsByGoodsName")
+    @ResponseBody
+    public List<GoodsUserImage> getGoodsByGoodsName(@RequestParam("goodsName") String goodsName){
+        System.out.println(goodsName);
+        List<GoodsUserImage> goods=goodsService.getAllGoods(0,goodsName);
+        goods.forEach(goodsUserImage -> System.out.println(goodsUserImage));
+        return goods;
+    }
     /**
      * 发布商品接口
      * @param file MultipartFile对象

@@ -13,7 +13,7 @@ public interface GoodsService {
      * 获取所有商品以及每个商品的图片和每个商品是那个用户发布的
      * @return 所有商品信息
      */
-    List<GoodsUserImage> getAllGoods(int typeId);
+    List<GoodsUserImage> getAllGoods(int typeId,String goodsName);
 
     /**
      * 根据商品id获取对应的商品相关信息--》商品详情页面

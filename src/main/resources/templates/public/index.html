@@ -48,9 +48,9 @@
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="搜索商品">
+                            <input type="text" class="form-control searchGoods" placeholder="搜索商品">
                         </div>
-                        <button type="submit" class="btn btn-default">搜索</button>
+                        <button @click="searchGoodsByGoodsName" type="button" class="btn btn-default">搜索</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right" th:if="${session.userLoginName}">
                         <li>
@@ -508,6 +508,23 @@
             value: 4
         },
         methods: {
+            searchGoodsByGoodsName:function(){
+                let _this=this
+                console.log($(".searchGoods").val())
+                $.ajax({
+                    url:'goods/getGoodsByGoodsName',
+                    type:'get',
+                    dataType:'json',
+                    data:{
+                        goodsName:$(".searchGoods").val()
+                    },
+                    success:function (data) {
+                        console.log(data)
+                        _this.allGoods=data
+                        $(".pageBtn-box").fadeOut();
+                    }
+                })
+            },
             insertGoodsInfos:function(){
                 let inputBox=$(".checkGoods")
                 let flag=true
