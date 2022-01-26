@@ -66,6 +66,7 @@
                                 <li class="showPushGoods"><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon glyphicon-lock"></span>&nbsp;&nbsp;修改密码</a></li>
                                 <li><a href="logOut"><span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a>
                                 </li>
                                 <li role="separator" class="divider"></li>
@@ -399,7 +400,8 @@
         <div class="content-goods-list">
             <ul>
                 <li v-for="goods in allGoods">
-                    <a href="#">
+                    <!--<a :href="'www.baidu.com?query='+xxx">12334</a>-->
+                    <a :href="'goods/getGoodsById?gid='+goods.id">
                         <div class="goodsName">{{goods.goodsName}}</div>
                         <div class="img-box">
                             <img :src="goods.goodsImages[0].imgUrl">

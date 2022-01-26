@@ -48,6 +48,18 @@
     </resultMap>
 
 
+    <select id="getGoodsByGid" resultMap="getAllGoodsResultMap" parameterType="int">
+        select *,u.id as userId,uh.id as imgId
+        from goods g,user u,userheadimg uh
+        where
+        <if test="gid!=0">
+            g.id=#{gid}
+        </if>
+        and g.goodsByUserId =u.id
+        and u.id=uh.userId
+        order by g.id
+    </select>
+
     <select id="getAllGoods" resultMap="getAllGoodsResultMap" parameterType="int">
         select *,u.id as userId,uh.id as imgId
         from goods g,user u,userheadimg uh

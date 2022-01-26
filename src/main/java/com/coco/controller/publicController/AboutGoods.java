@@ -13,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -105,5 +106,18 @@ public class AboutGoods {
         }catch (Exception e){
             return "no";
         }
+    }
+
+    /**
+     * 商品详情接口
+     * @param goodsId 商品的id
+     * @param model model
+     * @return 商品详情页面
+     */
+    @ApiOperation("商品详情接口")
+    @RequestMapping("/getGoodsById")
+    public String getGoodsById(@RequestParam("gid") Integer goodsId, Model model){
+        model.addAttribute("goodsInfosById",goodsService.getGoodsByGid(goodsId));
+        return "aboutGoods/goodsInfoPage";
     }
 }

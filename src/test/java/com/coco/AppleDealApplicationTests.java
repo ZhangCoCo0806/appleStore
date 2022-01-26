@@ -4,27 +4,13 @@ import com.coco.dao.aboutGoods.GoodsDao;
 import com.coco.dao.aboutGoods.GoodsTypeDao;
 import com.coco.dao.aboutUser.IUserDao;
 import com.coco.dao.test.ItestDao;
-import com.coco.model.dto.GoodsUserImage;
-import com.coco.model.pojo.Goods;
-import com.coco.model.pojo.UserInfos;
-import com.coco.model.pojo.UserPojo;
-import com.coco.model.pojo.UserRolePojo;
 import com.coco.service.aboutGoods.GoodsService;
 import com.coco.service.aboutUser.IUserService;
 import com.coco.service.sendEmail.EmailTools;
-import com.coco.utils.DateUtil;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-
-import java.awt.print.Pageable;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
 
 @SpringBootTest
 class AppleDealApplicationTests {
@@ -90,11 +76,12 @@ class AppleDealApplicationTests {
         PageInfo<GoodsUserImage> pageInfo=new PageInfo<>(allGoods);
         pageInfo.getList().forEach(System.out::println);*/
        /* goodsDao.getAllGoodsANDImageForSlider().forEach(System.out::println);*/
-        String str = "2019-08-06";
+        /*String str = "2019-08-06";
         System.out.println(str);
         Goods aaa = new Goods(null, "aaa", 123.0, "", null, 4, 1, 1);
         System.out.println(goodsDao.insertGoods(aaa));
-        System.out.println(aaa);
+        System.out.println(aaa);*/
+        System.out.println(goodsServicel.getGoodsByGid(1));
     }
 
 }

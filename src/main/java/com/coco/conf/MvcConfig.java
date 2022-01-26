@@ -12,6 +12,10 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/test").setViewName("test");
     }
 
+    /**
+     * 配置拦截器
+     * @param registry registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new TestInterceptor()).addPathPatterns("/test").excludePathPatterns("/");

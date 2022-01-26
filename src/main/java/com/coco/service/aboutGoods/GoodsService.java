@@ -16,6 +16,13 @@ public interface GoodsService {
     List<GoodsUserImage> getAllGoods(int typeId);
 
     /**
+     * 根据商品id获取对应的商品相关信息--》商品详情页面
+     * @param goodsId 商品id
+     * @return 对应的商品
+     */
+    GoodsUserImage getGoodsByGid(@Param("gid") int goodsId);
+
+    /**
      * 获取商品的id和商品的图片
      * 轮播图功能
      * @return
