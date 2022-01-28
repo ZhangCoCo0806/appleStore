@@ -28,12 +28,11 @@ import java.util.List;
 public class AboutGoods {
     @Resource
     private GoodsService goodsService;
-
     @Resource
     private IUserService userService;
-
     @Resource
     private OssUpLoad ossUpLoad;
+
     /**
      * 显示所有商品信息,是哪一个用户发布的,该用户的信息和头像接口
      * @return 商品信息+该商品用户信息+用户头像
