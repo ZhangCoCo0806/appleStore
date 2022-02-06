@@ -23,6 +23,7 @@
 <div id="app">
     <div class="title-box"></div>
     <div class="content-box">
+        <div class="goods-title">商品详情</div>
         <div class="left-slider-box">
             <div class="swiper-container gallery-top">
                 <div class="swiper-wrapper">
@@ -38,21 +39,9 @@
                 </div>
             </div>
         </div>
-        <div class="right-goodsInfo-box">
-            <div th:text="${goodsInfosById.goodsName}" class="goods-name"></div>
-            <div th:text="${goodsInfosById.goodsText}" class="goods-text"></div>
-            <div class="goods-price">平台人情价&nbsp;&nbsp;&nbsp;&nbsp;<span>$[[${goodsInfosById.goodsPrice}]]</span></div>
-            <div class="goods-data"><span>发布日期&nbsp;&nbsp;&nbsp;&nbsp;</span><span>[[${goodsInfosById.goodsDate}]]</span></div>
-            <div class="goods-user-box">
-                <div class="title">卖家信息</div>
-                <div class="headImage">
-                    <img th:src="${goodsInfosById.userHandImg.headImage.url}">
-                </div>
-                <div class="userAccount"><span>卖家账号：</span>[[${goodsInfosById.userHandImg.userAccount}]]</div>
-                <div class="userPhone"><span>卖家电话：</span>[[${goodsInfosById.userHandImg.phone}]]</div>
-                <div class="userEmail"><span>卖家邮箱：</span>[[${goodsInfosById.userHandImg.email}]]</div>
-                <div class="userData"><span>卖家加入平台时间：</span>[[${goodsInfosById.userHandImg.joinData}]]</div>
-            </div>
+        <div class="right-goodsInfos-box">
+            <div class="goods-name">[[${goodsInfosById.goodsName}]]</div>
+            <div class="goods-text">[[${goodsInfosById.goodsText}]]</div>
         </div>
     </div>
 </div>
