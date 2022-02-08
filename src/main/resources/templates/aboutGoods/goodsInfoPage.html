@@ -25,7 +25,7 @@
     <div class="content-box">
         <div class="goods-title">商品详情</div>
         <div class="left-slider-box">
-            <div class="swiper-container gallery-top">
+            <div class="swiper-container gallery-top goodsInfos">
                 <div class="swiper-wrapper">
                     <div th:each="goodsImg : ${goodsInfosById.goodsImages}" class="swiper-slide"><img th:src="${goodsImg.imgUrl}"></div>
                 </div>
@@ -42,6 +42,49 @@
         <div class="right-goodsInfos-box">
             <div class="goods-name">[[${goodsInfosById.goodsName}]]</div>
             <div class="goods-text">[[${goodsInfosById.goodsText}]]</div>
+            <div class="goods-Price">¥[[${goodsInfosById.goodsPrice}]]</div>
+            <div class="goods-date">上架时间：[[${goodsInfosById.goodsDate}]]</div>
+            <div class="goods-user-info">
+                <div class="title">卖家信息</div>
+                <div class="img">
+                    <img th:src="${goodsInfosById.userHandImg.headImage.url}">
+                </div>
+                <div class="user-userAccount infos">卖家账号：[[${goodsInfosById.userHandImg.userAccount}]]</div>
+                <div class="user-userPhone infos">卖家电话：[[${goodsInfosById.userHandImg.phone}]]</div>
+                <div class="user-userEmail infos">卖家邮箱：[[${goodsInfosById.userHandImg.email}]]</div>
+                <div class="user-userEmail infos">
+                    <span>卖家加入日期：[[${goodsInfosById.userHandImg.joinData}]]</span>
+                    <!--<span th:@click="|getUserId('${goodsInfosById.userHandImg.id}')|" class="user-other-goods">查看卖家其他商品</span>-->
+                    <span th:@click="|getUserId('${goodsInfosById.id}','${goodsInfosById.goodsByUserId}')|" class="user-other-goods-text">查看商品评论</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="other-goods-goodsAndText">
+        <div class="other-goods">
+            <div class="other-goods-title">
+                该用户还发布了
+            </div>
+            <div class="goods-img-box">
+                <ul>
+                    <li v-for="og in otherGoods">
+                        <a :href="'/goods/getGoodsById?gid='+og.id"><img :src="og.goodsImages[0].imgUrl"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="goods-text">
+            <ul>
+                <li v-for="t in goodsText">
+                    <div class="imgAccount">
+                        <span><img :src="t.url"></span>
+                        <span>{{t.account}}</span>
+                    </div>
+                    <div class="goods-context">
+                        <p>{{t.text}}</p>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -49,18 +92,55 @@
     var vm=new Vue({
         el:'#app',
         data:{
-            name:'zhangsan'
+            name:'zhangsan',
+            goodsText:'',
+            otherGoods:''
         },
         methods:{
-
+            getUserId:function (gid,uid) {
+                this.getOtherGoods(uid)
+                console.log(gid+"-->goodsId")
+                let _this=this
+                $.ajax({
+                    url:'getAllGoodsByUser',
+                    type:'get',
+                    dataType:'json',
+                    data:{
+                        gid:gid
+                    },
+                    success:function (data) {
+                        _this.goodsText=data
+                    }
+                })
+            },
+            getOtherGoods:function (uid) {
+                console.log(uid+'::::getOtherGoods')
+                let _this=this
+                $.ajax({
+                    url:'getGoodsByUid',
+                    type:'get',
+                    dataType:'json',
+                    data:{
+                        uid:uid
+                    },
+                    success:function (data) {
+                        console.log(data)
+                        _this.otherGoods=data
+                    }
+                })
+            }
         },
         mounted:function(){
-
         }
     })
 </script>
 <script src="../js/swiper-3.4.2.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $(".user-other-goods-text").click(function () {
+            $(".other-goods-goodsAndText").fadeToggle()
+        })
+    });
     var galleryTop = new Swiper('.gallery-top', {
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',

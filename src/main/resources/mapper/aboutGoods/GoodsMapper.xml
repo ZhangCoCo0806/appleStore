@@ -60,6 +60,34 @@
         order by g.id
     </select>
 
+    <select id="getAllGoodsTextByUid" resultType="com.coco.model.dto.GoodsText">
+        select gc.goodsText text,u.userAccount account,uh.url url from goodscomments gc,user u,userheadimg uh
+        where gc.goodsId=#{gid}
+        and gc.userId=u.id
+        and u.id=uh.userId
+    </select>
+
+    <select id="getAllGoodsByUser" resultMap="goodsAndImage" parameterType="int">
+        select *,gi.id gid from goods g,goodsimage gi
+        where g.goodsByUserId=#{uid}
+        and gi.goodsId=g.id;
+    </select>
+    <resultMap id="goodsAndImage" type="com.coco.model.dto.GoodsAndImage">
+        <id property="id" column="id" />
+        <result property="goodsName" column="goodsName"/>
+        <result property="goodsPrice" column="goodsPrice"/>
+        <result property="goodsText" column="goodsText"/>
+        <result property="goodsDate" column="goodsDate"/>
+        <result property="goodsStart" column="goodsStart"/>
+        <result property="goodsTypeId" column="goodsTypeId"/>
+        <result property="goodsByUserId" column="goodsByUserId"/>
+        <collection property="goodsImages" column="id" ofType="com.coco.model.pojo.GoodsImage">
+            <id property="id" column="gid" />
+            <result property="imgUrl" column="imgUrl" />
+            <result property="goodsId" column="goodsId" />
+        </collection>
+    </resultMap>
+
     <select id="getAllGoods" resultMap="getAllGoodsResultMap" parameterType="int">
         select *,u.id as userId,uh.id as imgId
         from goods g,user u,userheadimg uh

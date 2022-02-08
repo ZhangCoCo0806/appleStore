@@ -11,7 +11,6 @@
     width: 55%;
     height: 530px;
     margin: 20px auto;
-    background-color: wheat;
 }
 .content-box .goods-title{
     width: 100%;
@@ -90,7 +89,116 @@
     height: 40px;
     line-height: 40px;
     margin-top: 20px;
-    background-color: yellow;
 }
 
-
+.right-goodsInfos-box .goods-Price{
+    color: orangered;
+    font-size: 18px;
+    line-height: 40px;
+}
+.right-goodsInfos-box .goods-date{
+    line-height: 40px;
+}
+.right-goodsInfos-box .goods-user-info{
+    width: 100%;
+    height: 258px;
+}
+.goods-user-info .title{
+    width: 95%;
+    height: 40px;
+    border-bottom: 1px solid gray;
+    box-sizing: border-box;
+    line-height: 40px;
+}
+.goods-user-info .img{
+    width: 50px;
+    height: 50px;
+    margin: 10px auto;
+    border-radius: 50%;
+}
+.goods-user-info .img img{
+    width: 50px;
+    height: 50px;
+    margin-right: -10px;
+    border-radius: 50%;
+}
+.goods-user-info .infos{
+    line-height: 35px;
+}
+.goods-user-info .infos .user-other-goods-text{
+    display: inline-block;
+    width: 140px;
+    float: right;
+    background-color: orangered;
+    text-align: center;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: white;
+}
+.other-goods-goodsAndText{
+    width: 55%;
+    height: auto;
+    margin: auto;
+    display: none;
+    background-color: orangered;
+}
+.other-goods-goodsAndText .other-goods{
+    width: 30%;
+    height: auto;
+    float: left;
+}
+.other-goods-goodsAndText .other-goods .other-goods-title{
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #0096e6;
+}
+.other-goods-goodsAndText .other-goods .goods-img-box{
+    width: 100%;
+    height: auto;
+}
+.other-goods-goodsAndText .other-goods .goods-img-box ul{
+    list-style: none;
+}
+.other-goods-goodsAndText .other-goods .goods-img-box ul li{
+    display: block;
+    width: 100%;
+    height: 300px;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+.other-goods-goodsAndText .other-goods .goods-img-box ul li a img{
+    width: 100%;
+    height: 100%;
+}
+.other-goods-goodsAndText .goods-text{
+    width: 60%;
+    height: 100%;
+    float: right;
+    padding-left: 50px;
+}
+.other-goods-goodsAndText .goods-text ul{
+    list-style: none;
+}
+.other-goods-goodsAndText .goods-text ul li{
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+}
+.other-goods-goodsAndText .goods-text ul li .imgAccount{
+    width: 100%;
+    height: 40px;
+}
+.other-goods-goodsAndText .goods-text ul li .imgAccount span img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.other-goods-goodsAndText .goods-text ul li .goods-context{
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    padding-left: 40px;
+}

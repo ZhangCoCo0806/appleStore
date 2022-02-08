@@ -2,6 +2,8 @@ package com.coco.service.aboutGoods.impl;
 
 import com.coco.dao.aboutGoods.GoodsDao;
 import com.coco.model.dto.GoodsANDImageForSlider;
+import com.coco.model.dto.GoodsAndImage;
+import com.coco.model.dto.GoodsText;
 import com.coco.model.dto.GoodsUserImage;
 import com.coco.model.pojo.Goods;
 import com.coco.model.pojo.GoodsImage;
@@ -17,6 +19,16 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<GoodsUserImage> getAllGoods(int typeId,String goodsName) {
         return goodsDao.getAllGoods(typeId,goodsName);
+    }
+
+    @Override
+    public List<GoodsAndImage> getAllGoodsByUser(int uid) {
+        return goodsDao.getAllGoodsByUser(uid);
+    }
+
+    @Override
+    public List<GoodsText> getAllGoodsTextByUid(int gid) {
+        return goodsDao.getAllGoodsTextByUid(gid);
     }
 
     @Override

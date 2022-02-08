@@ -1,6 +1,8 @@
 package com.coco.service.aboutGoods;
 
 import com.coco.model.dto.GoodsANDImageForSlider;
+import com.coco.model.dto.GoodsAndImage;
+import com.coco.model.dto.GoodsText;
 import com.coco.model.dto.GoodsUserImage;
 import com.coco.model.pojo.Goods;
 import com.coco.model.pojo.GoodsImage;
@@ -14,6 +16,20 @@ public interface GoodsService {
      * @return 所有商品信息
      */
     List<GoodsUserImage> getAllGoods(int typeId,String goodsName);
+
+    /**
+     * 获取用户发布的所有商品
+     * @param uid 用户id
+     * @return 用户发布的所有商品
+     */
+    List<GoodsAndImage> getAllGoodsByUser(@Param("uid") int uid);
+
+    /**
+     * 根据商品id获取商品的所有用户评论
+     * @param gid 商品id
+     * @return 商品的评论
+     */
+    List<GoodsText> getAllGoodsTextByUid(@Param("gid") int gid);
 
     /**
      * 根据商品id获取对应的商品相关信息--》商品详情页面

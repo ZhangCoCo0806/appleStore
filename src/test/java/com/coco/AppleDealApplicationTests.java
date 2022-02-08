@@ -81,7 +81,10 @@ class AppleDealApplicationTests {
         Goods aaa = new Goods(null, "aaa", 123.0, "", null, 4, 1, 1);
         System.out.println(goodsDao.insertGoods(aaa));
         System.out.println(aaa);*/
-        System.out.println(goodsServicel.getGoodsByGid(1));
+        /*System.out.println(goodsServicel.getGoodsByGid(1));*/
+//        goodsServicel.getAllGoodsByUser(1).forEach(goodsUserImage -> System.out.println(goodsUserImage));
+        /*goodsServicel.getAllGoodsTextByUid(1).forEach(goodsText -> System.out.println(goodsText));*/
+        goodsServicel.getAllGoodsByUser(1).forEach(goodsUserImage -> System.out.println(goodsUserImage));
     }
 
 }

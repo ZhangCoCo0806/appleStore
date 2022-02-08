@@ -1,6 +1,8 @@
 package com.coco.controller.publicController;
 
 import com.coco.model.dto.GoodsANDImageForSlider;
+import com.coco.model.dto.GoodsAndImage;
+import com.coco.model.dto.GoodsText;
 import com.coco.model.dto.GoodsUserImage;
 import com.coco.model.pojo.Goods;
 import com.coco.model.pojo.GoodsImage;
@@ -130,5 +132,28 @@ public class AboutGoods {
     public String getGoodsById(@RequestParam("gid") Integer goodsId, Model model){
         model.addAttribute("goodsInfosById",goodsService.getGoodsByGid(goodsId));
         return "aboutGoods/goodsInfoPage";
+    }
+
+    /**
+     * 根据商品id获取商品的评论接口
+     * @param gid 商品的id
+     * @return 商品的所有评论
+     */
+    @RequestMapping("/getAllGoodsByUser")
+    @ResponseBody
+    public List<GoodsText> getAllGoodsByUser(@RequestParam("gid") int gid){
+        List<GoodsText> goodsText=goodsService.getAllGoodsTextByUid(gid);
+        return goodsText;
+    }
+
+    /**
+     * 根据用户id获取该用户发布的所有的商品
+     * @param uid 用户id
+     * @return 商品列表
+     */
+    @GetMapping("/getGoodsByUid")
+    @ResponseBody
+    public List<GoodsAndImage> getGoodsByUid(@RequestParam("uid") int uid){
+        return goodsService.getAllGoodsByUser(uid);
     }
 }
