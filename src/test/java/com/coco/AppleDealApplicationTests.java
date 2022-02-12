@@ -37,6 +37,8 @@ class AppleDealApplicationTests {
     private GoodsDao goodsDao;
     @Test
     void contextLoads() {
+        /*boolean b=true?false:true==true?false:true;
+        System.out.println(b);*/
         /*itestDao.getAll().forEach(System.out::println);
         System.out.println(goodsTypeDao.getAllGoodsType());
         System.out.println(userService.getUserByUserAccount("zhangsan"));
@@ -84,7 +86,7 @@ class AppleDealApplicationTests {
         /*System.out.println(goodsServicel.getGoodsByGid(1));*/
 //        goodsServicel.getAllGoodsByUser(1).forEach(goodsUserImage -> System.out.println(goodsUserImage));
         /*goodsServicel.getAllGoodsTextByUid(1).forEach(goodsText -> System.out.println(goodsText));*/
-        goodsServicel.getAllGoodsByUser(1).forEach(goodsUserImage -> System.out.println(goodsUserImage));
+//        goodsServicel.getAllGoodsByUser(1).forEach(goodsUserImage -> System.out.println(goodsUserImage));
     }
 
 }
