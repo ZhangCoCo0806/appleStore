@@ -393,10 +393,22 @@
     </div>
     <div class="context-box">
         <div class="context-box-title">
+            <div class="left-typeList">
+                <ul>
+                    <li v-for="type in goodsType">
+                        <a @click="getGoodsByTypeId(type.id)">{{type.typename}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-key">
+                <el-input
+                        placeholder="请输入商品名称"
+                        prefix-icon="el-icon-search"
+                        @input="searchGoodsByGoods(searchGoodsKey)"
+                        v-model="searchGoodsKey">
+                </el-input>
+            </div>
         </div>
-        <form class="hack" method="post" action="hack">
-            <input type="submit" value="点我有彩蛋">
-        </form>
         <div class="content-goods-list">
             <ul>
                 <li v-for="goods in allGoods">
@@ -464,18 +476,7 @@
         <div class="left-tools-box-title-item">
             <div class="swiper-container slider-02">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>张三:哈哈哈啊哈666</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>李四:456465哈哈哈</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>zhangsan:apple真是太好了</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>lisi:iphone12太香了吧也</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>xixi:好喜欢iphone12呀</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>zhangshiqi:刚买了iPhone12mini,手感不错呦</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>xixi:好开心呀,终于抢到了</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>lixi:刚收到货,九九新呐!</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>admin:今年的第二个iPhone</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>zhangshiqi:终于可以好好打游戏了</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>zhangshiqi:终于可以好好打游戏了</div></div>
-                    <div class="swiper-slide"><div><img src="img/indexBg05.jpg"></div><div>zhangshiqi:终于可以好好打游戏了</div></div>
+                    <div class="swiper-slide" v-for="g in goodsComments"><div><img :src="g.url"></div><div class="userComments">{{g.userAccount}}：{{g.goodsText}}</div></div>
                 </div>
             </div>
         </div>
@@ -487,6 +488,14 @@
     var vm = new Vue({
         el: '#app',
         data: {
+            goodsComments:[
+                {
+                    userAccount:'',
+                    url:'',
+                    goodsText:''
+                }
+            ],
+            searchGoodsKey:'',
             insertGoods:{
                 goodsName:'',
                 goodsPrice:'',
@@ -508,10 +517,27 @@
             value: 4
         },
         methods: {
-
+            searchGoodsByGoods(name){
+                console.log(name)
+                let _this=this;
+                $.ajax({
+                    url:'goods/getGoodsByGoodsName',
+                    type:'get',
+                    dataType:'json',
+                    data:{
+                        goodsName:name
+                    },
+                    success:function (data) {
+                        /*if(data.length<=0){
+                            $(".content-goods-list").html('<h1>对不起，没有该商品！</h1>')
+                        }*/
+                        _this.allGoods=data
+                        $(".pageBtn-box").fadeOut();
+                    }
+                })
+            },
             searchGoodsByGoodsName:function(){
-                let _this=this
-                console.log($(".searchGoods").val())
+                let _this=this;
                 $.ajax({
                     url:'goods/getGoodsByGoodsName',
                     type:'get',
@@ -599,7 +625,6 @@
                         typeId:id
                     },
                     success:function (data) {
-                        console.log(data)
                         _this.allGoods=data
                         $(".pageBtn-box").fadeOut();
                     }
@@ -848,13 +873,22 @@
             }, 6000);*/
             let _this = this;
             $.ajax({
+                url: 'goods/goodsComments',
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    console.log(data)
+                    _this.goodsComments=data
+                }
+            });
+            $.ajax({
                 url: 'getAllGoodsType',
                 dataType: 'json',
                 type: 'get',
                 success: function (data) {
                     _this.goodsType = data
                 }
-            })
+            });
             $.ajax({
                 url:'goods/getAllGoodsAndGoodsUserAndUserHeadUrl',
                 type:'get',
@@ -866,7 +900,7 @@
                     _this.pageInfos=data
                     _this.allGoods=data.list
                 }
-            })
+            });
             $.ajax({
                 url:'goods/getSliderGoods',
                 type:'get',
@@ -880,10 +914,9 @@
                         }
                     }
                 }
-            })
+            });
         }
-
-    })
+    });
     $(document).ready(function () {
         $(".showPushGoods").click(function () {
             $(".insertGoods").modal('show')
@@ -968,7 +1001,7 @@
             $(".left-tools-box").fadeIn(1000);
         }
     });
-    let aaa = $(".context-box-title")
+    /*let aaa = $(".context-box-title")
     let timeid = 0
     let i = 0
     timeid = setInterval(function() {
@@ -1058,7 +1091,7 @@
         } else if(i == 53) {
             i = 0
         }
-    }, 200)
+    }, 200)*/
 </script>
 </body>
 </html>

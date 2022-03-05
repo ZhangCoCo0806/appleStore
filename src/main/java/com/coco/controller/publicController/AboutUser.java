@@ -59,8 +59,6 @@ public class AboutUser {
     @ApiOperation("用户登录验证接口")
     @PostMapping("/login")
     public String login(@ApiParam("用户名") String name, @ApiParam("用户密码") String pass, @ApiParam("model") Model model, HttpSession session) {
-
-
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(name, pass);
         try {

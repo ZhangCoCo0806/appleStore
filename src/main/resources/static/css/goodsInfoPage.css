@@ -62,7 +62,25 @@
 .content-box .left-slider-box .gallery-thumbs .swiper-slide-active {
     opacity: 1;
 }
-
+.buyGoods-box{
+    width: 55%;
+    height: 40px;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: -20px;
+}
+.buyGoods-box .addCart{
+    width: 117px;
+    height: 40px;
+    float: right;
+    margin-right: 30px;
+}
+.buyGoods-box .buyGoods{
+    width: 117px;
+    height: 40px;
+    float: right;
+    margin-right: 35px;
+}
 .right-goodsInfos-box{
     float: right;
     width: 60%;
@@ -142,6 +160,7 @@
     display: none;
     background-color: orangered;
 }
+
 .other-goods-goodsAndText .other-goods{
     width: 30%;
     height: auto;
@@ -166,7 +185,7 @@
     display: block;
     width: 100%;
     height: 300px;
-    border: 1px solid black;
+    border: 1px solid gray;
     margin-top: 10px;
 }
 .other-goods-goodsAndText .other-goods .goods-img-box ul li a img{
@@ -175,9 +194,38 @@
 }
 .other-goods-goodsAndText .goods-text{
     width: 60%;
-    height: 100%;
+    height: 960px;
     float: right;
     padding-left: 50px;
+    overflow: auto;
+}
+.other-goods-goodsAndText .goods-text .user-input-box{
+    width: 100%;
+    height: 150px;
+    margin-bottom: 20px;
+}
+.other-goods-goodsAndText .goods-text .user-input-box .title{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+.other-goods-goodsAndText .goods-text .user-input-box .inputBox{
+    width: 80%;
+    height: 120px;
+    float: left;
+}
+.other-goods-goodsAndText .goods-text .user-input-box .inputBox textarea{
+    width: 100%;
+    height: 100%;
+    resize:none;
+}
+.other-goods-goodsAndText .goods-text .user-input-box .button{
+    width: 18%;
+    height: 30px;
+    float: left;
+    margin-left: 11px;
+    margin-top: 80px;
 }
 .other-goods-goodsAndText .goods-text ul{
     list-style: none;
@@ -186,7 +234,8 @@
     display: block;
     width: 100%;
     height: auto;
-    margin-top: 5px;
+    margin-top: 15px;
+    border-bottom: solid gray 1px;
 }
 .other-goods-goodsAndText .goods-text ul li .imgAccount{
     width: 100%;

@@ -1,10 +1,8 @@
 package com.coco.controller.publicController;
 
-import com.coco.model.dto.GoodsANDImageForSlider;
-import com.coco.model.dto.GoodsAndImage;
-import com.coco.model.dto.GoodsText;
-import com.coco.model.dto.GoodsUserImage;
+import com.coco.model.dto.*;
 import com.coco.model.pojo.Goods;
+import com.coco.model.pojo.GoodsComments;
 import com.coco.model.pojo.GoodsImage;
 import com.coco.service.aboutGoods.GoodsService;
 import com.coco.service.aboutUser.IUserService;
@@ -155,5 +153,39 @@ public class AboutGoods {
     @ResponseBody
     public List<GoodsAndImage> getGoodsByUid(@RequestParam("uid") int uid){
         return goodsService.getAllGoodsByUser(uid);
+    }
+
+
+    /**
+     * 查询所有用户评论和用户信息
+     * @return 所有用户评论和用户信息
+     */
+    @GetMapping("/goodsComments")
+    @ResponseBody
+    public List<GoodsCommentForIndex> goodsComments(){
+
+        return goodsService.goodsComments();
+    }
+
+    /**
+     * 用户添加评论工程
+     * @param gid 商品id
+     * @param text 评论信息
+     * @return 是否添加成功
+     */
+    @PostMapping("/addComments")
+    @ResponseBody
+    public String addComments(@RequestParam("goodsId") int gid,@RequestParam("goodsText") String text,HttpSession session){
+        String name = (String) session.getAttribute("userLoginName");
+        if (name==null){
+            return "no";
+        }else {
+            try{
+                goodsService.addComments(new GoodsComments(0,userService.getUserIdByUserAccount(name),gid,text));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return "ok";
+        }
     }
 }

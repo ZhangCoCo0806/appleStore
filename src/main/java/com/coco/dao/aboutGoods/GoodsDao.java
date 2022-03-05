@@ -1,10 +1,8 @@
 package com.coco.dao.aboutGoods;
 
-import com.coco.model.dto.GoodsANDImageForSlider;
-import com.coco.model.dto.GoodsAndImage;
-import com.coco.model.dto.GoodsText;
-import com.coco.model.dto.GoodsUserImage;
+import com.coco.model.dto.*;
 import com.coco.model.pojo.Goods;
+import com.coco.model.pojo.GoodsComments;
 import com.coco.model.pojo.GoodsImage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -60,4 +58,17 @@ public interface GoodsDao {
      * @return 受影响记录数
      */
     int insertGoodsImage(GoodsImage goodsImage);
+
+    /**
+     * 获取商品评论和用户信息，用于首页展示
+     * @return 商品评论
+     */
+    List<GoodsCommentForIndex> goodsComments();
+
+    /**
+     * 用户评论添加
+     * @param goods 商品评论实体类
+     * @return 受影响记录数
+     */
+    int addComments(GoodsComments goods);
 }

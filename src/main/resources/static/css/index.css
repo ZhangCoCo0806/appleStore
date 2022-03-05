@@ -102,53 +102,52 @@ body {
 .context-box .context-box-title{
     width: 100%;
     height: 40px;
-    background-color: black;
+    background-color: #101010;
     border-radius: 5px;
-    font-family: "zhangsan";
+    /*font-family: "zhangsan";*/
     color: white;
     line-height: 40px;
     text-align: center;
     font-size: 16px;
+    margin-bottom: 40px;
 }
-.hack{
-    width: 100px;
-    height: 100px;
-    margin-top: -30px;
-    margin-left: 10px;
+.context-box .context-box-title .left-typeList{
+    width: 60%;
+    height: 100%;
+    float: left;
 }
-.hack input{
-    width: 100px;
-    height: 22px;
-    line-height: 22px;
-    border: none;
+.context-box .context-box-title .left-typeList ul{
+    list-style: none;
+}
+.context-box .context-box-title .left-typeList ul li{
+    display: block;
+    float: left;
+    margin-left: 20px;
+    padding: 0px 22px;
+}
+.context-box .context-box-title .left-typeList ul li a{
+    text-decoration: none;
+    color: #9d9d9d;
+}
+.context-box .context-box-title .left-typeList ul li a:hover{
     color: white;
-    border-radius: 10px;
-    background-color: black;
-    animation: myfirst 5s;
-    -webkit-animation: myfirst 1s infinite linear;
-
 }
+.context-box .context-box-title .right-key{
+    width: 30%;
+    height: 100%;
+    float: right;
+    margin-right: 80px;
+}
+
 @keyframes myfirst
 {
-    /*from {background: black;}
-    to {background: orangered;}*/
+
     0% {left: 0; }
     20%{color: yellow; width: 120px;}
     50% {left: 200px; color: #009a61; width: 140px;}
     100% {left: 400px; color: orange; width: 150px;}
 }
-/*.context-box .context-box-title ul{
-    list-style: none;
-}
-.context-box .context-box-title ul li{
-    float: left;
-    width: 200px;
-    height: 40px;
-    margin-left: 21px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 15px;
-}*/
+
 .content-goods-list{
     width: 100%;
     height: auto;
@@ -244,7 +243,6 @@ body {
     margin-top: 5px;
     margin-left: 60px;
     border-radius: 25px;
-
 }
 .goods-user-info .goods-user-img img{
     width: 50px;
@@ -304,4 +302,7 @@ body {
     height: 35px;
     border-radius: 50%;
     margin-right: 5px;
+}
+.userComments{
+    overflow: hidden;
 }

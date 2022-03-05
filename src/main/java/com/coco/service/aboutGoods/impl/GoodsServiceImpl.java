@@ -1,11 +1,9 @@
 package com.coco.service.aboutGoods.impl;
 
 import com.coco.dao.aboutGoods.GoodsDao;
-import com.coco.model.dto.GoodsANDImageForSlider;
-import com.coco.model.dto.GoodsAndImage;
-import com.coco.model.dto.GoodsText;
-import com.coco.model.dto.GoodsUserImage;
+import com.coco.model.dto.*;
 import com.coco.model.pojo.Goods;
+import com.coco.model.pojo.GoodsComments;
 import com.coco.model.pojo.GoodsImage;
 import com.coco.service.aboutGoods.GoodsService;
 import org.springframework.stereotype.Service;
@@ -49,5 +47,15 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int insertGoodsImage(GoodsImage goodsImage) {
         return goodsDao.insertGoodsImage(goodsImage);
+    }
+
+    @Override
+    public List<GoodsCommentForIndex> goodsComments() {
+        return goodsDao.goodsComments();
+    }
+
+    @Override
+    public int addComments(GoodsComments goods) {
+        return goodsDao.addComments(goods);
     }
 }

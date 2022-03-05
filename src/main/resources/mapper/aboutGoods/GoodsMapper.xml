@@ -65,12 +65,12 @@
         where gc.goodsId=#{gid}
         and gc.userId=u.id
         and u.id=uh.userId
+        order by gc.id desc
     </select>
 
     <select id="getAllGoodsByUser" resultMap="goodsAndImage" parameterType="int">
-        select *,gi.id gid from goods g,goodsimage gi
-        where g.goodsByUserId=#{uid}
-        and gi.goodsId=g.id;
+        select * from goods g
+        where g.goodsByUserId=#{uid} limit 0,3
     </select>
     <resultMap id="goodsAndImage" type="com.coco.model.dto.GoodsAndImage">
         <id property="id" column="id" />
@@ -81,11 +81,7 @@
         <result property="goodsStart" column="goodsStart"/>
         <result property="goodsTypeId" column="goodsTypeId"/>
         <result property="goodsByUserId" column="goodsByUserId"/>
-        <collection property="goodsImages" column="id" ofType="com.coco.model.pojo.GoodsImage">
-            <id property="id" column="gid" />
-            <result property="imgUrl" column="imgUrl" />
-            <result property="goodsId" column="goodsId" />
-        </collection>
+        <collection property="goodsImages" column="id" select="getGoodsImage" ofType="com.coco.model.pojo.GoodsImage" />
     </resultMap>
 
     <select id="getAllGoods" resultMap="getAllGoodsResultMap" parameterType="int">
@@ -138,5 +134,17 @@
 
     <insert id="insertGoodsImage">
         insert into goodsimage value(null,#{imgUrl},#{goodsId})
+    </insert>
+
+    <select id="goodsComments" resultType="com.coco.model.dto.GoodsCommentForIndex">
+        select u.userAccount,uh.url,gs.goodsText
+        from user u,userheadimg uh,goodscomments gs
+        where u.id=uh.userId
+        and u.id=gs.userId
+        order by RAND()
+    </select>
+
+    <insert id="addComments">
+        insert into goodscomments values(null,#{userId},#{goodsId},#{goodsText})
     </insert>
 </mapper>
