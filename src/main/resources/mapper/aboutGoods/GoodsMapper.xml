@@ -72,6 +72,12 @@
         select * from goods g
         where g.goodsByUserId=#{uid} limit 0,3
     </select>
+
+    <select id="showAllUserGoods" resultMap="goodsAndImage" parameterType="int">
+        select * from goods g
+        where g.goodsByUserId=#{uid}
+    </select>
+
     <resultMap id="goodsAndImage" type="com.coco.model.dto.GoodsAndImage">
         <id property="id" column="id" />
         <result property="goodsName" column="goodsName"/>

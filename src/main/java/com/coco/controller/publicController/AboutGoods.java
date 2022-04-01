@@ -188,4 +188,13 @@ public class AboutGoods {
             return "ok";
         }
     }
+
+    @GetMapping("/showUserGoods")
+    @ResponseBody
+    public List<GoodsAndImage> showUserGoods(HttpSession session){
+        String name = (String) session.getAttribute("userLoginName");
+        /*System.out.println(name);
+        System.out.println("asjdaksld");*/
+        return goodsService.showAllUserGoods(userService.getUserByUserAccount(name).getId());
+    }
 }

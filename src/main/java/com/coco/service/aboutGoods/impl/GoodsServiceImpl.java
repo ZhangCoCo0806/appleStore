@@ -25,6 +25,11 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public List<GoodsAndImage> showAllUserGoods(int uid) {
+        return goodsDao.showAllUserGoods(uid);
+    }
+
+    @Override
     public List<GoodsText> getAllGoodsTextByUid(int gid) {
         return goodsDao.getAllGoodsTextByUid(gid);
     }

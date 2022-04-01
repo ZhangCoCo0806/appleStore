@@ -64,7 +64,7 @@
                                 <li class="checkUserInfo" @click="getUserData"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;查看个人详细信息</a></li>
                                 <li class="insertAddress"><a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;添加地址信息</a></li>
                                 <li class="showPushGoods"><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
+                                <li class="showAllUserGoods" @click="showAllUserGoods"><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon glyphicon-lock"></span>&nbsp;&nbsp;修改密码</a></li>
                                 <li><a href="logOut"><span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a>
@@ -369,6 +369,34 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        <div class="modal fade showUserGoods" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">已发布的商品</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="user_Goods">
+                            <ul>
+                                <!--<li v-for="g in userOtherGoods">
+                                    {{g.goodsName}}
+                                </li>-->
+                                <li v-for="g in userOtherGoods">
+                                    <a :href="'goods/getGoodsById?gid='+g.id">
+                                        <p>{{g.goodsName}}</p>
+                                        <img :src="g.goodsImages[0].imgUrl">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
     <div class="slider-box">
         <div class="swiper-container slider-01">
@@ -488,6 +516,7 @@
     var vm = new Vue({
         el: '#app',
         data: {
+            userOtherGoods:[],
             goodsComments:[
                 {
                     userAccount:'',
@@ -517,6 +546,18 @@
             value: 4
         },
         methods: {
+            showAllUserGoods(){
+                let _this=this;
+                $.ajax({
+                    url:'goods/showUserGoods',
+                    type:'get',
+                    dataType:'json',
+                    success:function (data) {
+                        _this.userOtherGoods=data
+                        console.log(data)
+                    }
+                })
+            },
             searchGoodsByGoods(name){
                 console.log(name)
                 let _this=this;
@@ -918,6 +959,9 @@
         }
     });
     $(document).ready(function () {
+        $(".showAllUserGoods").click(function () {
+            $(".showUserGoods").modal('show')
+        })
         $(".showPushGoods").click(function () {
             $(".insertGoods").modal('show')
         })
@@ -951,6 +995,7 @@
 </script>
 <script src="js/swiper-3.4.2.min.js"></script>
 <script>
+
     let swiper1 = new Swiper('.slider-01', {
         pagination: '.swiper-pagination',
         effect: 'coverflow',

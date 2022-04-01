@@ -24,6 +24,14 @@ public interface GoodsDao {
      */
     List<GoodsAndImage> getAllGoodsByUser(@Param("uid") int uid);
 
+
+    /**
+     * 获取用户发布的所有商品
+     * @param uid 用户id
+     * @return 用户发布的所有商品
+     */
+    List<GoodsAndImage> showAllUserGoods(@Param("uid") int uid);
+
     /**
      * 根据商品id获取商品的所有用户评论
      * @param gid 商品id
