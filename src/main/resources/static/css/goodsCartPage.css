@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.cart_title{
+    width: 60%;
+    height: 200px;
+    margin: auto;
+    background-color: black;
+}
+.cartContext{
+    width: 60%;
+    height: 650px;
+    margin: auto;
+    margin-top: 40px;
+    background-color: yellow;
+}

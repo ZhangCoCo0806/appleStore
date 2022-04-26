@@ -6,5 +6,20 @@
     <insert id="addCart">
         insert into goodscart values(null,#{gid},#{uid},now())
     </insert>
-
+    <select id="showCart" resultType="com.coco.model.dto.GoodsCatShow01">
+        select g.id gid,g.goodsName goodsName,gi.imgUrl imgUrl from goodscart gc,goods g,goodsimage gi
+        where gc.goodsId=g.id
+        and gc.goodsId=gi.goodsId
+        and gc.userId=#{uid}
+        group by gid
+    </select>
+    <select id="showCart02" resultType="com.coco.model.dto.GoodsCartShow02">
+        select g.id gid,g.goodsName goodsName,gi.imgUrl imgUrl,g.goodsPrice goodsPrice,g.goodsDate goodsDate,g.goodsStart goodsStart,u.userAccount userAccount,u.phone phone
+        from goodscart gc,goods g,goodsimage gi,user u
+        where gc.goodsId=g.id
+          and gc.goodsId=gi.goodsId
+          and g.goodsByUserId=u.id
+          and gc.userId=#{uid}
+        group by gid;
+    </select>
 </mapper>

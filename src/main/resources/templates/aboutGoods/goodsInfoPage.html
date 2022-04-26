@@ -63,9 +63,32 @@
             <el-button th:@click="|addCart('${goodsInfosById.id}')|" type="primary" icon="el-icon-search">加入购物车</el-button>
         </div>
         <div class="buyGoods">
-            <el-button th:@click="|checkCart('${goodsInfosById.id}')|" type="primary" icon="el-icon-search">查看购物车</el-button>
+            <el-button th:@click="|checkCart()|" type="primary" icon="el-icon-search">查看购物车</el-button>
         </div>
     </div>
+    <div class="modal fade showGoodsCart" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">购物车</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="goods_Cart_show">
+                        <ul>
+                            <li v-for="c in showCartGoods">
+                                <p>{{c.goodsName}}</p>
+                                <img :src="c.imgUrl">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <div class="other-goods-goodsAndText">
         <div class="other-goods">
             <div class="other-goods-title">
@@ -110,11 +133,35 @@
             goodsCom:'',
             name:'zhangsan',
             goodsText:'',
-            otherGoods:''
+            otherGoods:'',
+            showCartGoods:[]
         },
         methods:{
-            checkCart(userId){
-                console.log(userId)
+            checkCart(){
+                let _this=this
+                $.ajax({
+                    url:'showCart',
+                    type:'get',
+                    success:function (data) {
+                        if (data===''){
+                            const loading = _this.$loading({
+                                lock: true,
+                                text: '对不起您没有登录！请登录！',
+                                spinner: 'el-icon-loading',
+                                background: 'rgba(0, 0, 0, 0.7)'
+                            });
+                            setTimeout(() => {
+                                loading.close();
+                            }, 1000);
+                        }else {
+                            console.log(data)
+                            _this.showCartGoods=data
+                        }
+                    }
+                })
+                /*$(".buyGoods").click(function () {
+                    alert("jjjjjj")
+                })*/
             },
             addComments:function(gid){
                 let _this=this;
@@ -221,9 +268,9 @@
         $(".user-other-goods-text").click(function () {
             $(".other-goods-goodsAndText").fadeToggle()
         })
-        /*$(".buyGoods").click(function () {
-            alert("jjjjjj")
-        })*/
+        $(".buyGoods").click(function () {
+            $(".showGoodsCart").modal('show')
+        })
     });
     var galleryTop = new Swiper('.gallery-top', {
         nextButton: '.swiper-button-next',

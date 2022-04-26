@@ -3,8 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <!--<link rel="stylesheet" href="css/index.css">-->
+    <link rel="stylesheet" href="../css/goodsCartPage.css">
+    <link rel="stylesheet" href="../css/swiper-3.4.2.min.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
-<h1>this is cart page</h1>
+    <div id="app">
+        <div class="cart_title"></div>
+        <div class="cartContext">
+            <el-table :data="goodsCartShow" height="650" border style="width: 100%">
+                <el-table-column fixed prop="goodsName" align="center" label="商品名称" width="150"></el-table-column>
+                <!--<el-table-column prop="imgUrl" align="center" label="商品图片" width="280"></el-table-column>-->
+                <el-table-column prop="imgUrl" align="center"  label="精品图片">
+                    <template slot-scope="scope">
+                        <el-popover placement="top-start" title="" trigger="hover">
+                            <img :src="scope.row.imgUrl" alt="" style="width: 150px;height: 150px">
+                            <img slot="reference" :src="scope.row.imgUrl" style="width: 30px;height: 30px">
+                        </el-popover>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="goodsPrice" align="center" label="价格(元)" width="100"></el-table-column>
+                <el-table-column prop="goodsDate" align="center" label="上架日期" width="170"></el-table-column>
+                <el-table-column prop="goodsStart" align="center" label="商品星级" width="200">
+                    <template slot-scope="scope">
+                        <el-rate
+                                v-model="scope.row.goodsStart"
+                                show-text>
+                        </el-rate>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="userAccount" align="center" label="卖家账号" width="150"></el-table-column>
+                <el-table-column prop="phone" align="center" label="卖家电话" width="150"></el-table-column>
+                <el-table-column fixed="right" align="center" label="操作" width="100">
+                    <template slot-scope="scope">
+                        <el-button @click="handleClick(scope.row)" type="text" size="small">购买</el-button>
+                        <el-button type="text" size="small">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+    </div>
+<script>
+    var vm=new Vue({
+        el:'#app',
+        data:{
+            goodsCartShow: []
+        },
+        methods:{
+            handleClick(row) {
+                console.log(row);
+            }
+        },
+        mounted:function () {
+            var _this=this;
+            $.ajax({
+                url:'showCartGoods',
+                type:'get',
+                dataType:'json',
+                success:function (data) {
+                    console.log(data)
+                    _this.goodsCartShow=data
+                }
+            })
+        }
+    })
+</script>
 </body>
 </html>

@@ -65,7 +65,7 @@
                                 <li class="insertAddress"><a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;添加地址信息</a></li>
                                 <li class="showPushGoods"><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
                                 <li class="showAllUserGoods" @click="showAllUserGoods"><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a></li>
+                                <li><a href="goods/showCart2"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon glyphicon-lock"></span>&nbsp;&nbsp;修改密码</a></li>
                                 <li><a href="logOut"><span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a>
                                 </li>
@@ -379,9 +379,6 @@
                     <div class="modal-body">
                         <div class="user_Goods">
                             <ul>
-                                <!--<li v-for="g in userOtherGoods">
-                                    {{g.goodsName}}
-                                </li>-->
                                 <li v-for="g in userOtherGoods">
                                     <a :href="'goods/getGoodsById?gid='+g.id">
                                         <p>{{g.goodsName}}</p>

@@ -5,6 +5,7 @@ import com.coco.model.dto.*;
 import com.coco.model.pojo.Goods;
 import com.coco.model.pojo.GoodsComments;
 import com.coco.model.pojo.GoodsImage;
+import com.coco.service.aboutGoods.GoodsCartService;
 import com.coco.service.aboutGoods.GoodsService;
 import com.coco.service.aboutUser.IUserService;
 import com.coco.service.aboutUser.OssUpLoad;
@@ -36,7 +37,7 @@ public class AboutGoods {
 
 
     @Resource
-    private GoodsCartDao goodsCartDao;
+    private GoodsCartService goodsCartService;
     /**
      * 显示所有商品信息,是哪一个用户发布的,该用户的信息和头像接口
      * @return 商品信息+该商品用户信息+用户头像
@@ -216,14 +217,12 @@ public class AboutGoods {
     @GetMapping("/addCart")
     @ResponseBody
     public String addCart(HttpSession session,@RequestParam("id") Integer id){
-        System.out.println("商品id："+id);
         String userName = (String) session.getAttribute("userLoginName");
-        System.out.println(userName);
         if (userName==null){
             return "no";
         }else {
             try {
-                goodsCartDao.addCart(id, userService.getUserIdByUserAccount(userName));
+                goodsCartService.addCart(id, userService.getUserIdByUserAccount(userName));
                 return "ok";
             }catch (Exception e){
                 e.printStackTrace();
@@ -232,8 +231,38 @@ public class AboutGoods {
         }
     }
 
-    /*@GetMapping("showCart")
-    public String showCart(){
+    /**
+     * 查看购物车
+     * @param session session
+     * @return 购物车商品信息
+     */
+    @GetMapping("showCart")
+    @ResponseBody
+    public List<GoodsCatShow01> showCart(HttpSession session){
+        String userName = (String) session.getAttribute("userLoginName");
+        System.out.println(userName);
+        if (userName==null){
+            return null;
+        }else {
+            return goodsCartService.showCart(userService.getUserByUserAccount(userName).getId());
+        }
+    }
+
+    /**
+     * 跳转到购物车页面
+     * @return 购物车页面
+     */
+    @GetMapping("showCart2")
+    public String showCart2(){
         return "aboutGoods/goodsCartPage";
-    }*/
+    }
+
+    @GetMapping("showCartGoods")
+    @ResponseBody
+    public List<GoodsCartShow02> showCartGoods(HttpSession session){
+        String userName = (String) session.getAttribute("userLoginName");
+
+        System.out.println(userName);
+        return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId());
+    }
 }
