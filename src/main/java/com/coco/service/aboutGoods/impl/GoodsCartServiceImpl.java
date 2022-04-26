@@ -27,4 +27,9 @@ public class GoodsCartServiceImpl implements GoodsCartService {
     public List<GoodsCartShow02> showCart02(int uid) {
         return goodsCartDao.showCart02(uid);
     }
+
+    @Override
+    public int deleteGoodsInCart(int cid) {
+        return goodsCartDao.deleteGoodsInCart(cid);
+    }
 }

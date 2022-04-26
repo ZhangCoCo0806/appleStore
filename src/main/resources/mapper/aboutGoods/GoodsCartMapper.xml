@@ -14,7 +14,7 @@
         group by gid
     </select>
     <select id="showCart02" resultType="com.coco.model.dto.GoodsCartShow02">
-        select g.id gid,g.goodsName goodsName,gi.imgUrl imgUrl,g.goodsPrice goodsPrice,g.goodsDate goodsDate,g.goodsStart goodsStart,u.userAccount userAccount,u.phone phone
+        select gc.id gid,g.goodsName goodsName,gi.imgUrl imgUrl,g.goodsPrice goodsPrice,g.goodsDate goodsDate,g.goodsStart goodsStart,u.userAccount userAccount,u.phone phone
         from goodscart gc,goods g,goodsimage gi,user u
         where gc.goodsId=g.id
           and gc.goodsId=gi.goodsId
@@ -22,4 +22,8 @@
           and gc.userId=#{uid}
         group by gid;
     </select>
+    <delete id="deleteGoodsInCart">
+        delete from goodscart
+        where id=#{cid}
+    </delete>
 </mapper>

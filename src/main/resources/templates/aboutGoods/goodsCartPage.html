@@ -20,7 +20,16 @@
 </head>
 <body>
     <div id="app">
-        <div class="cart_title"></div>
+        <div class="cart_title">
+            <div class="swiper-container swiper01">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper001.webp"></div>
+                    <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper002.webp"></div>
+                    <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper003.webp"></div>
+                    <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper004.webp"></div>
+                </div>
+            </div>
+        </div>
         <div class="cartContext">
             <el-table :data="goodsCartShow" height="650" border style="width: 100%">
                 <el-table-column fixed prop="goodsName" align="center" label="商品名称" width="150"></el-table-column>
@@ -47,8 +56,8 @@
                 <el-table-column prop="phone" align="center" label="卖家电话" width="150"></el-table-column>
                 <el-table-column fixed="right" align="center" label="操作" width="100">
                     <template slot-scope="scope">
-                        <el-button @click="handleClick(scope.row)" type="text" size="small">购买</el-button>
-                        <el-button type="text" size="small">删除</el-button>
+                        <el-button @click="buyGoods(scope.row)" type="text" size="small">购买</el-button>
+                        <el-button @click="delGoods(scope.row)" type="text" size="small">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -61,8 +70,35 @@
             goodsCartShow: []
         },
         methods:{
-            handleClick(row) {
+            buyGoods(row) {
                 console.log(row);
+            },
+            delGoods(row) {
+                console.log(row);
+                var _this=this;
+                $.ajax({
+                    url:'deleteGoodsInCart',
+                    type:'delete',
+                    data: {
+                        cid:row.gid
+                    },
+                    dataType:'json',
+                    success:function (data) {
+                        if (data===''){
+                            _this.$message({
+                                message: '警告哦，删除失败！',
+                                type: 'warning'
+                            });
+                        }else {
+                            _this.goodsCartShow=data
+                            _this.$message({
+                                showClose: true,
+                                message: '成功删除购物车中的商品！',
+                                type: 'success'
+                            });
+                        }
+                    }
+                })
             }
         },
         mounted:function () {
@@ -79,5 +115,18 @@
         }
     })
 </script>
+    <script src="../js/swiper-3.4.2.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper01', {
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            slidesPerView: 1,
+            paginationClickable: true,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: 1500,
+        });
+    </script>
 </body>
 </html>

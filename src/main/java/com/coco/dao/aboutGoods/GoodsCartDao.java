@@ -30,4 +30,11 @@ public interface GoodsCartDao {
      * @return 购物车商品信息
      */
     List<GoodsCartShow02> showCart02(@Param("uid") int uid);
+
+    /**
+     * 根据购物车中商品的编号删除商品
+     * @param cid 购物车中商品的编号
+     * @return 受影响记录数
+     */
+    int deleteGoodsInCart(@Param("cid") int cid);
 }

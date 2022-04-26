@@ -257,12 +257,36 @@ public class AboutGoods {
         return "aboutGoods/goodsCartPage";
     }
 
+    /**
+     * 购物车页面的商品展示
+     * @param session session
+     * @return 用户购物车中的商品信息
+     */
     @GetMapping("showCartGoods")
     @ResponseBody
     public List<GoodsCartShow02> showCartGoods(HttpSession session){
         String userName = (String) session.getAttribute("userLoginName");
-
         System.out.println(userName);
         return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId());
+    }
+
+    /**
+     * 删除购物车中的商品
+     * @param session session
+     * @param cartId 购物车中的商品id
+     * @return 是否删除成功
+     */
+    @DeleteMapping("/deleteGoodsInCart")
+    @ResponseBody
+    public List<GoodsCartShow02> deleteGoodsInCart(HttpSession session,@RequestParam("cid") int cartId){
+        System.out.println(cartId);
+        try{
+            goodsCartService.deleteGoodsInCart(cartId);
+            String userName = (String) session.getAttribute("userLoginName");
+            return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
