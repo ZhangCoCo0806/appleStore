@@ -37,6 +37,8 @@ class AppleDealApplicationTests {
     private GoodsDao goodsDao;
     @Test
     void contextLoads() {
+
+
         /*boolean b=true?false:true==true?false:true;
         System.out.println(b);*/
         /*itestDao.getAll().forEach(System.out::println);

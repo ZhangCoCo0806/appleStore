@@ -63,7 +63,7 @@
             <el-button th:@click="|addCart('${goodsInfosById.id}')|" type="primary" icon="el-icon-search">加入购物车</el-button>
         </div>
         <div class="buyGoods">
-            <el-button type="primary" icon="el-icon-search">查看购物车</el-button>
+            <el-button th:@click="|checkCart('${goodsInfosById.id}')|" type="primary" icon="el-icon-search">查看购物车</el-button>
         </div>
     </div>
     <div class="other-goods-goodsAndText">
@@ -113,6 +113,9 @@
             otherGoods:''
         },
         methods:{
+            checkCart(userId){
+                console.log(userId)
+            },
             addComments:function(gid){
                 let _this=this;
                 $.ajax({
@@ -150,7 +153,33 @@
                 })
             },
             addCart:function(id){
-                console.log("jjjj"+id)
+                let _this=this
+                $.ajax({
+                    url:'addCart',
+                    type:'get',
+                    data:{
+                        id:id,
+                    },
+                    success:function (data) {
+                        if (data==="no"){
+                            const loading = _this.$loading({
+                                lock: true,
+                                text: '对不起您没有登录！请登录！',
+                                spinner: 'el-icon-loading',
+                                background: 'rgba(0, 0, 0, 0.7)'
+                            });
+                            setTimeout(() => {
+                                loading.close();
+                            }, 1000);
+                        }else {
+                            _this.$notify({
+                                title: '成功',
+                                message: '添加购物车成功！',
+                                type: 'success'
+                            });
+                        }
+                    }
+                })
             },
             getUserId:function (gid,uid) {
                 this.getOtherGoods(uid)
@@ -192,6 +221,9 @@
         $(".user-other-goods-text").click(function () {
             $(".other-goods-goodsAndText").fadeToggle()
         })
+        /*$(".buyGoods").click(function () {
+            alert("jjjjjj")
+        })*/
     });
     var galleryTop = new Swiper('.gallery-top', {
         nextButton: '.swiper-button-next',

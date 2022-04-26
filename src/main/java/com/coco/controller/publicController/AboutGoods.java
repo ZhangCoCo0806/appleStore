@@ -1,5 +1,6 @@
 package com.coco.controller.publicController;
 
+import com.coco.dao.aboutGoods.GoodsCartDao;
 import com.coco.model.dto.*;
 import com.coco.model.pojo.Goods;
 import com.coco.model.pojo.GoodsComments;
@@ -33,6 +34,9 @@ public class AboutGoods {
     @Resource
     private OssUpLoad ossUpLoad;
 
+
+    @Resource
+    private GoodsCartDao goodsCartDao;
     /**
      * 显示所有商品信息,是哪一个用户发布的,该用户的信息和头像接口
      * @return 商品信息+该商品用户信息+用户头像
@@ -163,7 +167,6 @@ public class AboutGoods {
     @GetMapping("/goodsComments")
     @ResponseBody
     public List<GoodsCommentForIndex> goodsComments(){
-
         return goodsService.goodsComments();
     }
 
@@ -189,6 +192,11 @@ public class AboutGoods {
         }
     }
 
+    /**
+     * 显示用户发布的商品
+     * @param session session
+     * @return 用户以发布的所有商品
+     */
     @GetMapping("/showUserGoods")
     @ResponseBody
     public List<GoodsAndImage> showUserGoods(HttpSession session){
@@ -197,4 +205,35 @@ public class AboutGoods {
         System.out.println("asjdaksld");*/
         return goodsService.showAllUserGoods(userService.getUserByUserAccount(name).getId());
     }
+
+
+    /**
+     * 购物车添加
+     * @param session session
+     * @param id 添加的商品id
+     * @return 是否添加成功
+     */
+    @GetMapping("/addCart")
+    @ResponseBody
+    public String addCart(HttpSession session,@RequestParam("id") Integer id){
+        System.out.println("商品id："+id);
+        String userName = (String) session.getAttribute("userLoginName");
+        System.out.println(userName);
+        if (userName==null){
+            return "no";
+        }else {
+            try {
+                goodsCartDao.addCart(id, userService.getUserIdByUserAccount(userName));
+                return "ok";
+            }catch (Exception e){
+                e.printStackTrace();
+                return "no";
+            }
+        }
+    }
+
+    /*@GetMapping("showCart")
+    public String showCart(){
+        return "aboutGoods/goodsCartPage";
+    }*/
 }
