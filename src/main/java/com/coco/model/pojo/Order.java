@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GoodsCart {
+public class Order {
     private int id;
+    private String orderNum;
     private int goodsId;
-    private int userId;
-    private java.sql.Date addDate;
-    private int isSuccess;
+    private int buyerId;
+    private java.sql.Date buyTime;
 }

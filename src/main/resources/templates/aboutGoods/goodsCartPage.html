@@ -32,9 +32,9 @@
         </div>
         <div class="cartContext">
             <el-table :data="goodsCartShow" height="650" border style="width: 100%">
-                <el-table-column fixed prop="goodsName" align="center" label="商品名称" width="150"></el-table-column>
+                <el-table-column fixed prop="goodsName" align="center" label="商品名称" width="110"></el-table-column>
                 <!--<el-table-column prop="imgUrl" align="center" label="商品图片" width="280"></el-table-column>-->
-                <el-table-column prop="imgUrl" align="center"  label="精品图片">
+                <el-table-column prop="imgUrl" align="center"  label="精品图片" width="80">
                     <template slot-scope="scope">
                         <el-popover placement="top-start" title="" trigger="hover">
                             <img :src="scope.row.imgUrl" alt="" style="width: 150px;height: 150px">
@@ -43,18 +43,16 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="goodsPrice" align="center" label="价格(元)" width="100"></el-table-column>
-                <el-table-column prop="goodsDate" align="center" label="上架日期" width="170"></el-table-column>
+                <el-table-column prop="goodsDate" align="center" label="上架日期" width="100"></el-table-column>
                 <el-table-column prop="goodsStart" align="center" label="商品星级" width="200">
                     <template slot-scope="scope">
-                        <el-rate
-                                v-model="scope.row.goodsStart"
-                                show-text>
-                        </el-rate>
+                        <el-rate v-model="scope.row.goodsStart" show-text></el-rate>
                     </template>
                 </el-table-column>
                 <el-table-column prop="userAccount" align="center" label="卖家账号" width="150"></el-table-column>
                 <el-table-column prop="phone" align="center" label="卖家电话" width="150"></el-table-column>
-                <el-table-column fixed="right" align="center" label="操作" width="100">
+                <el-table-column prop="isSuccess" :formatter="changeNum" align="center" label="是否下单" width="110"></el-table-column>
+                <el-table-column align="center" label="操作" width="150">
                     <template slot-scope="scope">
                         <el-button @click="buyGoods(scope.row)" type="text" size="small">购买</el-button>
                         <el-button @click="delGoods(scope.row)" type="text" size="small">删除</el-button>
@@ -70,11 +68,41 @@
             goodsCartShow: []
         },
         methods:{
+            changeNum(row,column,cellValue){
+                if (cellValue===1){
+                    return '已下单';
+                }else {
+                    return '未下单';
+                }
+            },
             buyGoods(row) {
-                console.log(row);
+                var _this=this;
+                $.ajax({
+                    url:'buyGoods',
+                    type:'get',
+                    data: {
+                        id:row.goodsId,
+                        cid:row.gid
+                    },
+                    dataType:'json',
+                    success:function (data) {
+                        if (data===''){
+                            _this.$message({
+                                message: '对不起，购买失败，请联系管理员：1100101010',
+                                type: 'warning'
+                            });
+                        }else {
+                            _this.goodsCartShow=data
+                            _this.$message({
+                                showClose: true,
+                                message: '恭喜您，购买成功！',
+                                type: 'success'
+                            });
+                        }
+                    }
+                })
             },
             delGoods(row) {
-                console.log(row);
                 var _this=this;
                 $.ajax({
                     url:'deleteGoodsInCart',
@@ -108,11 +136,11 @@
                 type:'get',
                 dataType:'json',
                 success:function (data) {
-                    console.log(data)
                     _this.goodsCartShow=data
                 }
             })
         }
+
     })
 </script>
     <script src="../js/swiper-3.4.2.min.js"></script>

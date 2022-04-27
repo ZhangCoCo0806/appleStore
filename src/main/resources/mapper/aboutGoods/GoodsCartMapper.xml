@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.coco.dao.aboutGoods.GoodsCartDao">
     <insert id="addCart">
-        insert into goodscart values(null,#{gid},#{uid},now())
+        insert into goodscart values(null,#{gid},#{uid},now(),0)
     </insert>
     <select id="showCart" resultType="com.coco.model.dto.GoodsCatShow01">
         select g.id gid,g.goodsName goodsName,gi.imgUrl imgUrl from goodscart gc,goods g,goodsimage gi
@@ -14,7 +14,7 @@
         group by gid
     </select>
     <select id="showCart02" resultType="com.coco.model.dto.GoodsCartShow02">
-        select gc.id gid,g.goodsName goodsName,gi.imgUrl imgUrl,g.goodsPrice goodsPrice,g.goodsDate goodsDate,g.goodsStart goodsStart,u.userAccount userAccount,u.phone phone
+        select gc.id gid,g.id goodsId,g.goodsName goodsName,gi.imgUrl imgUrl,g.goodsPrice goodsPrice,g.goodsDate goodsDate,g.goodsStart goodsStart,u.userAccount userAccount,u.phone phone,gc.isSuccess isSuccess
         from goodscart gc,goods g,goodsimage gi,user u
         where gc.goodsId=g.id
           and gc.goodsId=gi.goodsId
@@ -26,4 +26,11 @@
         delete from goodscart
         where id=#{cid}
     </delete>
+    <insert id="buyGoods">
+        insert into order_table values(null,uuid(),#{gid},#{uid},now())
+    </insert>
+    <update id="changeNum">
+        update goodscart set isSuccess=1
+        where id=#{cid}
+    </update>
 </mapper>

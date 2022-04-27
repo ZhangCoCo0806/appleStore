@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GoodsCartShow02 {
     private int gid;
+    private int goodsId;
     private String goodsName;
     private String imgUrl;
     private double goodsPrice;
@@ -16,4 +17,5 @@ public class GoodsCartShow02 {
     private int goodsStart;
     private String userAccount;
     private String phone;
+    private int isSuccess;
 }

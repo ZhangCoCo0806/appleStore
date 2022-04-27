@@ -37,4 +37,19 @@ public interface GoodsCartDao {
      * @return 受影响记录数
      */
     int deleteGoodsInCart(@Param("cid") int cid);
+
+    /**
+     * 商品购买，下订单
+     * @param goodsId 商品id
+     * @param userId 买家id
+     * @return 受影响记录数
+     */
+    int buyGoods(@Param("gid") int goodsId,@Param("uid") int userId);
+
+    /**
+     * 修改购物车中是否下单
+     * @param cartId 购物车中的id
+     * @return 受影响记录数
+     */
+    int changeNum(@Param("cid") int cartId);
 }

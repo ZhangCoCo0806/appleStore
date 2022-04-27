@@ -32,4 +32,14 @@ public class GoodsCartServiceImpl implements GoodsCartService {
     public int deleteGoodsInCart(int cid) {
         return goodsCartDao.deleteGoodsInCart(cid);
     }
+
+    @Override
+    public int buyGoods(int goodsId, int userId) {
+        return goodsCartDao.buyGoods(goodsId,userId);
+    }
+
+    @Override
+    public int changeNum(int cartId) {
+        return goodsCartDao.changeNum(cartId);
+    }
 }
