@@ -2,6 +2,7 @@ package com.coco.service.aboutGoods;
 
 import com.coco.model.dto.GoodsCartShow02;
 import com.coco.model.dto.GoodsCatShow01;
+import com.coco.model.dto.OrderShow;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public interface GoodsCartService {
      * @param uid 用户id
      * @return 购物车商品信息
      */
-    List<GoodsCartShow02> showCart02(int uid);
+    List<GoodsCartShow02> showCart02(int uid,String goodsName);
 
     /**
      * 根据购物车中商品的编号删除商品
@@ -50,4 +51,11 @@ public interface GoodsCartService {
      * @return 受影响记录数
      */
     int changeNum(int cartId);
+
+    /**
+     * 订单查看
+     * @param uid 用户编号
+     * @return 订单信息
+     */
+    List<OrderShow> orderShow(int uid);
 }

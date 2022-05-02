@@ -3,6 +3,7 @@ package com.coco.service.aboutGoods.impl;
 import com.coco.dao.aboutGoods.GoodsCartDao;
 import com.coco.model.dto.GoodsCartShow02;
 import com.coco.model.dto.GoodsCatShow01;
+import com.coco.model.dto.OrderShow;
 import com.coco.service.aboutGoods.GoodsCartService;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,10 @@ public class GoodsCartServiceImpl implements GoodsCartService {
     }
 
     @Override
-    public List<GoodsCartShow02> showCart02(int uid) {
-        return goodsCartDao.showCart02(uid);
+    public List<GoodsCartShow02> showCart02(int uid, String goodsName) {
+        return goodsCartDao.showCart02(uid,goodsName);
     }
+
 
     @Override
     public int deleteGoodsInCart(int cid) {
@@ -41,5 +43,10 @@ public class GoodsCartServiceImpl implements GoodsCartService {
     @Override
     public int changeNum(int cartId) {
         return goodsCartDao.changeNum(cartId);
+    }
+
+    @Override
+    public List<OrderShow> orderShow(int uid) {
+        return goodsCartDao.orderShow(uid);
     }
 }

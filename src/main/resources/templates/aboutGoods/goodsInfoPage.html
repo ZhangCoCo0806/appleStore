@@ -19,7 +19,17 @@
 </head>
 <body>
 <div id="app">
-    <div class="title-box"></div>
+    <div class="title-box">
+        <div class="swiper-container swiper_title">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper001.webp"></div>
+                <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper002.webp"></div>
+                <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper003.webp"></div>
+                <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper004.webp"></div>
+            </div>
+        </div>
+
+    </div>
     <div class="content-box">
         <div class="goods-title">商品详情</div>
         <div class="left-slider-box">
@@ -286,7 +296,14 @@
     });
     galleryTop.params.control = galleryThumbs;
     galleryThumbs.params.control = galleryTop;
+    var swiper = new Swiper('.swiper_title', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        direction: 'vertical',
+        loop: true,
+        autoplay: 1500,
 
+    });
 </script>
 </body>
 </html>

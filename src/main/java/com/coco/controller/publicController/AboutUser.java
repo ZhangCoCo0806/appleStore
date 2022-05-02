@@ -234,5 +234,19 @@ public class AboutUser {
         String code = String.valueOf((int)((Math.random()*9+1)*100000));
         emailTools.sendEmailCode("小可爱,欢迎你注册本网站,以下是邮箱验证码!","宝儿,欢迎注册本网站,验证码是:"+code,userEmail,"2231925844@qq.com");
         return code;
+    }//updatePass
+
+    @PutMapping("getAccount")
+    @ResponseBody
+    public String getAccount(HttpSession session){
+        String userName = (String) session.getAttribute("userLoginName");
+        System.out.println("哈哈哈哈"+"--------"+userName);
+        return "ok";
+    }
+
+    @PutMapping("updatePass")
+    @ResponseBody
+    public String updatePass(){
+        return "ok";
     }
 }

@@ -66,7 +66,8 @@
                                 <li class="showPushGoods"><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
                                 <li class="showAllUserGoods" @click="showAllUserGoods"><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
                                 <li><a href="goods/showCart2"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a></li>
-                                <li><a href="#"><span class="glyphicon glyphicon glyphicon-lock"></span>&nbsp;&nbsp;修改密码</a></li>
+                                <li class="order_goods" @click="orderShow"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看订单</a></li>
+                                <li class="updatePassBtn" @Click="updatePass"><a href="#"><span class="glyphicon glyphicon glyphicon-lock"></span>&nbsp;&nbsp;修改密码</a></li>
                                 <li><a href="logOut"><span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a>
                                 </li>
                                 <li role="separator" class="divider"></li>
@@ -99,31 +100,31 @@
                         <form action="" method="post">
                             <div class="form-group has-feedback">
 <!--                                <label class="control-label" for="userName">请设置用户名</label>-->
-                                <label class="control-label" for="userName">请输入QQ账号</label>
+                                <label class="control-label" for="userName">请输入账号</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
                                            v-model.trim="userInfo.userAccount" class="form-control checkEmpty" id="userName"
-                                           placeholder="请输入QQ账号" aria-describedby="inputGroupSuccess1Status">
+                                           placeholder="请输入账号" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
 <!--                                <label class="control-label" for="userPass1">请设置登录密码</label>-->
-                                <label class="control-label" for="userPass1">请输入QQ密码</label>
+                                <label class="control-label" for="userPass1">请输入密码</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
                                            v-model.trim="userInfo.userPass" class="form-control checkEmpty" id="userPass1"
-                                           placeholder="请输入QQ密码" aria-describedby="inputGroupSuccess1Status">
+                                           placeholder="请输入密码" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
 <!--                                <label class="control-label" for="userPass2">请再次输入密码</label>-->
-                                <label class="control-label" for="userPass2">请再次输入QQ密码</label>
+                                <label class="control-label" for="userPass2">请再次输入密码</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
-                                           class="form-control checkEmpty" id="userPass2" placeholder="请再次输入QQ密码"
+                                           class="form-control checkEmpty" id="userPass2" placeholder="请再次输入密码"
                                            aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
@@ -394,6 +395,81 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+        <div class="modal fade showOrder" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">已购买的商品</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="order_box">
+                            <template>
+                                <el-table :data="orderTable" height="500" border style="width: 100%">
+                                    <el-table-column fixed prop="goodsName" align="center" label="商品名称" width="150"></el-table-column>
+                                    <el-table-column prop="imgUrl" align="center" label="商品图片" width="120">
+                                        <template slot-scope="scope">
+                                            <el-popover placement="top-start" title="" trigger="hover">
+                                                <img :src="scope.row.imgUrl" alt="" style="width: 150px;height: 150px">
+                                                <img slot="reference" :src="scope.row.imgUrl" style="width: 30px;height: 30px">
+                                            </el-popover>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column prop="goodsPrice" align="center" label="商品价格" width="120"></el-table-column>
+                                    <el-table-column prop="goodsDate" align="center" label="上架日期" width="160"></el-table-column>
+                                    <el-table-column prop="orderNum" align="center" label="订单编号" width="300"></el-table-column>
+                                    <el-table-column prop="buyTime" align="center" label="下单日期" width="160"></el-table-column>
+                                    <el-table-column prop="account" align="center" label="卖家账号" width="120"></el-table-column>
+                                    <el-table-column prop="phone" align="center" label="卖家电话" width="120"></el-table-column>
+                                    <!--<el-table-column fixed="right" align="center" label="操作" width="100">
+                                        <template slot-scope="scope">
+                                            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                                            <el-button type="text" size="small">编辑</el-button>
+                                        </template>
+                                    </el-table-column>-->
+                                </el-table>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div class="modal fade updatePass" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">修改密码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <fieldset disabled>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">账号</label>
+                                    <input v-model="updatePassInfo.account" type="email" class="form-control" id="exampleInputEmail1" placeholder="账号">
+                                </div>
+                            </fieldset>
+
+                            <div class="form-group ">
+                                <label for="exampleInputPassword1">旧密码</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="旧密码">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword12">新密码</label>
+                                <input type="password" class="form-control" id="exampleInputPassword12" placeholder="新密码">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
     <div class="slider-box">
         <div class="swiper-container slider-01">
@@ -492,7 +568,7 @@
         </div>
     </div>
     <div class="footer-box">
-        <h1>底部版权信息以及网站介绍相关(待开发中).....</h1>
+        <!--<h1>底部版权信息以及网站介绍相关(待开发中).....</h1>-->
     </div>
     <div class="left-tools-box">
         <div class="left-tools-box-title">
@@ -501,7 +577,30 @@
         <div class="left-tools-box-title-item">
             <div class="swiper-container slider-02">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="g in goodsComments"><div><img :src="g.url"></div><div class="userComments">{{g.userAccount}}：{{g.goodsText}}</div></div>
+                    <!--<div class="swiper-slide" v-for="g in goodsComments">
+                        <div><img :src="g.url"></div>
+                        <div class="userComments">{{g.userAccount}}：{{g.goodsText}}</div>
+                    </div>-->
+                    <div class="swiper-slide">
+                        <div><img src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/b883543b-ee1c-4a60-83b9-2ca2dd34e5d4.jpeg"></div>
+                        <div class="userComments">zhangsan：手机到手后是全新无拆机的</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div><img src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/59c7fe86-61f5-4bee-aa5e-700b923673bb.jpg"></div>
+                        <div class="userComments">admin：外形外观：外形外观真的超级好看，</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div><img src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/6ad2ba81-6f9c-4b90-9a03-0863efa3f551.jpeg"></div>
+                        <div class="userComments">xixi：待机时间：很棒 运行速度：865够用 </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div><img src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/b948f484-73bb-44b6-b1cf-c47752bd0e83.jpg"></div>
+                        <div class="userComments">lixi：哇哦，真的是一款很不错的手机</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/morenImageHead.png"></div>
+                        <div class="userComments">zhangshiqi：手机收到真的太好看了</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -513,6 +612,21 @@
     var vm = new Vue({
         el: '#app',
         data: {
+            updatePassInfo:{
+                account:'zhangsan',
+                oldPass:'',
+                newPass:''
+            },
+            orderTable: [{
+                goodsName: 'iphone',
+                imgUrl: 'https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goodsImages/00e40d61-90b2-4475-8f23-465076f0edbe.jpg',
+                goodsPrice: 5999.0,
+                goodsDate: '2022-01-16 19:04:36',
+                orderNum: 'bb0cfd39-c5f4-11ec-8834-a0b3ccf77983',
+                buyTime: '2022-01-16 19:04:36',
+                account: 'zhangsan',
+                phone: '13359490766'
+            }],
             userOtherGoods:[],
             goodsComments:[
                 {
@@ -543,6 +657,23 @@
             value: 4
         },
         methods: {
+            updatePass(){
+
+            },
+            orderShow(){
+                let _this=this;
+                $.ajax({
+                    url:'goods/orderShow',
+                    type:'get',
+                    dataType:'json',
+                    success:function (data) {
+                        _this.orderTable=data
+                    }
+                })
+            },
+            handleClick(row) {
+                console.log(row);
+            },
             showAllUserGoods(){
                 let _this=this;
                 $.ajax({
@@ -603,7 +734,7 @@
                 if (flag===false){
                     this.$notify({
                         title: '商品信息不能为空哦!',
-                        message: '宝儿,你的头发好香呦!商品信息不能为空哦!!!!',
+                        message: '对不起!商品信息不能为空哦!!!!',
                         type: 'warning'
                     });
                 }else{
@@ -956,6 +1087,13 @@
         }
     });
     $(document).ready(function () {
+        // updatePassBtn  updatePass
+        $(".updatePassBtn").click(function () {
+            $(".updatePass").modal('show')
+        })
+        $(".order_goods").click(function () {
+            $(".showOrder").modal('show')
+        })
         $(".showAllUserGoods").click(function () {
             $(".showUserGoods").modal('show')
         })
@@ -1011,11 +1149,10 @@
     var swiper = new Swiper('.slider-02', {
         loop: true, // 循环模式选项
         direction: 'vertical', // 垂直切换选项
-        slidesPerView: 9,
+        slidesPerView: 5,
         autoplay: {
             delay: 1000,//1秒切换一次
         },
-        mousewheel: false,
     });
 </script>
 <script>

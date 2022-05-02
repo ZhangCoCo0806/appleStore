@@ -21,7 +21,7 @@ class AppleDealApplicationTests {
     private GoodsCartDao goodsCartDao;
     @Test
     void contextLoads() {
-        goodsCartDao.showCart02(1).forEach(goodsCartShow02 -> System.out.println(goodsCartShow02));
+        System.out.println(goodsCartDao.showCart02(1, "ip"));
     }
 
 }

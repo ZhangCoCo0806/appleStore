@@ -34,8 +34,6 @@ public class AboutGoods {
     private IUserService userService;
     @Resource
     private OssUpLoad ossUpLoad;
-
-
     @Resource
     private GoodsCartService goodsCartService;
     /**
@@ -202,8 +200,6 @@ public class AboutGoods {
     @ResponseBody
     public List<GoodsAndImage> showUserGoods(HttpSession session){
         String name = (String) session.getAttribute("userLoginName");
-        /*System.out.println(name);
-        System.out.println("asjdaksld");*/
         return goodsService.showAllUserGoods(userService.getUserByUserAccount(name).getId());
     }
 
@@ -267,7 +263,21 @@ public class AboutGoods {
     public List<GoodsCartShow02> showCartGoods(HttpSession session){
         String userName = (String) session.getAttribute("userLoginName");
         System.out.println(userName);
-        return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId());
+        return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId(),null);
+    }
+
+    /**
+     * 模糊查询购物车中的商品
+     * @param session session
+     * @param goodsName 模糊查询关键字
+     * @return 模糊查询到的商品信息
+     */
+    @GetMapping("searchGoods")
+    @ResponseBody
+    public List<GoodsCartShow02> showCartGoods(HttpSession session,@RequestParam("name") String goodsName){
+        String userName = (String) session.getAttribute("userLoginName");
+        System.out.println(userName);
+        return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId(),goodsName);
     }
 
     /**
@@ -279,14 +289,57 @@ public class AboutGoods {
     @DeleteMapping("/deleteGoodsInCart")
     @ResponseBody
     public List<GoodsCartShow02> deleteGoodsInCart(HttpSession session,@RequestParam("cid") int cartId){
-        System.out.println(cartId);
         try{
             goodsCartService.deleteGoodsInCart(cartId);
             String userName = (String) session.getAttribute("userLoginName");
-            return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId());
+            return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId(),null);
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
     }
+
+
+    /**
+     * 购买商品，下订单
+     * @param session session
+     * @param goodsId 商品id
+     * @param cartId 购物车中的id
+     * @return 是否购买成功
+     */
+    @GetMapping("buyGoods")
+    @ResponseBody
+    public List<GoodsCartShow02> buyGoods(HttpSession session,@RequestParam("id") int goodsId,@RequestParam("cid") int cartId){
+        String userName = (String) session.getAttribute("userLoginName");
+        int userId=userService.getUserByUserAccount(userName).getId();
+        try {
+            if (goodsCartService.buyGoods(goodsId,userId)>0){
+                if (goodsCartService.changeNum(cartId)>=0){
+                    return goodsCartService.showCart02(userId,null);
+                }else {
+                    return null;
+                }
+            }else {
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 显示订单信息
+     * @param session session
+     * @return 订单信息
+     */
+    @GetMapping("/orderShow")
+    @ResponseBody
+    public List<OrderShow> orderShow(HttpSession session){
+        String userName = (String) session.getAttribute("userLoginName");
+        int userId=userService.getUserByUserAccount(userName).getId();
+        return goodsCartService.orderShow(userId);
+    }
+
+
 }

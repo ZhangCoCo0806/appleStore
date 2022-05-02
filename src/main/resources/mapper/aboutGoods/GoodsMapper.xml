@@ -40,9 +40,7 @@
         </collection>
     </resultMap>-->
 
-    <!--<insert id="addCart">
-        insert into goodscart values(null,#{gid},#{uid},now())
-    </insert>-->
+
 
     <select id="getAllGoodsANDImageForSlider" resultMap="getAllGoodsInfos">
         select g.id from goods g order by g.id limit 0,5
@@ -151,8 +149,8 @@
         select u.userAccount,uh.url,gs.goodsText
         from user u,userheadimg uh,goodscomments gs
         where u.id=uh.userId
-        and u.id=gs.userId
-        order by RAND()
+          and u.id=gs.userId
+        order by RAND() limit 1,10
     </select>
 
     <insert id="addComments">

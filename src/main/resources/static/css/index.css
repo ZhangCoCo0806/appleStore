@@ -7,7 +7,7 @@
     background-color: #383a3c;
 }*/
 body {
-    background: url("../img/indexBg05.jpg") no-repeat center;
+    background: url("../img/indexBg06.jpg") no-repeat center;
     background-size: 100%;
     background-attachment: fixed;
 }
@@ -211,7 +211,7 @@ body {
 }
 .content-goods-list ul li .goods-price p{
     font-size: 22px;
-    color: orangered;
+    color: black;
 }
 .content-goods-list ul li .goods-data,.content-goods-list ul li .goods-user{
     font-size: 16px;
@@ -228,8 +228,9 @@ body {
     left: 10px;
     width: 200px;
     height: 200px;
-    background-color: black;
-    color: white;
+    background-color: wheat;
+    box-sizing: border-box;
+    color: darkslategray;
     display: none;
     border-radius: 5px;
     box-shadow: 10px 10px 5px #888888;
@@ -269,7 +270,7 @@ body {
     width: 270px;
     height: 350px;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.6);
     overflow: hidden;
 }
 .left-tools-box .left-tools-box-title{
@@ -336,4 +337,10 @@ body {
 .user_Goods ul li img{
     width: 100%;
     height: 120px;
+}
+
+.showOrder .order_box{
+    width: 868px;
+    height: 500px;
+    background-color: yellow;
 }

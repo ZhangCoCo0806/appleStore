@@ -20,7 +20,10 @@
           and gc.goodsId=gi.goodsId
           and g.goodsByUserId=u.id
           and gc.userId=#{uid}
-        group by gid;
+        <if test="name!=null">
+            and g.goodsName like concat('%',#{name},'%')
+        </if>
+            group by gid;
     </select>
     <delete id="deleteGoodsInCart">
         delete from goodscart
@@ -33,4 +36,13 @@
         update goodscart set isSuccess=1
         where id=#{cid}
     </update>
+    <select id="orderShow" resultType="com.coco.model.dto.OrderShow">
+        select g.goodsName goodsName,gi.imgUrl,g.goodsPrice goodsPrice,g.goodsDate goodsDate,ot.orderNum orderNum,ot.buyTime buyTime,u.userAccount account,u.phone phone
+        from order_table ot,goods g,user u,goodsimage gi
+        where ot.goodsId=g.id
+        and g.goodsByUserId=u.id
+        and g.id=gi.goodsId
+        and ot.buyerId=#{id}
+        group by g.goodsName;
+    </select>
 </mapper>

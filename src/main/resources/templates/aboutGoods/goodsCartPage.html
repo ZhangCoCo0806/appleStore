@@ -30,8 +30,14 @@
                 </div>
             </div>
         </div>
+        <div class="search_box">
+            <el-input @input="searchGoodsByName" placeholder="请输入内容" v-model="searchKeyName" clearable>
+                <template slot="prepend">请输入要查询的商品</template>
+                <el-button slot="append" icon="el-icon-search"></el-button>
+            </el-input>
+        </div>
         <div class="cartContext">
-            <el-table :data="goodsCartShow" height="650" border style="width: 100%">
+            <el-table :data="goodsCartShow" height="550" border style="width: 100%">
                 <el-table-column fixed prop="goodsName" align="center" label="商品名称" width="110"></el-table-column>
                 <!--<el-table-column prop="imgUrl" align="center" label="商品图片" width="280"></el-table-column>-->
                 <el-table-column prop="imgUrl" align="center"  label="精品图片" width="80">
@@ -65,9 +71,24 @@
     var vm=new Vue({
         el:'#app',
         data:{
-            goodsCartShow: []
+            goodsCartShow: [],
+            searchKeyName:''
         },
         methods:{
+            searchGoodsByName(name){
+                var _this=this;
+                $.ajax({
+                    url:'searchGoods',
+                    type:'get',
+                    data: {
+                        name:name
+                    },
+                    dataType:'json',
+                    success:function (data) {
+                        _this.goodsCartShow=data
+                    }
+                })
+            },
             changeNum(row,column,cellValue){
                 if (cellValue===1){
                     return '已下单';

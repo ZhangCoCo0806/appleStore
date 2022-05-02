@@ -2,6 +2,7 @@ package com.coco.dao.aboutGoods;
 
 import com.coco.model.dto.GoodsCartShow02;
 import com.coco.model.dto.GoodsCatShow01;
+import com.coco.model.dto.OrderShow;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,7 +30,7 @@ public interface GoodsCartDao {
      * @param uid 用户id
      * @return 购物车商品信息
      */
-    List<GoodsCartShow02> showCart02(@Param("uid") int uid);
+    List<GoodsCartShow02> showCart02(@Param("uid") int uid,@Param("name") String goodsName);
 
     /**
      * 根据购物车中商品的编号删除商品
@@ -52,4 +53,11 @@ public interface GoodsCartDao {
      * @return 受影响记录数
      */
     int changeNum(@Param("cid") int cartId);
+
+    /**
+     * 订单查看
+     * @param uid 用户编号
+     * @return 订单信息
+     */
+    List<OrderShow> orderShow(@Param("id") int uid);
 }
