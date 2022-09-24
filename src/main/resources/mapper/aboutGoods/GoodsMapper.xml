@@ -41,13 +41,12 @@
     </resultMap>-->
 
 
-
     <select id="getAllGoodsANDImageForSlider" resultMap="getAllGoodsInfos">
         select g.id from goods g order by g.id limit 0,5
     </select>
     <resultMap id="getAllGoodsInfos" type="com.coco.model.dto.GoodsANDImageForSlider">
-        <id property="id" column="id" />
-        <collection property="goodsImages" column="id" select="getGoodsImage" ofType="com.coco.model.pojo.GoodsImage" />
+        <id property="id" column="id"/>
+        <collection property="goodsImages" column="id" select="getGoodsImage" ofType="com.coco.model.pojo.GoodsImage"/>
     </resultMap>
 
 
@@ -82,7 +81,7 @@
     </select>
 
     <resultMap id="goodsAndImage" type="com.coco.model.dto.GoodsAndImage">
-        <id property="id" column="id" />
+        <id property="id" column="id"/>
         <result property="goodsName" column="goodsName"/>
         <result property="goodsPrice" column="goodsPrice"/>
         <result property="goodsText" column="goodsText"/>
@@ -90,7 +89,7 @@
         <result property="goodsStart" column="goodsStart"/>
         <result property="goodsTypeId" column="goodsTypeId"/>
         <result property="goodsByUserId" column="goodsByUserId"/>
-        <collection property="goodsImages" column="id" select="getGoodsImage" ofType="com.coco.model.pojo.GoodsImage" />
+        <collection property="goodsImages" column="id" select="getGoodsImage" ofType="com.coco.model.pojo.GoodsImage"/>
     </resultMap>
 
     <select id="getAllGoods" resultMap="getAllGoodsResultMap" parameterType="int">
@@ -106,7 +105,7 @@
         and u.id=uh.userId order by g.id
     </select>
     <resultMap id="getAllGoodsResultMap" type="com.coco.model.dto.GoodsUserImage">
-        <id property="id" column="id" />
+        <id property="id" column="id"/>
         <result property="goodsName" column="goodsName"/>
         <result property="goodsPrice" column="goodsPrice"/>
         <result property="goodsText" column="goodsText"/>
@@ -115,19 +114,19 @@
         <result property="goodsTypeId" column="goodsTypeId"/>
         <result property="goodsByUserId" column="goodsByUserId"/>
         <association property="userHandImg" javaType="com.coco.model.dto.UserHandImg">
-            <id column="userId" property="id" />
-            <result column="userAccount" property="userAccount" />
-            <result column="phone" property="phone" />
-            <result column="email" property="email" />
-            <result column="joinData" property="joinData" />
+            <id column="userId" property="id"/>
+            <result column="userAccount" property="userAccount"/>
+            <result column="phone" property="phone"/>
+            <result column="email" property="email"/>
+            <result column="joinData" property="joinData"/>
             <association property="headImage" javaType="com.coco.model.pojo.HeadImage">
-                <id column="imgId" property="id" />
-                <result column="userId" property="userId" />
-                <result column="userId" property="userId" />
-                <result column="url" property="url" />
+                <id column="imgId" property="id"/>
+                <result column="userId" property="userId"/>
+                <result column="userId" property="userId"/>
+                <result column="url" property="url"/>
             </association>
         </association>
-        <collection property="goodsImages" column="id" select="getGoodsImage" ofType="com.coco.model.pojo.GoodsImage" />
+        <collection property="goodsImages" column="id" select="getGoodsImage" ofType="com.coco.model.pojo.GoodsImage"/>
     </resultMap>
     <select id="getGoodsImage" resultType="com.coco.model.pojo.GoodsImage">
         select * from goodsimage gi where gi.goodsId=#{id}
@@ -138,7 +137,8 @@
         <selectKey keyProperty="id" keyColumn="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into goods values (null,#{goodsName},#{goodsPrice},#{goodsText},now(),#{goodsStart},#{goodsTypeId},#{goodsByUserId});
+        insert into goods values
+        (null,#{goodsName},#{goodsPrice},#{goodsText},now(),#{goodsStart},#{goodsTypeId},#{goodsByUserId});
     </insert>
 
     <insert id="insertGoodsImage">

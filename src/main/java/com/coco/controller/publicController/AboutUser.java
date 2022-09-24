@@ -117,6 +117,8 @@ public class AboutUser {
             } else {
                 //如果不是默认头像的url,则先将阿里云oss中的用户之前的头像删除,然后再讲用户的新头像上传
                 ossUpLoad.delete("apple-shop-all-images", oldImageUrl.substring(58));
+//                https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/ed0858d6-4ff2-4e56-a659-694d87441438.png
+                //userHeaderImages/ed0858d6-4ff2-4e56-a659-694d87441438.png
                 urlStr = ossUpLoad.upload(file, "apple-shop-all-images", "userHeaderImages");
                 userService.updateUserHeadImage(userService.getUserIdByUserAccount(userName), urlStr);
             }
@@ -190,63 +192,66 @@ public class AboutUser {
 
     /**
      * 根据账号获取用户基础信息
+     *
      * @param session session
      * @return 用户基础信息
      */
     @ApiOperation("根据账号获取用户基础信息接口")
     @GetMapping("/getUserDataByUserId")
     @ResponseBody
-    public UserData getUserDataByUserId(HttpSession session){
+    public UserData getUserDataByUserId(HttpSession session) {
         String userName = (String) session.getAttribute("userLoginName");
         return userService.getUserDataByUserAccount(userName);
     }
 
     /**
      * 用户新增地址
+     *
      * @param userAddressInfo 用户地址信息
-     * @param session session
+     * @param session         session
      * @return 是否新增成功
      */
     @ApiOperation("用户新增地址")
     @RequestMapping("/getUserAddress")
     @ResponseBody
-    public String getUserAddress(@RequestBody UserAddress userAddressInfo,HttpSession session){
+    public String getUserAddress(@RequestBody UserAddress userAddressInfo, HttpSession session) {
         String userName = (String) session.getAttribute("userLoginName");
-        try{
+        try {
             userAddressInfo.setUserId(userService.getUserIdByUserAccount(userName));
             userService.insertUserAddress(userAddressInfo);
             return "ok";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "no";
         }
     }
 
     /**
      * 用户注册邮箱验证码接口
+     *
      * @param userEmail 用户输入的邮箱
      * @return 验证码
      */
     @ApiOperation("用户注册邮箱验证码接口")
     @GetMapping("/sendEmail")
     @ResponseBody
-    public String sendEmail(@RequestParam("UserEmail") String userEmail){
+    public String sendEmail(@RequestParam("UserEmail") String userEmail) {
         System.out.println(userEmail);
-        String code = String.valueOf((int)((Math.random()*9+1)*100000));
-        emailTools.sendEmailCode("小可爱,欢迎你注册本网站,以下是邮箱验证码!","宝儿,欢迎注册本网站,验证码是:"+code,userEmail,"2231925844@qq.com");
+        String code = String.valueOf((int) ((Math.random() * 9 + 1) * 100000));
+        emailTools.sendEmailCode("小可爱,欢迎你注册本网站,以下是邮箱验证码!", "宝儿,欢迎注册本网站,验证码是:" + code, userEmail, "2231925844@qq.com");
         return code;
     }//updatePass
 
     @PutMapping("getAccount")
     @ResponseBody
-    public String getAccount(HttpSession session){
+    public String getAccount(HttpSession session) {
         String userName = (String) session.getAttribute("userLoginName");
-        System.out.println("哈哈哈哈"+"--------"+userName);
+        System.out.println("哈哈哈哈" + "--------" + userName);
         return "ok";
     }
 
     @PutMapping("updatePass")
     @ResponseBody
-    public String updatePass(){
+    public String updatePass() {
         return "ok";
     }
 }

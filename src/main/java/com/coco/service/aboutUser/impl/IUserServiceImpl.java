@@ -16,7 +16,9 @@ import javax.annotation.Resource;
 @Service
 public class IUserServiceImpl implements IUserService {
     @Resource
-    private IUserDao userDao;;
+    private IUserDao userDao;
+    ;
+
     @Override
     public User getUserByUserAccount(String userAccount) {
         return userDao.getUserByUserAccount(userAccount);
@@ -45,7 +47,7 @@ public class IUserServiceImpl implements IUserService {
 
     @Override
     public int updateUserHeadImage(int userId, String urlStr) {
-        return userDao.updateUserHeadImage(userId,urlStr);
+        return userDao.updateUserHeadImage(userId, urlStr);
     }
 
     @Override

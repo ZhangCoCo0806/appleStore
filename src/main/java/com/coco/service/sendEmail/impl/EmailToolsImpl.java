@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 public class EmailToolsImpl implements EmailTools {
     @Autowired
     JavaMailSenderImpl mailSender;
+
     @Override
     public String sendEmailCode(String title, String text, String toPerson, String fromPerson) {
-        try{
+        try {
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             simpleMailMessage.setSubject(title);
             simpleMailMessage.setText(text);
@@ -20,7 +21,7 @@ public class EmailToolsImpl implements EmailTools {
             simpleMailMessage.setFrom(fromPerson);
             mailSender.send(simpleMailMessage);
             return "true";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "false";
         }
     }

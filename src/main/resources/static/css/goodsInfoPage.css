@@ -1,25 +1,30 @@
-*{
+* {
     padding: 0;
     margin: 0;
 }
-.title-box{
+
+.title-box {
     width: 100%;
     height: 300px;
 }
-.title-box .swiper_title{
+
+.title-box .swiper_title {
     width: 100%;
     height: 100%;
 }
-.title-box .swiper_title .swiper-wrapper .swiper-slide img{
+
+.title-box .swiper_title .swiper-wrapper .swiper-slide img {
     width: 100%;
     height: 100%;
 }
-.content-box{
+
+.content-box {
     width: 55%;
     height: 530px;
     margin: 20px auto;
 }
-.content-box .goods-title{
+
+.content-box .goods-title {
     width: 100%;
     height: 40px;
     background-color: darkgray;
@@ -30,13 +35,15 @@
     color: white;
     border-radius: 10px 10px 0px 0px;
 }
-.content-box .left-slider-box{
+
+.content-box .left-slider-box {
     width: 400px;
     height: 450px;
     float: left;
     border: 1px solid gray;
     box-sizing: border-box;
 }
+
 .content-box .left-slider-box .swiper-container {
     width: 100%;
     height: 400px;
@@ -44,51 +51,60 @@
     margin-right: auto;
 }
 
-.content-box .left-slider-box .swiper-container img{
+.content-box .left-slider-box .swiper-container img {
     width: 100%;
     height: 100%;
 }
+
 .content-box .left-slider-box .swiper-slide {
     background-size: cover;
     background-position: center;
 }
+
 .content-box .left-slider-box .gallery-top {
     height: 80%;
     width: 100%;
 }
+
 .content-box .left-slider-box .gallery-thumbs {
     height: 20%;
     box-sizing: border-box;
     padding: 10px 0;
 }
+
 .content-box .left-slider-box .gallery-thumbs .swiper-slide {
     width: 25%;
     height: 100%;
     opacity: 0.4;
 }
+
 .content-box .left-slider-box .gallery-thumbs .swiper-slide-active {
     opacity: 1;
 }
-.buyGoods-box{
+
+.buyGoods-box {
     width: 55%;
     height: 40px;
     margin: auto;
     margin-bottom: 20px;
     margin-top: -20px;
 }
-.buyGoods-box .addCart{
+
+.buyGoods-box .addCart {
     width: 117px;
     height: 40px;
     float: right;
     margin-right: 30px;
 }
-.buyGoods-box .buyGoods{
+
+.buyGoods-box .buyGoods {
     width: 117px;
     height: 40px;
     float: right;
     margin-right: 35px;
 }
-.right-goodsInfos-box{
+
+.right-goodsInfos-box {
     float: right;
     width: 60%;
     height: 450px;
@@ -96,11 +112,12 @@
     border: 1px solid gray;
     box-sizing: border-box;
 }
-.right-goodsInfos-box div{
+
+.right-goodsInfos-box div {
     padding-left: 20px;
 }
 
-.right-goodsInfos-box .goods-name{
+.right-goodsInfos-box .goods-name {
     width: 95%;
     height: 50px;
     line-height: 50px;
@@ -109,48 +126,56 @@
     font-size: 16px;
     margin: auto;
 }
-.right-goodsInfos-box .goods-text{
+
+.right-goodsInfos-box .goods-text {
     width: 100%;
     height: 40px;
     line-height: 40px;
     margin-top: 20px;
 }
 
-.right-goodsInfos-box .goods-Price{
+.right-goodsInfos-box .goods-Price {
     color: orangered;
     font-size: 18px;
     line-height: 40px;
 }
-.right-goodsInfos-box .goods-date{
+
+.right-goodsInfos-box .goods-date {
     line-height: 40px;
 }
-.right-goodsInfos-box .goods-user-info{
+
+.right-goodsInfos-box .goods-user-info {
     width: 100%;
     height: 258px;
 }
-.goods-user-info .title{
+
+.goods-user-info .title {
     width: 95%;
     height: 40px;
     border-bottom: 1px solid gray;
     box-sizing: border-box;
     line-height: 40px;
 }
-.goods-user-info .img{
+
+.goods-user-info .img {
     width: 50px;
     height: 50px;
     margin: 10px auto;
     border-radius: 50%;
 }
-.goods-user-info .img img{
+
+.goods-user-info .img img {
     width: 50px;
     height: 50px;
     margin-right: -10px;
     border-radius: 50%;
 }
-.goods-user-info .infos{
+
+.goods-user-info .infos {
     line-height: 35px;
 }
-.goods-user-info .infos .user-other-goods-text{
+
+.goods-user-info .infos .user-other-goods-text {
     display: inline-block;
     width: 140px;
     float: right;
@@ -160,7 +185,8 @@
     margin-right: 5px;
     color: white;
 }
-.other-goods-goodsAndText{
+
+.other-goods-goodsAndText {
     width: 55%;
     height: auto;
     margin: auto;
@@ -168,12 +194,13 @@
     background-color: orangered;
 }
 
-.other-goods-goodsAndText .other-goods{
+.other-goods-goodsAndText .other-goods {
     width: 30%;
     height: auto;
     float: left;
 }
-.other-goods-goodsAndText .other-goods .other-goods-title{
+
+.other-goods-goodsAndText .other-goods .other-goods-title {
     width: 100%;
     height: 30px;
     text-align: center;
@@ -181,93 +208,111 @@
     color: white;
     background-color: #0096e6;
 }
-.other-goods-goodsAndText .other-goods .goods-img-box{
+
+.other-goods-goodsAndText .other-goods .goods-img-box {
     width: 100%;
     height: auto;
 }
-.other-goods-goodsAndText .other-goods .goods-img-box ul{
+
+.other-goods-goodsAndText .other-goods .goods-img-box ul {
     list-style: none;
 }
-.other-goods-goodsAndText .other-goods .goods-img-box ul li{
+
+.other-goods-goodsAndText .other-goods .goods-img-box ul li {
     display: block;
     width: 100%;
     height: 300px;
     border: 1px solid gray;
     margin-top: 10px;
 }
-.other-goods-goodsAndText .other-goods .goods-img-box ul li a img{
+
+.other-goods-goodsAndText .other-goods .goods-img-box ul li a img {
     width: 100%;
     height: 100%;
 }
-.other-goods-goodsAndText .goods-text{
+
+.other-goods-goodsAndText .goods-text {
     width: 60%;
     height: 960px;
     float: right;
     padding-left: 50px;
     overflow: auto;
 }
-.other-goods-goodsAndText .goods-text .user-input-box{
+
+.other-goods-goodsAndText .goods-text .user-input-box {
     width: 100%;
     height: 150px;
     margin-bottom: 20px;
 }
-.other-goods-goodsAndText .goods-text .user-input-box .title{
+
+.other-goods-goodsAndText .goods-text .user-input-box .title {
     width: 100%;
     height: 30px;
     line-height: 30px;
     text-align: center;
 }
-.other-goods-goodsAndText .goods-text .user-input-box .inputBox{
+
+.other-goods-goodsAndText .goods-text .user-input-box .inputBox {
     width: 80%;
     height: 120px;
     float: left;
 }
-.other-goods-goodsAndText .goods-text .user-input-box .inputBox textarea{
+
+.other-goods-goodsAndText .goods-text .user-input-box .inputBox textarea {
     width: 100%;
     height: 100%;
-    resize:none;
+    resize: none;
 }
-.other-goods-goodsAndText .goods-text .user-input-box .button{
+
+.other-goods-goodsAndText .goods-text .user-input-box .button {
     width: 18%;
     height: 30px;
     float: left;
     margin-left: 11px;
     margin-top: 80px;
 }
-.other-goods-goodsAndText .goods-text ul{
+
+.other-goods-goodsAndText .goods-text ul {
     list-style: none;
 }
-.other-goods-goodsAndText .goods-text ul li{
+
+.other-goods-goodsAndText .goods-text ul li {
     display: block;
     width: 100%;
     height: auto;
     margin-top: 15px;
     border-bottom: solid gray 1px;
 }
-.other-goods-goodsAndText .goods-text ul li .imgAccount{
+
+.other-goods-goodsAndText .goods-text ul li .imgAccount {
     width: 100%;
     height: 40px;
 }
-.other-goods-goodsAndText .goods-text ul li .imgAccount span img{
+
+.other-goods-goodsAndText .goods-text ul li .imgAccount span img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
-.other-goods-goodsAndText .goods-text ul li .goods-context{
+
+.other-goods-goodsAndText .goods-text ul li .goods-context {
     width: 100%;
     height: auto;
     margin-top: 20px;
     padding-left: 40px;
 }
-.goods_Cart_show{
+
+.goods_Cart_show {
     width: 565px;
     height: 450px;
-    overflow-y:auto;
+    overflow-y: auto;
 }
-.goods_Cart_show ul{
+
+.goods_Cart_show ul {
     list-style: none;
 }
-.goods_Cart_show ul li{
+
+.goods_Cart_show ul li {
     display: block;
     float: left;
     width: 125px;
@@ -275,13 +320,15 @@
     margin-left: 10px;
     margin-top: 10px;
 }
-.goods_Cart_show ul li p{
+
+.goods_Cart_show ul li p {
     width: 100%;
     height: 25px;
     text-align: center;
     line-height: 32px;
 }
-.goods_Cart_show ul li img{
+
+.goods_Cart_show ul li img {
     width: 100%;
     height: 105px;
 }

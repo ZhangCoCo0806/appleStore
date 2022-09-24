@@ -14,9 +14,10 @@ import java.util.List;
 public class GoodsCartServiceImpl implements GoodsCartService {
     @Resource
     private GoodsCartDao goodsCartDao;
+
     @Override
     public int addCart(int goodsId, int userId) {
-        return goodsCartDao.addCart(goodsId,userId);
+        return goodsCartDao.addCart(goodsId, userId);
     }
 
     @Override
@@ -26,7 +27,7 @@ public class GoodsCartServiceImpl implements GoodsCartService {
 
     @Override
     public List<GoodsCartShow02> showCart02(int uid, String goodsName) {
-        return goodsCartDao.showCart02(uid,goodsName);
+        return goodsCartDao.showCart02(uid, goodsName);
     }
 
 
@@ -37,7 +38,7 @@ public class GoodsCartServiceImpl implements GoodsCartService {
 
     @Override
     public int buyGoods(int goodsId, int userId) {
-        return goodsCartDao.buyGoods(goodsId,userId);
+        return goodsCartDao.buyGoods(goodsId, userId);
     }
 
     @Override

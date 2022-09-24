@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 class AppleDealApplicationTests {
     @Resource
     private GoodsCartDao goodsCartDao;
+
     @Test
     void contextLoads() {
         System.out.println(goodsCartDao.showCart02(1, "ip"));

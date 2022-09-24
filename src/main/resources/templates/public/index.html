@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/swiper-3.4.2.min.css">
     <!-- 引入样式 -->
@@ -60,14 +62,22 @@
                             <a href="#" class="dropdown-toggle personal-center" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">个人中心 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li class="btnSelf" @click="showSelfInfos"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;修改个人信息</a></li>
-                                <li class="checkUserInfo" @click="getUserData"><a href="#"><span class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;查看个人详细信息</a></li>
-                                <li class="insertAddress"><a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;添加地址信息</a></li>
-                                <li class="showPushGoods"><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a></li>
-                                <li class="showAllUserGoods" @click="showAllUserGoods"><a href="#"><span class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
-                                <li><a href="goods/showCart2"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a></li>
-                                <li class="order_goods" @click="orderShow"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看订单</a></li>
-                                <li class="updatePassBtn" @Click="updatePass"><a href="#"><span class="glyphicon glyphicon glyphicon-lock"></span>&nbsp;&nbsp;修改密码</a></li>
+                                <li class="btnSelf" @click="showSelfInfos"><a href="#"><span
+                                        class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;修改个人信息</a></li>
+                                <li class="checkUserInfo" @click="getUserData"><a href="#"><span
+                                        class="glyphicon glyphicon-fire"></span>&nbsp;&nbsp;查看个人详细信息</a></li>
+                                <li class="insertAddress"><a href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;添加地址信息</a>
+                                </li>
+                                <li class="showPushGoods"><a href="#"><span class="glyphicon glyphicon-apple"></span>&nbsp;&nbsp;发布商品</a>
+                                </li>
+                                <li class="showAllUserGoods" @click="showAllUserGoods"><a href="#"><span
+                                        class="glyphicon glyphicon-flash"></span>&nbsp;&nbsp;查看已发布</a></li>
+                                <li><a href="goods/showCart2"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看购物车</a>
+                                </li>
+                                <li class="order_goods" @click="orderShow"><a href="#"><span
+                                        class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;查看订单</a></li>
+                                <li class="updatePassBtn" @Click="updatePass"><a href="#"><span
+                                        class="glyphicon glyphicon glyphicon-lock"></span>&nbsp;&nbsp;修改密码</a></li>
                                 <li><a href="logOut"><span class="glyphicon glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a>
                                 </li>
                                 <li role="separator" class="divider"></li>
@@ -99,27 +109,29 @@
                     <div class="modal-body">
                         <form action="" method="post">
                             <div class="form-group has-feedback">
-<!--                                <label class="control-label" for="userName">请设置用户名</label>-->
+                                <!--                                <label class="control-label" for="userName">请设置用户名</label>-->
                                 <label class="control-label" for="userName">请输入账号</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                     <input type="text" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
-                                           v-model.trim="userInfo.userAccount" class="form-control checkEmpty" id="userName"
+                                           v-model.trim="userInfo.userAccount" class="form-control checkEmpty"
+                                           id="userName"
                                            placeholder="请输入账号" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
-<!--                                <label class="control-label" for="userPass1">请设置登录密码</label>-->
+                                <!--                                <label class="control-label" for="userPass1">请设置登录密码</label>-->
                                 <label class="control-label" for="userPass1">请输入密码</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                     <input type="password" onkeyup="this.value=this.value.replace(/[, ]/g,'')"
-                                           v-model.trim="userInfo.userPass" class="form-control checkEmpty" id="userPass1"
+                                           v-model.trim="userInfo.userPass" class="form-control checkEmpty"
+                                           id="userPass1"
                                            placeholder="请输入密码" aria-describedby="inputGroupSuccess1Status">
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
-<!--                                <label class="control-label" for="userPass2">请再次输入密码</label>-->
+                                <!--                                <label class="control-label" for="userPass2">请再次输入密码</label>-->
                                 <label class="control-label" for="userPass2">请再次输入密码</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -141,7 +153,10 @@
                                 <label class="control-label" for="userEmailCode">请输入验证码</label>
                                 <div class="input-group col-xs-6">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input type="text" @blur="checkEmailCode" ref="getCode" onkeyup="this.value=this.value.replace(/[, ]/g,'')" class="form-control checkEmpty" id="userEmailCode" placeholder="请输入验证码" aria-describedby="inputGroupSuccess1Status">
+                                    <input type="text" @blur="checkEmailCode" ref="getCode"
+                                           onkeyup="this.value=this.value.replace(/[, ]/g,'')"
+                                           class="form-control checkEmpty" id="userEmailCode" placeholder="请输入验证码"
+                                           aria-describedby="inputGroupSuccess1Status">
                                 </div>
                                 <div id="sendEmailBtn">
                                     <el-button @click="sendEmail" type="info">发送验证码至邮箱</el-button>
@@ -196,8 +211,10 @@
                             <div class="form-group">
                                 <label for="age">性别:</label>
 
-                                <label for="nan">男</label><input type="radio" v-model="userInfos.sex" value="男" id="nan" name="sex">
-                                <label for="nv">女</label><input type="radio" v-model="userInfos.sex" value="女" id="nv" name="sex">
+                                <label for="nan">男</label><input type="radio" v-model="userInfos.sex" value="男" id="nan"
+                                                                 name="sex">
+                                <label for="nv">女</label><input type="radio" v-model="userInfos.sex" value="女" id="nv"
+                                                                name="sex">
                             </div>
                             <div class="form-group">
                                 <label for="hobbies">兴趣爱好</label>
@@ -223,9 +240,10 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">基本信息</h4>
-                        <img id="selfImage" :src="userData.userHeadImage"  class="img-circle">
+                        <img id="selfImage" :src="userData.userHeadImage" class="img-circle">
                     </div>
                     <div class="modal-body">
                         <div>
@@ -277,9 +295,15 @@
                                         <i class="el-icon-loading"></i>
                                         会员等级
                                     </template>
-                                    <span v-if="userData.userRole=='vip1'"><i class="roleLeave"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/uservipleavel/%E8%88%AA%E7%A9%BA%E8%88%AA%E5%A4%A9-aerospace-%E5%AE%87%E8%88%AA%E5%91%98-a.png"></i><span style="color: #F56C6C">白银</span></span>
-                                    <span v-else-if="userData.userRole=='vip2'"><i class="roleLeave"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/uservipleavel/%E7%BB%BF%E5%B7%A8%E4%BA%BA.png"></i><span style="color: #F56C6C">黄金</span></span>
-                                    <span v-else-if="userData.userRole=='vip3'"><i class="roleLeave"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/uservipleavel/%E8%B6%85%E4%BA%BA.png"></i><span style="color: #F56C6C">铂金</span></span>
+                                    <span v-if="userData.userRole=='vip1'"><i class="roleLeave"><img
+                                            src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/uservipleavel/%E8%88%AA%E7%A9%BA%E8%88%AA%E5%A4%A9-aerospace-%E5%AE%87%E8%88%AA%E5%91%98-a.png"></i><span
+                                            style="color: #F56C6C">白银</span></span>
+                                    <span v-else-if="userData.userRole=='vip2'"><i class="roleLeave"><img
+                                            src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/uservipleavel/%E7%BB%BF%E5%B7%A8%E4%BA%BA.png"></i><span
+                                            style="color: #F56C6C">黄金</span></span>
+                                    <span v-else-if="userData.userRole=='vip3'"><i class="roleLeave"><img
+                                            src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/uservipleavel/%E8%B6%85%E4%BA%BA.png"></i><span
+                                            style="color: #F56C6C">铂金</span></span>
                                 </el-descriptions-item>
                             </el-descriptions>
                         </div>
@@ -294,28 +318,34 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">添加地址信息</h4>
                     </div>
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
                                 <label for="province">请输入所在省份</label>
-                                <input v-model="userAddress.provice" type="email" class="form-control" id="province" placeholder="如:甘肃省">
+                                <input v-model="userAddress.provice" type="email" class="form-control" id="province"
+                                       placeholder="如:甘肃省">
                             </div>
                             <div class="form-group">
                                 <label for="city">请输入所在市</label>
-                                <input v-model="userAddress.city" type="text" class="form-control" id="city" placeholder="如:兰州市">
+                                <input v-model="userAddress.city" type="text" class="form-control" id="city"
+                                       placeholder="如:兰州市">
                             </div>
                             <div class="form-group">
                                 <label for="county">请输入所在区县</label>
-                                <input v-model="userAddress.county" type="text" class="form-control" id="county" placeholder="如:永登县">
+                                <input v-model="userAddress.county" type="text" class="form-control" id="county"
+                                       placeholder="如:永登县">
                             </div>
                             <div class="form-group">
                                 <label for="address">请输入详细地址</label>
-                                <input v-model="userAddress.detailedAddress" type="text" class="form-control" id="address" placeholder="如:城关镇人民街102号">
+                                <input v-model="userAddress.detailedAddress" type="text" class="form-control"
+                                       id="address" placeholder="如:城关镇人民街102号">
                             </div>
-                            <el-button @click="sendUserAddress" type="primary">上传地址信息<i class="el-icon-upload el-icon--right"></i></el-button>
+                            <el-button @click="sendUserAddress" type="primary">上传地址信息<i
+                                    class="el-icon-upload el-icon--right"></i></el-button>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -328,22 +358,26 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">发布商品</h4>
                     </div>
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
                                 <label for="goodsName">请输入商品名称</label>
-                                <input type="text" v-model="insertGoods.goodsName" class="form-control checkGoods" id="goodsName" placeholder="请输入商品名称">
+                                <input type="text" v-model="insertGoods.goodsName" class="form-control checkGoods"
+                                       id="goodsName" placeholder="请输入商品名称">
                             </div>
                             <div class="form-group">
                                 <label for="goodsPrice">请输入商品价格</label>
-                                <input type="number" v-model="insertGoods.goodsPrice" class="form-control checkGoods" id="goodsPrice" placeholder="请输入商品价格">
+                                <input type="number" v-model="insertGoods.goodsPrice" class="form-control checkGoods"
+                                       id="goodsPrice" placeholder="请输入商品价格">
                             </div>
                             <div class="form-group">
                                 <label for="goodsText">请输入商品描述信息</label>
-                                <input type="text" v-model="insertGoods.goodsText" class="form-control checkGoods" id="goodsText" placeholder="请输入商品描述信息">
+                                <input type="text" v-model="insertGoods.goodsText" class="form-control checkGoods"
+                                       id="goodsText" placeholder="请输入商品描述信息">
                             </div>
                             <div class="form-group">
                                 <label for="goodsStar">请选择商品星级</label>
@@ -352,7 +386,8 @@
                             <div class="form-group">
                                 <label for="goodsTypeName">请选择商品所属类别</label>
                                 <el-select v-model="insertGoods.goodsType" placeholder="请选择">
-                                    <el-option v-for="type in goodsType" :key="type.id" :label="type.typename" :value="type.id">
+                                    <el-option v-for="type in goodsType" :key="type.id" :label="type.typename"
+                                               :value="type.id">
                                     </el-option>
                                 </el-select>
                             </div>
@@ -374,7 +409,8 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">已发布的商品</h4>
                     </div>
                     <div class="modal-body">
@@ -399,28 +435,37 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">已购买的商品</h4>
                     </div>
                     <div class="modal-body">
                         <div class="order_box">
                             <template>
                                 <el-table :data="orderTable" height="500" border style="width: 100%">
-                                    <el-table-column fixed prop="goodsName" align="center" label="商品名称" width="150"></el-table-column>
+                                    <el-table-column fixed prop="goodsName" align="center" label="商品名称"
+                                                     width="150"></el-table-column>
                                     <el-table-column prop="imgUrl" align="center" label="商品图片" width="120">
                                         <template slot-scope="scope">
                                             <el-popover placement="top-start" title="" trigger="hover">
                                                 <img :src="scope.row.imgUrl" alt="" style="width: 150px;height: 150px">
-                                                <img slot="reference" :src="scope.row.imgUrl" style="width: 30px;height: 30px">
+                                                <img slot="reference" :src="scope.row.imgUrl"
+                                                     style="width: 30px;height: 30px">
                                             </el-popover>
                                         </template>
                                     </el-table-column>
-                                    <el-table-column prop="goodsPrice" align="center" label="商品价格" width="120"></el-table-column>
-                                    <el-table-column prop="goodsDate" align="center" label="上架日期" width="160"></el-table-column>
-                                    <el-table-column prop="orderNum" align="center" label="订单编号" width="300"></el-table-column>
-                                    <el-table-column prop="buyTime" align="center" label="下单日期" width="160"></el-table-column>
-                                    <el-table-column prop="account" align="center" label="卖家账号" width="120"></el-table-column>
-                                    <el-table-column prop="phone" align="center" label="卖家电话" width="120"></el-table-column>
+                                    <el-table-column prop="goodsPrice" align="center" label="商品价格"
+                                                     width="120"></el-table-column>
+                                    <el-table-column prop="goodsDate" align="center" label="上架日期"
+                                                     width="160"></el-table-column>
+                                    <el-table-column prop="orderNum" align="center" label="订单编号"
+                                                     width="300"></el-table-column>
+                                    <el-table-column prop="buyTime" align="center" label="下单日期"
+                                                     width="160"></el-table-column>
+                                    <el-table-column prop="account" align="center" label="卖家账号"
+                                                     width="120"></el-table-column>
+                                    <el-table-column prop="phone" align="center" label="卖家电话"
+                                                     width="120"></el-table-column>
                                     <!--<el-table-column fixed="right" align="center" label="操作" width="100">
                                         <template slot-scope="scope">
                                             <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
@@ -441,7 +486,8 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">修改密码</h4>
                     </div>
                     <div class="modal-body">
@@ -449,17 +495,20 @@
                             <fieldset disabled>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">账号</label>
-                                    <input v-model="updatePassInfo.account" type="email" class="form-control" id="exampleInputEmail1" placeholder="账号">
+                                    <input v-model="updatePassInfo.account" type="email" class="form-control"
+                                           id="exampleInputEmail1" placeholder="账号">
                                 </div>
                             </fieldset>
 
                             <div class="form-group ">
                                 <label for="exampleInputPassword1">旧密码</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="旧密码">
+                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                       placeholder="旧密码">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword12">新密码</label>
-                                <input type="password" class="form-control" id="exampleInputPassword12" placeholder="新密码">
+                                <input type="password" class="form-control" id="exampleInputPassword12"
+                                       placeholder="新密码">
                             </div>
                         </form>
                     </div>
@@ -529,7 +578,8 @@
                             发布日期:{{goods.goodsDate}}
                         </div>
                         <div class="goods-user">
-                            <span @mouseover="mouseover" @mouseleave="mouseLeave">发布用户:{{goods.userHandImg.userAccount}}</span>
+                            <span @mouseover="mouseover"
+                                  @mouseleave="mouseLeave">发布用户:{{goods.userHandImg.userAccount}}</span>
                             <div class="goods-user-info" ref="showUserInfoImage">
                                 <div class="goods-user-img">
                                     <img :src="goods.userHandImg.headImage.url">
@@ -582,23 +632,33 @@
                         <div class="userComments">{{g.userAccount}}：{{g.goodsText}}</div>
                     </div>-->
                     <div class="swiper-slide">
-                        <div><img src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/b883543b-ee1c-4a60-83b9-2ca2dd34e5d4.jpeg"></div>
+                        <div><img
+                                src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/b883543b-ee1c-4a60-83b9-2ca2dd34e5d4.jpeg">
+                        </div>
                         <div class="userComments">zhangsan：手机到手后是全新无拆机的</div>
                     </div>
                     <div class="swiper-slide">
-                        <div><img src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/59c7fe86-61f5-4bee-aa5e-700b923673bb.jpg"></div>
+                        <div><img
+                                src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/59c7fe86-61f5-4bee-aa5e-700b923673bb.jpg">
+                        </div>
                         <div class="userComments">admin：外形外观：外形外观真的超级好看，</div>
                     </div>
                     <div class="swiper-slide">
-                        <div><img src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/6ad2ba81-6f9c-4b90-9a03-0863efa3f551.jpeg"></div>
-                        <div class="userComments">xixi：待机时间：很棒 运行速度：865够用 </div>
+                        <div><img
+                                src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/6ad2ba81-6f9c-4b90-9a03-0863efa3f551.jpeg">
+                        </div>
+                        <div class="userComments">xixi：待机时间：很棒 运行速度：865够用</div>
                     </div>
                     <div class="swiper-slide">
-                        <div><img src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/b948f484-73bb-44b6-b1cf-c47752bd0e83.jpg"></div>
+                        <div><img
+                                src="https://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/b948f484-73bb-44b6-b1cf-c47752bd0e83.jpg">
+                        </div>
                         <div class="userComments">lixi：哇哦，真的是一款很不错的手机</div>
                     </div>
                     <div class="swiper-slide">
-                        <div><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/morenImageHead.png"></div>
+                        <div><img
+                                src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/userHeaderImages/morenImageHead.png">
+                        </div>
                         <div class="userComments">zhangshiqi：手机收到真的太好看了</div>
                     </div>
                 </div>
@@ -612,10 +672,10 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            updatePassInfo:{
-                account:'zhangsan',
-                oldPass:'',
-                newPass:''
+            updatePassInfo: {
+                account: 'zhangsan',
+                oldPass: '',
+                newPass: ''
             },
             orderTable: [{
                 goodsName: 'iphone',
@@ -627,117 +687,117 @@
                 account: 'zhangsan',
                 phone: '13359490766'
             }],
-            userOtherGoods:[],
-            goodsComments:[
+            userOtherGoods: [],
+            goodsComments: [
                 {
-                    userAccount:'',
-                    url:'',
-                    goodsText:''
+                    userAccount: '',
+                    url: '',
+                    goodsText: ''
                 }
             ],
-            searchGoodsKey:'',
-            insertGoods:{
-                goodsName:'',
-                goodsPrice:'',
-                goodsText:'',
-                goodsStar:3,
-                goodsType:""
+            searchGoodsKey: '',
+            insertGoods: {
+                goodsName: '',
+                goodsPrice: '',
+                goodsText: '',
+                goodsStar: 3,
+                goodsType: ""
             },
             goodsType: '',
-            goodsForSlider:[],
+            goodsForSlider: [],
             userInfo: {},
             userInfos: {},
-            userData:{},
-            userAddress:{},
-            emailCode:"",
-            allGoods:"",
-            pageInfos:[],
+            userData: {},
+            userAddress: {},
+            emailCode: "",
+            allGoods: "",
+            pageInfos: [],
             fullscreenLoading: false,
             drawer: false,
             value: 4
         },
         methods: {
-            updatePass(){
+            updatePass() {
 
             },
-            orderShow(){
-                let _this=this;
+            orderShow() {
+                let _this = this;
                 $.ajax({
-                    url:'goods/orderShow',
-                    type:'get',
-                    dataType:'json',
-                    success:function (data) {
-                        _this.orderTable=data
+                    url: 'goods/orderShow',
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        _this.orderTable = data
                     }
                 })
             },
             handleClick(row) {
                 console.log(row);
             },
-            showAllUserGoods(){
-                let _this=this;
+            showAllUserGoods() {
+                let _this = this;
                 $.ajax({
-                    url:'goods/showUserGoods',
-                    type:'get',
-                    dataType:'json',
-                    success:function (data) {
-                        _this.userOtherGoods=data
+                    url: 'goods/showUserGoods',
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        _this.userOtherGoods = data
                         console.log(data)
                     }
                 })
             },
-            searchGoodsByGoods(name){
+            searchGoodsByGoods(name) {
                 console.log(name)
-                let _this=this;
+                let _this = this;
                 $.ajax({
-                    url:'goods/getGoodsByGoodsName',
-                    type:'get',
-                    dataType:'json',
-                    data:{
-                        goodsName:name
+                    url: 'goods/getGoodsByGoodsName',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        goodsName: name
                     },
-                    success:function (data) {
+                    success: function (data) {
                         /*if(data.length<=0){
                             $(".content-goods-list").html('<h1>对不起，没有该商品！</h1>')
                         }*/
-                        _this.allGoods=data
+                        _this.allGoods = data
                         $(".pageBtn-box").fadeOut();
                     }
                 })
             },
-            searchGoodsByGoodsName:function(){
-                let _this=this;
+            searchGoodsByGoodsName: function () {
+                let _this = this;
                 $.ajax({
-                    url:'goods/getGoodsByGoodsName',
-                    type:'get',
-                    dataType:'json',
-                    data:{
-                        goodsName:$(".searchGoods").val()
+                    url: 'goods/getGoodsByGoodsName',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        goodsName: $(".searchGoods").val()
                     },
-                    success:function (data) {
-                        if(data.length<=0){
+                    success: function (data) {
+                        if (data.length <= 0) {
                             $(".content-goods-list").html('<h1>对不起，没有该商品！</h1>')
                         }
-                        _this.allGoods=data
+                        _this.allGoods = data
                         $(".pageBtn-box").fadeOut();
                     }
                 })
             },
-            insertGoodsInfos:function(){
-                let inputBox=$(".checkGoods")
-                let flag=true
+            insertGoodsInfos: function () {
+                let inputBox = $(".checkGoods")
+                let flag = true
                 for (let i = 0; i < inputBox.length; i++) {
-                    if(inputBox[i].value==""||inputBox[i].value==undefined||inputBox[i].value==null){
-                        flag=false
+                    if (inputBox[i].value == "" || inputBox[i].value == undefined || inputBox[i].value == null) {
+                        flag = false
                     }
                 }
-                if (flag===false){
+                if (flag === false) {
                     this.$notify({
                         title: '商品信息不能为空哦!',
                         message: '对不起!商品信息不能为空哦!!!!',
                         type: 'warning'
                     });
-                }else{
+                } else {
                     const loading = this.$loading({
                         lock: true,
                         text: '商品发布中,请稍等...',
@@ -749,11 +809,11 @@
                     for (let j = 0; j < $(".fileImages")[0].files.length; j++) {
                         formData.append("file", $(".fileImages")[0].files[j]);
                     }
-                    formData.append("goodsName",_this.insertGoods.goodsName)
-                    formData.append("goodsPrice",_this.insertGoods.goodsPrice)
-                    formData.append("goodsText",_this.insertGoods.goodsText)
-                    formData.append("goodsStar",_this.insertGoods.goodsStar)
-                    formData.append("goodsType",_this.insertGoods.goodsType)
+                    formData.append("goodsName", _this.insertGoods.goodsName)
+                    formData.append("goodsPrice", _this.insertGoods.goodsPrice)
+                    formData.append("goodsText", _this.insertGoods.goodsText)
+                    formData.append("goodsStar", _this.insertGoods.goodsStar)
+                    formData.append("goodsType", _this.insertGoods.goodsType)
                     $.ajax({
                         url: "goods/pushGoods",
                         type: "post",
@@ -763,14 +823,14 @@
                         dataType: 'text',
                         success: function (data) {
                             console.log(data)
-                            if('ok'===data){
+                            if ('ok' === data) {
                                 $(".insertGoods").modal('hide')
                                 _this.$notify({
                                     title: '发布成功!',
                                     message: '恭喜您,商品发布成功!',
                                     type: 'success'
                                 });
-                            }else {
+                            } else {
                                 this.$notify({
                                     title: '发布失败!',
                                     message: '对不起,商品发布失败!',
@@ -784,80 +844,80 @@
                     }, 1500);
                 }
             },
-            getGoodsByTypeId:function(id){
-                let _this=this
+            getGoodsByTypeId: function (id) {
+                let _this = this
                 $.ajax({
-                    url:'goods/getGoodsByTypeId',
-                    type:'get',
-                    dataType:'json',
-                    data:{
-                        typeId:id
+                    url: 'goods/getGoodsByTypeId',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        typeId: id
                     },
-                    success:function (data) {
-                        _this.allGoods=data
+                    success: function (data) {
+                        _this.allGoods = data
                         $(".pageBtn-box").fadeOut();
                     }
                 })
             },
-            sendPageSize:function(){
-                let currentPage=this.$refs.pagination.internalCurrentPage;
-                var _this=this;
+            sendPageSize: function () {
+                let currentPage = this.$refs.pagination.internalCurrentPage;
+                var _this = this;
                 $.ajax({
-                    url:'goods/getAllGoodsAndGoodsUserAndUserHeadUrl',
-                    type:'get',
-                    dataType:'json',
-                    data:{
-                        pn:currentPage
+                    url: 'goods/getAllGoodsAndGoodsUserAndUserHeadUrl',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        pn: currentPage
                     },
-                    success:function (data) {
-                        _this.pageInfos=data
-                        _this.allGoods=data.list
+                    success: function (data) {
+                        _this.pageInfos = data
+                        _this.allGoods = data.list
                     }
                 })
             },
-            changePages:function(flag){
+            changePages: function (flag) {
                 var pageNumber;
-                var _this=this;
-                if('l'===flag){
-                    pageNumber=this.pageInfos.prePage;
-                }else if('n'===flag){
-                    pageNumber=this.pageInfos.nextPage;
+                var _this = this;
+                if ('l' === flag) {
+                    pageNumber = this.pageInfos.prePage;
+                } else if ('n' === flag) {
+                    pageNumber = this.pageInfos.nextPage;
                 }
                 $.ajax({
-                    url:'goods/getAllGoodsAndGoodsUserAndUserHeadUrl',
-                    type:'get',
-                    dataType:'json',
-                    data:{
-                        pn:pageNumber
+                    url: 'goods/getAllGoodsAndGoodsUserAndUserHeadUrl',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        pn: pageNumber
                     },
-                    success:function (data) {
-                        _this.pageInfos=data
-                        _this.allGoods=data.list
+                    success: function (data) {
+                        _this.pageInfos = data
+                        _this.allGoods = data.list
                     }
                 })
             },
-            mouseover:function(e){
-                e.target.style.color='red'
-                e.currentTarget.nextElementSibling.style.display='block'
+            mouseover: function (e) {
+                e.target.style.color = 'red'
+                e.currentTarget.nextElementSibling.style.display = 'block'
             },
-            mouseLeave:function(e){
-                e.target.style.color='black'
-                e.currentTarget.nextElementSibling.style.display='none'
+            mouseLeave: function (e) {
+                e.target.style.color = 'black'
+                e.currentTarget.nextElementSibling.style.display = 'none'
             },
-            checkEmailCode:function(){
-                if (this.$refs.getCode.value===this.emailCode&&this.$refs.getCode.value!=""&&this.emailCode!=""){
+            checkEmailCode: function () {
+                if (this.$refs.getCode.value === this.emailCode && this.$refs.getCode.value != "" && this.emailCode != "") {
                     this.$notify({
                         title: '验证码正确',
                         message: '唯女人与英雄难过也,唯对象与工作难找也!验证码正确!',
                         type: 'success'
                     });
-                }else if (this.$refs.getCode.value===""){
+                } else if (this.$refs.getCode.value === "") {
                     this.$notify({
                         title: '警告,验证码不能为空',
                         message: '药不医假病,酒不解真愁!宝贝,验证码不能为空!',
                         type: 'warning'
                     });
-                }else {
+                } else {
                     this.$notify.error({
                         title: '验证码错误',
                         message: '黄瓜在于拍,人生在于嗨!验证码错误!请重新输入....',
@@ -865,29 +925,29 @@
                     });
                 }
             },
-            sendEmail:function(){
-                let _this=this
+            sendEmail: function () {
+                let _this = this
                 $.ajax({
-                    url:'sendEmail',
-                    type:'get',
-                    data:{
-                        UserEmail:_this.userInfo.email
+                    url: 'sendEmail',
+                    type: 'get',
+                    data: {
+                        UserEmail: _this.userInfo.email
                     },
-                    success:function (data) {
-                        _this.emailCode=data
+                    success: function (data) {
+                        _this.emailCode = data
                     }
                 })
             },
-            sendUserAddress:function(){
-                let _this=this
+            sendUserAddress: function () {
+                let _this = this
                 let userAddressInfo = JSON.stringify(_this.userAddress);
                 $.ajax({
                     type: "post",
                     url: "getUserAddress",
                     data: userAddressInfo,
                     contentType: "application/json;charset=utf-8",
-                    success:function (data) {
-                        if("ok"===data){
+                    success: function (data) {
+                        if ("ok" === data) {
                             const loading = _this.$loading({
                                 lock: true,
                                 text: '地址信息正在提交中,爱你呦小宝贝!',
@@ -906,14 +966,14 @@
                     }
                 })
             },
-            getUserData:function(){
-                let _this=this
+            getUserData: function () {
+                let _this = this
                 $.ajax({
-                    url:"getUserDataByUserId",
-                    type:"get",
-                    success:function (date) {
+                    url: "getUserDataByUserId",
+                    type: "get",
+                    success: function (date) {
                         console.log(date)
-                        _this.userData=date
+                        _this.userData = date
                     }
                 })
             },
@@ -959,20 +1019,20 @@
                 console.log("asdk")
             },
             sendUserInfo: function () {
-                let inputBox=$(".checkEmpty")
-                let flag=true
+                let inputBox = $(".checkEmpty")
+                let flag = true
                 for (let i = 0; i < inputBox.length; i++) {
-                    if(inputBox[i].value==""||inputBox[i].value==undefined||inputBox[i].value==null){
-                        flag=false
+                    if (inputBox[i].value == "" || inputBox[i].value == undefined || inputBox[i].value == null) {
+                        flag = false
                     }
                 }
-                if (flag===false){
+                if (flag === false) {
                     this.$notify({
                         title: '注册信息不能为空呦!',
                         message: '宝儿,你的头发好香呦!注册信息不能为空呀!!!!',
                         type: 'warning'
                     });
-                }else {
+                } else {
                     let _this = this;
                     let userInfo = _this.userInfo
                     let user = JSON.stringify(userInfo);
@@ -1047,7 +1107,7 @@
                 type: 'get',
                 success: function (data) {
                     console.log(data)
-                    _this.goodsComments=data
+                    _this.goodsComments = data
                 }
             });
             $.ajax({
@@ -1059,27 +1119,27 @@
                 }
             });
             $.ajax({
-                url:'goods/getAllGoodsAndGoodsUserAndUserHeadUrl',
-                type:'get',
-                dataType:'json',
-                data:{
-                    pn:1
+                url: 'goods/getAllGoodsAndGoodsUserAndUserHeadUrl',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    pn: 1
                 },
-                success:function (data) {
-                    _this.pageInfos=data
-                    _this.allGoods=data.list
+                success: function (data) {
+                    _this.pageInfos = data
+                    _this.allGoods = data.list
                 }
             });
             $.ajax({
-                url:'goods/getSliderGoods',
-                type:'get',
-                dataType:'json',
-                success:function (data) {
-                    _this.goodsForSlider=data
+                url: 'goods/getSliderGoods',
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    _this.goodsForSlider = data
                     for (let i = 0; i < _this.goodsForSlider.length; i++) {
                         for (let j = 0; j < _this.goodsForSlider[i].goodsImages.length; j++) {
                             // console.log(_this.goodsForSlider[i].goodsImages[0].imgUrl)
-                            $(".slider-01 .swiper-wrapper .swiper-slide img")[i].src=_this.goodsForSlider[i].goodsImages[0].imgUrl
+                            $(".slider-01 .swiper-wrapper .swiper-slide img")[i].src = _this.goodsForSlider[i].goodsImages[0].imgUrl
                         }
                     }
                 }
@@ -1103,8 +1163,8 @@
         $(".insertAddress").click(function () {
             $(".userAddress").modal('show')
         })
-        $(".gotop").bind("click",function(){
-            $('html, body').animate({scrollTop: 0},300);
+        $(".gotop").bind("click", function () {
+            $('html, body').animate({scrollTop: 0}, 300);
         });
 
         $(".checkUserInfo").click(function () {
@@ -1157,7 +1217,7 @@
 </script>
 <script>
     // 禁止查看源代码
-    window.onload=function(){
+    window.onload = function () {
         /*document.onkeydown=function(){
             var e=window.event||arguments[0];
             if(e.keyCode==123){
@@ -1173,10 +1233,10 @@
             return false;
         }*/
     }
-    $(window).scroll(function(){
-        if ($(document).scrollTop() >= $(document).height() - $(window).height()-300) {
+    $(window).scroll(function () {
+        if ($(document).scrollTop() >= $(document).height() - $(window).height() - 300) {
             $(".left-tools-box").fadeOut(1000);
-        }else {
+        } else {
             $(".left-tools-box").fadeIn(1000);
         }
     });

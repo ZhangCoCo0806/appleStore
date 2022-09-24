@@ -9,40 +9,41 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.util.UUID;
+
 @Service
 public class OssUpladImpl implements OssUpLoad {
     @Override
-    public String upload(MultipartFile multipartFile, String bucketStr,String filePathStr) {
+    public String upload(MultipartFile multipartFile, String bucketStr, String filePathStr) {
         String endpoint = "oss-cn-beijing.aliyuncs.com";
         String accessKeyId = "LTAI5tKJuYsxT3tsd2qcJoki";
         String accessKeySecret = "R7ruaAXTktZcJTvnQkgBMHFyVH3129";
         String bucketName = bucketStr;
         OSS ossClient = null;
-        try{
+        try {
             // 创建OSSClient实例。
             ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
             InputStream inputStream = multipartFile.getInputStream();
             //设置响应头,如果不设置点击链接后直接就是下载该文件
-            ObjectMetadata objectMetadata=new ObjectMetadata();
+            ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentType("image/jpg");
-            String filePath=filePathStr;
-            String originName=multipartFile.getOriginalFilename();
-            String fileName= UUID.randomUUID().toString();
-            String suffix=originName.substring(originName.lastIndexOf("."));
-            String newName=fileName+suffix;
-            String fileUrl= filePath+"/"+newName;
-            ossClient.putObject(bucketName, fileUrl, inputStream,objectMetadata);
-            return "https://"+bucketName+"."+endpoint+"/"+fileUrl;
-        }catch (Exception e){
+            String filePath = filePathStr;
+            String originName = multipartFile.getOriginalFilename();
+            String fileName = UUID.randomUUID().toString();
+            String suffix = originName.substring(originName.lastIndexOf("."));
+            String newName = fileName + suffix;
+            String fileUrl = filePath + "/" + newName;
+            ossClient.putObject(bucketName, fileUrl, inputStream, objectMetadata);
+            return "https://" + bucketName + "." + endpoint + "/" + fileUrl;
+        } catch (Exception e) {
             e.printStackTrace();
             return "fail";
-        }finally {
+        } finally {
             ossClient.shutdown();
         }
     }
 
     @Override
-    public String delete(String bucketStr,String filePath) {
+    public String delete(String bucketStr, String filePath) {
         // yourEndpoint填写Bucket所在地域对应的Endpoint。以华东1（杭州）为例，Endpoint填写为https://oss-cn-hangzhou.aliyuncs.com。
         String endpoint = "oss-cn-beijing.aliyuncs.com";
         // 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。

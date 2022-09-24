@@ -19,6 +19,7 @@ public class TestRealm extends AuthorizingRealm {
 
     @Autowired
     private IUserService userService;
+
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -27,7 +28,7 @@ public class TestRealm extends AuthorizingRealm {
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
         List<RoleTable> roleTables = user.getRoleTables();
-        List<String> roles=new ArrayList<>();
+        List<String> roles = new ArrayList<>();
         roleTables.forEach(roleTable -> roles.add(roleTable.getRole()));
         info.addRoles(roles);
         return info;
@@ -38,9 +39,9 @@ public class TestRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken userToken = (UsernamePasswordToken) token;
         User user = userService.getUserByUserAccount(userToken.getUsername());
-        if (user==null){
+        if (user == null) {
             return null;
         }
-        return new SimpleAuthenticationInfo(user,user.getUserPass(),"");
+        return new SimpleAuthenticationInfo(user, user.getUserPass(), "");
     }
 }

@@ -26,6 +26,7 @@ import java.util.List;
 
 @Api("商品相关控制器")
 @Controller
+@CrossOrigin
 @RequestMapping("/goods")
 public class AboutGoods {
     @Resource
@@ -36,65 +37,72 @@ public class AboutGoods {
     private OssUpLoad ossUpLoad;
     @Resource
     private GoodsCartService goodsCartService;
+
     /**
      * 显示所有商品信息,是哪一个用户发布的,该用户的信息和头像接口
+     *
      * @return 商品信息+该商品用户信息+用户头像
      */
     @ApiOperation("首页显示商品+商品是哪个用户发布的+该用户的信息+用户头像接口")
     @GetMapping("/getAllGoodsAndGoodsUserAndUserHeadUrl")
     @ResponseBody
-    public PageInfo<GoodsUserImage> getAllGoodsAndGoodsUserAndUserHeadUrl(@ApiParam("分页页码") @RequestParam("pn") int pageNum){
-        PageHelper.startPage(pageNum,8);
-        List<GoodsUserImage> allGoods = goodsService.getAllGoods(0,null);
-        PageInfo<GoodsUserImage> pageInfo=new PageInfo<>(allGoods);
+    public PageInfo<GoodsUserImage> getAllGoodsAndGoodsUserAndUserHeadUrl(@ApiParam("分页页码") @RequestParam("pn") int pageNum) {
+        PageHelper.startPage(pageNum, 8);
+        List<GoodsUserImage> allGoods = goodsService.getAllGoods(0, null);
+        PageInfo<GoodsUserImage> pageInfo = new PageInfo<>(allGoods);
         return pageInfo;
     }
 
     /**
      * 轮播图商品显示固定查询5个商品信息
+     *
      * @return 商品的信息以及商品的图片
      */
     @ApiOperation("轮播图商品显示固定查询5个商品信息")
     @GetMapping("/getSliderGoods")
     @ResponseBody
-    public List<GoodsANDImageForSlider> getSliderGoods(){
+    public List<GoodsANDImageForSlider> getSliderGoods() {
         return goodsService.getAllGoodsANDImageForSlider();
     }
 
     /**
      * 根据商品类型id该类型下所有商品
+     *
      * @param typeId 类型id
      * @return 对应类型的所有商品
      */
     @ApiOperation("根据商品类型id该类型下所有商品")
     @GetMapping("/getGoodsByTypeId")
     @ResponseBody
-    public List<GoodsUserImage> getGoodsByTypeId(@RequestParam("typeId") int typeId){
+    public List<GoodsUserImage> getGoodsByTypeId(@RequestParam("typeId") int typeId) {
         System.out.println(typeId);
-        List<GoodsUserImage> allGoods = goodsService.getAllGoods(typeId,null);
+        List<GoodsUserImage> allGoods = goodsService.getAllGoods(typeId, null);
         return allGoods;
     }
 
     /**
      * 根据商品名称进行模糊查询商品
+     *
      * @param goodsName 商品名称
      * @return 模糊匹配到的商品
      */
     @ApiOperation("根据商品名称进行模糊查询商品")
     @GetMapping("/getGoodsByGoodsName")
     @ResponseBody
-    public List<GoodsUserImage> getGoodsByGoodsName(@RequestParam("goodsName") String goodsName){
-        List<GoodsUserImage> goods=goodsService.getAllGoods(0,goodsName);
+    public List<GoodsUserImage> getGoodsByGoodsName(@RequestParam("goodsName") String goodsName) {
+        List<GoodsUserImage> goods = goodsService.getAllGoods(0, goodsName);
         return goods;
     }
+
     /**
      * 发布商品接口
-     * @param file MultipartFile对象
-     * @param goodsName 商品名称
+     *
+     * @param file       MultipartFile对象
+     * @param goodsName  商品名称
      * @param goodsPrice 商品价格
-     * @param goodsText 商品描述
-     * @param goodsStar 商品星级
-     * @param goodsType 商品类别
+     * @param goodsText  商品描述
+     * @param goodsStar  商品星级
+     * @param goodsType  商品类别
      * @return 是否添加成功
      */
     @ApiOperation("发布商品接口")
@@ -114,77 +122,82 @@ public class AboutGoods {
             goodsService.insertGoods(goods);
             for (int i = 0; i < file.length; i++) {
                 String goodsUrl = ossUpLoad.upload(file[i], "apple-shop-all-images", "goodsImages");
-                goodsService.insertGoodsImage(new GoodsImage(null,goodsUrl,goods.getId()));
+                goodsService.insertGoodsImage(new GoodsImage(null, goodsUrl, goods.getId()));
             }
             return "ok";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "no";
         }
     }
 
     /**
      * 商品详情接口
+     *
      * @param goodsId 商品的id
-     * @param model model
+     * @param model   model
      * @return 商品详情页面
      */
     @ApiOperation("商品详情接口")
     @RequestMapping("/getGoodsById")
-    public String getGoodsById(@RequestParam("gid") Integer goodsId, Model model){
-        model.addAttribute("goodsInfosById",goodsService.getGoodsByGid(goodsId));
+    public String getGoodsById(@RequestParam("gid") Integer goodsId, Model model) {
+        model.addAttribute("goodsInfosById", goodsService.getGoodsByGid(goodsId));
         return "aboutGoods/goodsInfoPage";
     }
 
     /**
      * 根据商品id获取商品的评论接口
+     *
      * @param gid 商品的id
      * @return 商品的所有评论
      */
     @RequestMapping("/getAllGoodsByUser")
     @ResponseBody
-    public List<GoodsText> getAllGoodsByUser(@RequestParam("gid") int gid){
-        List<GoodsText> goodsText=goodsService.getAllGoodsTextByUid(gid);
+    public List<GoodsText> getAllGoodsByUser(@RequestParam("gid") int gid) {
+        List<GoodsText> goodsText = goodsService.getAllGoodsTextByUid(gid);
         return goodsText;
     }
 
     /**
      * 根据用户id获取该用户发布的所有的商品
+     *
      * @param uid 用户id
      * @return 商品列表
      */
     @GetMapping("/getGoodsByUid")
     @ResponseBody
-    public List<GoodsAndImage> getGoodsByUid(@RequestParam("uid") int uid){
+    public List<GoodsAndImage> getGoodsByUid(@RequestParam("uid") int uid) {
         return goodsService.getAllGoodsByUser(uid);
     }
 
 
     /**
      * 查询所有用户评论和用户信息
+     *
      * @return 所有用户评论和用户信息
      */
     @GetMapping("/goodsComments")
     @ResponseBody
-    public List<GoodsCommentForIndex> goodsComments(){
+    public List<GoodsCommentForIndex> goodsComments() {
         return goodsService.goodsComments();
     }
 
     /**
      * 用户添加评论工程
-     * @param gid 商品id
+     *
+     * @param gid  商品id
      * @param text 评论信息
      * @return 是否添加成功
      */
     @PostMapping("/addComments")
     @ResponseBody
-    public String addComments(@RequestParam("goodsId") int gid,@RequestParam("goodsText") String text,HttpSession session){
+    public String addComments(@RequestParam("goodsId") int gid, @RequestParam("goodsText") String text, HttpSession session) {
         String name = (String) session.getAttribute("userLoginName");
-        if (name==null){
+        if (name == null) {
             return "no";
-        }else {
-            try{
-                goodsService.addComments(new GoodsComments(0,userService.getUserIdByUserAccount(name),gid,text));
-            }catch (Exception e){
+        } else {
+            try {
+                goodsService.addComments(new GoodsComments(0, userService.getUserIdByUserAccount(name), gid, text));
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return "ok";
@@ -193,12 +206,13 @@ public class AboutGoods {
 
     /**
      * 显示用户发布的商品
+     *
      * @param session session
      * @return 用户以发布的所有商品
      */
     @GetMapping("/showUserGoods")
     @ResponseBody
-    public List<GoodsAndImage> showUserGoods(HttpSession session){
+    public List<GoodsAndImage> showUserGoods(HttpSession session) {
         String name = (String) session.getAttribute("userLoginName");
         return goodsService.showAllUserGoods(userService.getUserByUserAccount(name).getId());
     }
@@ -206,21 +220,22 @@ public class AboutGoods {
 
     /**
      * 购物车添加
+     *
      * @param session session
-     * @param id 添加的商品id
+     * @param id      添加的商品id
      * @return 是否添加成功
      */
     @GetMapping("/addCart")
     @ResponseBody
-    public String addCart(HttpSession session,@RequestParam("id") Integer id){
+    public String addCart(HttpSession session, @RequestParam("id") Integer id) {
         String userName = (String) session.getAttribute("userLoginName");
-        if (userName==null){
+        if (userName == null) {
             return "no";
-        }else {
+        } else {
             try {
                 goodsCartService.addCart(id, userService.getUserIdByUserAccount(userName));
                 return "ok";
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return "no";
             }
@@ -229,71 +244,76 @@ public class AboutGoods {
 
     /**
      * 查看购物车
+     *
      * @param session session
      * @return 购物车商品信息
      */
     @GetMapping("showCart")
     @ResponseBody
-    public List<GoodsCatShow01> showCart(HttpSession session){
+    public List<GoodsCatShow01> showCart(HttpSession session) {
         String userName = (String) session.getAttribute("userLoginName");
         System.out.println(userName);
-        if (userName==null){
+        if (userName == null) {
             return null;
-        }else {
+        } else {
             return goodsCartService.showCart(userService.getUserByUserAccount(userName).getId());
         }
     }
 
     /**
      * 跳转到购物车页面
+     *
      * @return 购物车页面
      */
     @GetMapping("showCart2")
-    public String showCart2(){
+    public String showCart2() {
         return "aboutGoods/goodsCartPage";
     }
 
     /**
      * 购物车页面的商品展示
+     *
      * @param session session
      * @return 用户购物车中的商品信息
      */
     @GetMapping("showCartGoods")
     @ResponseBody
-    public List<GoodsCartShow02> showCartGoods(HttpSession session){
+    public List<GoodsCartShow02> showCartGoods(HttpSession session) {
         String userName = (String) session.getAttribute("userLoginName");
         System.out.println(userName);
-        return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId(),null);
+        return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId(), null);
     }
 
     /**
      * 模糊查询购物车中的商品
-     * @param session session
+     *
+     * @param session   session
      * @param goodsName 模糊查询关键字
      * @return 模糊查询到的商品信息
      */
     @GetMapping("searchGoods")
     @ResponseBody
-    public List<GoodsCartShow02> showCartGoods(HttpSession session,@RequestParam("name") String goodsName){
+    public List<GoodsCartShow02> showCartGoods(HttpSession session, @RequestParam("name") String goodsName) {
         String userName = (String) session.getAttribute("userLoginName");
         System.out.println(userName);
-        return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId(),goodsName);
+        return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId(), goodsName);
     }
 
     /**
      * 删除购物车中的商品
+     *
      * @param session session
-     * @param cartId 购物车中的商品id
+     * @param cartId  购物车中的商品id
      * @return 是否删除成功
      */
     @DeleteMapping("/deleteGoodsInCart")
     @ResponseBody
-    public List<GoodsCartShow02> deleteGoodsInCart(HttpSession session,@RequestParam("cid") int cartId){
-        try{
+    public List<GoodsCartShow02> deleteGoodsInCart(HttpSession session, @RequestParam("cid") int cartId) {
+        try {
             goodsCartService.deleteGoodsInCart(cartId);
             String userName = (String) session.getAttribute("userLoginName");
-            return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId(),null);
-        }catch (Exception e){
+            return goodsCartService.showCart02(userService.getUserByUserAccount(userName).getId(), null);
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -302,27 +322,28 @@ public class AboutGoods {
 
     /**
      * 购买商品，下订单
+     *
      * @param session session
      * @param goodsId 商品id
-     * @param cartId 购物车中的id
+     * @param cartId  购物车中的id
      * @return 是否购买成功
      */
     @GetMapping("buyGoods")
     @ResponseBody
-    public List<GoodsCartShow02> buyGoods(HttpSession session,@RequestParam("id") int goodsId,@RequestParam("cid") int cartId){
+    public List<GoodsCartShow02> buyGoods(HttpSession session, @RequestParam("id") int goodsId, @RequestParam("cid") int cartId) {
         String userName = (String) session.getAttribute("userLoginName");
-        int userId=userService.getUserByUserAccount(userName).getId();
+        int userId = userService.getUserByUserAccount(userName).getId();
         try {
-            if (goodsCartService.buyGoods(goodsId,userId)>0){
-                if (goodsCartService.changeNum(cartId)>=0){
-                    return goodsCartService.showCart02(userId,null);
-                }else {
+            if (goodsCartService.buyGoods(goodsId, userId) > 0) {
+                if (goodsCartService.changeNum(cartId) >= 0) {
+                    return goodsCartService.showCart02(userId, null);
+                } else {
                     return null;
                 }
-            }else {
+            } else {
                 return null;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -330,14 +351,15 @@ public class AboutGoods {
 
     /**
      * 显示订单信息
+     *
      * @param session session
      * @return 订单信息
      */
     @GetMapping("/orderShow")
     @ResponseBody
-    public List<OrderShow> orderShow(HttpSession session){
+    public List<OrderShow> orderShow(HttpSession session) {
         String userName = (String) session.getAttribute("userLoginName");
-        int userId=userService.getUserByUserAccount(userName).getId();
+        int userId = userService.getUserByUserAccount(userName).getId();
         return goodsCartService.orderShow(userId);
     }
 

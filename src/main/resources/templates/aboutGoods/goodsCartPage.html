@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
     <!--<link rel="stylesheet" href="css/index.css">-->
     <link rel="stylesheet" href="../css/goodsCartPage.css">
     <link rel="stylesheet" href="../css/swiper-3.4.2.min.css">
@@ -19,101 +21,110 @@
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
-    <div id="app">
-        <div class="cart_title">
-            <div class="swiper-container swiper01">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper001.webp"></div>
-                    <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper002.webp"></div>
-                    <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper003.webp"></div>
-                    <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper004.webp"></div>
+<div id="app">
+    <div class="cart_title">
+        <div class="swiper-container swiper01">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img
+                        src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper001.webp">
+                </div>
+                <div class="swiper-slide"><img
+                        src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper002.webp">
+                </div>
+                <div class="swiper-slide"><img
+                        src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper003.webp">
+                </div>
+                <div class="swiper-slide"><img
+                        src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper004.webp">
                 </div>
             </div>
         </div>
-        <div class="search_box">
-            <el-input @input="searchGoodsByName" placeholder="请输入内容" v-model="searchKeyName" clearable>
-                <template slot="prepend">请输入要查询的商品</template>
-                <el-button slot="append" icon="el-icon-search"></el-button>
-            </el-input>
-        </div>
-        <div class="cartContext">
-            <el-table :data="goodsCartShow" height="550" border style="width: 100%">
-                <el-table-column fixed prop="goodsName" align="center" label="商品名称" width="110"></el-table-column>
-                <!--<el-table-column prop="imgUrl" align="center" label="商品图片" width="280"></el-table-column>-->
-                <el-table-column prop="imgUrl" align="center"  label="精品图片" width="80">
-                    <template slot-scope="scope">
-                        <el-popover placement="top-start" title="" trigger="hover">
-                            <img :src="scope.row.imgUrl" alt="" style="width: 150px;height: 150px">
-                            <img slot="reference" :src="scope.row.imgUrl" style="width: 30px;height: 30px">
-                        </el-popover>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="goodsPrice" align="center" label="价格(元)" width="100"></el-table-column>
-                <el-table-column prop="goodsDate" align="center" label="上架日期" width="100"></el-table-column>
-                <el-table-column prop="goodsStart" align="center" label="商品星级" width="200">
-                    <template slot-scope="scope">
-                        <el-rate v-model="scope.row.goodsStart" show-text></el-rate>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="userAccount" align="center" label="卖家账号" width="150"></el-table-column>
-                <el-table-column prop="phone" align="center" label="卖家电话" width="150"></el-table-column>
-                <el-table-column prop="isSuccess" :formatter="changeNum" align="center" label="是否下单" width="110"></el-table-column>
-                <el-table-column align="center" label="操作" width="150">
-                    <template slot-scope="scope">
-                        <el-button @click="buyGoods(scope.row)" type="text" size="small">购买</el-button>
-                        <el-button @click="delGoods(scope.row)" type="text" size="small">删除</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-        </div>
     </div>
+    <div class="search_box">
+        <el-input @input="searchGoodsByName" placeholder="请输入内容" v-model="searchKeyName" clearable>
+            <template slot="prepend">请输入要查询的商品</template>
+            <el-button slot="append" icon="el-icon-search"></el-button>
+        </el-input>
+    </div>
+    <div class="cartContext">
+        <el-table :data="goodsCartShow" height="550" border style="width: 100%">
+            <el-table-column fixed prop="goodsName" align="center" label="商品名称" width="110"></el-table-column>
+            <!--<el-table-column prop="imgUrl" align="center" label="商品图片" width="280"></el-table-column>-->
+            <el-table-column prop="imgUrl" align="center" label="精品图片" width="80">
+                <template slot-scope="scope">
+                    <el-popover placement="top-start" title="" trigger="hover">
+                        <img :src="scope.row.imgUrl" alt="" style="width: 150px;height: 150px">
+                        <img slot="reference" :src="scope.row.imgUrl" style="width: 30px;height: 30px">
+                    </el-popover>
+                </template>
+            </el-table-column>
+            <el-table-column prop="goodsPrice" align="center" label="价格(元)" width="100"></el-table-column>
+            <el-table-column prop="goodsDate" align="center" label="上架日期" width="100"></el-table-column>
+            <el-table-column prop="goodsStart" align="center" label="商品星级" width="200">
+                <template slot-scope="scope">
+                    <el-rate v-model="scope.row.goodsStart" show-text></el-rate>
+                </template>
+            </el-table-column>
+            <el-table-column prop="userAccount" align="center" label="卖家账号" width="150"></el-table-column>
+            <el-table-column prop="phone" align="center" label="卖家电话" width="150"></el-table-column>
+            <el-table-column prop="isSuccess" :formatter="changeNum" align="center" label="是否下单"
+                             width="110"></el-table-column>
+            <el-table-column align="center" label="操作" width="150">
+                <template slot-scope="scope">
+                    <el-button @click="buyGoods(scope.row)" type="text" size="small">购买</el-button>
+                    <el-button @click="delGoods(scope.row)" type="text" size="small">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+</div>
 <script>
-    var vm=new Vue({
-        el:'#app',
-        data:{
+    var vm = new Vue({
+        el: '#app',
+        data: {
             goodsCartShow: [],
-            searchKeyName:''
+            searchKeyName: ''
         },
-        methods:{
-            searchGoodsByName(name){
-                var _this=this;
+        methods: {
+            searchGoodsByName(name) {
+                var _this = this;
                 $.ajax({
-                    url:'searchGoods',
-                    type:'get',
+                    url: 'searchGoods',
+                    type: 'get',
                     data: {
-                        name:name
+                        name: name
                     },
-                    dataType:'json',
-                    success:function (data) {
-                        _this.goodsCartShow=data
+                    dataType: 'json',
+                    success: function (data) {
+                        _this.goodsCartShow = data
                     }
                 })
             },
-            changeNum(row,column,cellValue){
-                if (cellValue===1){
+            changeNum(row, column, cellValue) {
+                if (cellValue === 1) {
                     return '已下单';
-                }else {
+                } else {
                     return '未下单';
                 }
             },
             buyGoods(row) {
-                var _this=this;
+                var _this = this;
                 $.ajax({
-                    url:'buyGoods',
-                    type:'get',
+                    url: 'buyGoods',
+                    type: 'get',
                     data: {
-                        id:row.goodsId,
-                        cid:row.gid
+                        id: row.goodsId,
+                        cid: row.gid
                     },
-                    dataType:'json',
-                    success:function (data) {
-                        if (data===''){
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data === '') {
                             _this.$message({
                                 message: '对不起，购买失败，请联系管理员：1100101010',
                                 type: 'warning'
                             });
-                        }else {
-                            _this.goodsCartShow=data
+                        } else {
+                            _this.goodsCartShow = data
                             _this.$message({
                                 showClose: true,
                                 message: '恭喜您，购买成功！',
@@ -124,22 +135,22 @@
                 })
             },
             delGoods(row) {
-                var _this=this;
+                var _this = this;
                 $.ajax({
-                    url:'deleteGoodsInCart',
-                    type:'delete',
+                    url: 'deleteGoodsInCart',
+                    type: 'delete',
                     data: {
-                        cid:row.gid
+                        cid: row.gid
                     },
-                    dataType:'json',
-                    success:function (data) {
-                        if (data===''){
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data === '') {
                             _this.$message({
                                 message: '警告哦，删除失败！',
                                 type: 'warning'
                             });
-                        }else {
-                            _this.goodsCartShow=data
+                        } else {
+                            _this.goodsCartShow = data
                             _this.$message({
                                 showClose: true,
                                 message: '成功删除购物车中的商品！',
@@ -150,32 +161,32 @@
                 })
             }
         },
-        mounted:function () {
-            var _this=this;
+        mounted: function () {
+            var _this = this;
             $.ajax({
-                url:'showCartGoods',
-                type:'get',
-                dataType:'json',
-                success:function (data) {
-                    _this.goodsCartShow=data
+                url: 'showCartGoods',
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    _this.goodsCartShow = data
                 }
             })
         }
 
     })
 </script>
-    <script src="../js/swiper-3.4.2.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper01', {
-            pagination: '.swiper-pagination',
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            slidesPerView: 1,
-            paginationClickable: true,
-            spaceBetween: 30,
-            loop: true,
-            autoplay: 1500,
-        });
-    </script>
+<script src="../js/swiper-3.4.2.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper01', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: 1500,
+    });
+</script>
 </body>
 </html>

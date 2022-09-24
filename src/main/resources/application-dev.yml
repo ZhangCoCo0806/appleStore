@@ -1,11 +1,11 @@
 spring:
   datasource:
-#    username: zhangshiqi
-#    password: zsq0806CoCo
-#    url: jdbc:mysql://rm-bp1z6l7991398vbymco.mysql.rds.aliyuncs.com:3306/apple?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
-    username: root
-    password: zsq662663
-    url: jdbc:mysql://localhost:3306/apple?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: zhangshiqi
+    password: zsq0806CoCo
+    url: jdbc:mysql://rm-bp1z6l7991398vbymco.mysql.rds.aliyuncs.com:3306/apple?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+#    username: root
+#    password: root
+#    url: jdbc:mysql://localhost:3306/apple?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   servlet:
@@ -24,6 +24,9 @@ spring:
     properties.mail.smtp.starttls.required: true
     default-encoding: utf-8
 
+
 mybatis:
   mapper-locations: classpath:mapper/**/*Mapper.xml
   type-aliases-package: com.coco.model
+server:
+  port: 8001

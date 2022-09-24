@@ -10,7 +10,7 @@
         select * from goods g,user u,goodsimage gi where g.goodsByUserId =u.id and g.id=gi.goodsId
     </select>
     <resultMap id="getAllGoodsResultMap" type="com.coco.model.dto.GoodsUserImage">
-        <id property="id" column="id" />
+        <id property="id" column="id"/>
         <result property="goodsName" column="goodsName"/>
         <result property="goodsPrice" column="goodsPrice"/>
         <result property="goodsText" column="goodsText"/>

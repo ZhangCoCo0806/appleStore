@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/swiper-3.4.2.min.css">
     <!-- 引入样式 -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -22,10 +24,18 @@
     <div class="title-box">
         <div class="swiper-container swiper_title">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper001.webp"></div>
-                <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper002.webp"></div>
-                <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper003.webp"></div>
-                <div class="swiper-slide"><img src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper004.webp"></div>
+                <div class="swiper-slide"><img
+                        src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper001.webp">
+                </div>
+                <div class="swiper-slide"><img
+                        src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper002.webp">
+                </div>
+                <div class="swiper-slide"><img
+                        src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper003.webp">
+                </div>
+                <div class="swiper-slide"><img
+                        src="http://apple-shop-all-images.oss-cn-beijing.aliyuncs.com/goods-cart-swiper/cartSwipper004.webp">
+                </div>
             </div>
         </div>
 
@@ -35,7 +45,8 @@
         <div class="left-slider-box">
             <div class="swiper-container gallery-top goodsInfos">
                 <div class="swiper-wrapper">
-                    <div th:each="goodsImg : ${goodsInfosById.goodsImages}" class="swiper-slide"><img th:src="${goodsImg.imgUrl}"></div>
+                    <div th:each="goodsImg : ${goodsInfosById.goodsImages}" class="swiper-slide"><img
+                            th:src="${goodsImg.imgUrl}"></div>
                 </div>
                 <!-- Add Arrows -->
                 <div class="swiper-button-next swiper-button-black"></div>
@@ -43,7 +54,8 @@
             </div>
             <div class="swiper-container gallery-thumbs">
                 <div class="swiper-wrapper">
-                    <div th:each="goodsImg : ${goodsInfosById.goodsImages}" class="swiper-slide"><img th:src="${goodsImg.imgUrl}"></div>
+                    <div th:each="goodsImg : ${goodsInfosById.goodsImages}" class="swiper-slide"><img
+                            th:src="${goodsImg.imgUrl}"></div>
                 </div>
             </div>
         </div>
@@ -63,14 +75,16 @@
                 <div class="user-userEmail infos">
                     <span>卖家加入日期：[[${goodsInfosById.userHandImg.joinData}]]</span>
                     <!--<span th:@click="|getUserId('${goodsInfosById.userHandImg.id}')|" class="user-other-goods">查看卖家其他商品</span>-->
-                    <span th:@click="|getUserId('${goodsInfosById.id}','${goodsInfosById.goodsByUserId}')|" class="user-other-goods-text">查看商品评论</span>
+                    <span th:@click="|getUserId('${goodsInfosById.id}','${goodsInfosById.goodsByUserId}')|"
+                          class="user-other-goods-text">查看商品评论</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="buyGoods-box">
         <div class="addCart">
-            <el-button th:@click="|addCart('${goodsInfosById.id}')|" type="primary" icon="el-icon-search">加入购物车</el-button>
+            <el-button th:@click="|addCart('${goodsInfosById.id}')|" type="primary" icon="el-icon-search">加入购物车
+            </el-button>
         </div>
         <div class="buyGoods">
             <el-button th:@click="|checkCart()|" type="primary" icon="el-icon-search">查看购物车</el-button>
@@ -80,7 +94,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">购物车</h4>
                 </div>
                 <div class="modal-body">
@@ -137,23 +152,23 @@
     </div>
 </div>
 <script>
-    var vm=new Vue({
-        el:'#app',
-        data:{
-            goodsCom:'',
-            name:'zhangsan',
-            goodsText:'',
-            otherGoods:'',
-            showCartGoods:[]
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            goodsCom: '',
+            name: 'zhangsan',
+            goodsText: '',
+            otherGoods: '',
+            showCartGoods: []
         },
-        methods:{
-            checkCart(){
-                let _this=this
+        methods: {
+            checkCart() {
+                let _this = this
                 $.ajax({
-                    url:'showCart',
-                    type:'get',
-                    success:function (data) {
-                        if (data===''){
+                    url: 'showCart',
+                    type: 'get',
+                    success: function (data) {
+                        if (data === '') {
                             const loading = _this.$loading({
                                 lock: true,
                                 text: '对不起您没有登录！请登录！',
@@ -163,9 +178,9 @@
                             setTimeout(() => {
                                 loading.close();
                             }, 1000);
-                        }else {
+                        } else {
                             console.log(data)
-                            _this.showCartGoods=data
+                            _this.showCartGoods = data
                         }
                     }
                 })
@@ -173,34 +188,34 @@
                     alert("jjjjjj")
                 })*/
             },
-            addComments:function(gid){
-                let _this=this;
+            addComments: function (gid) {
+                let _this = this;
                 $.ajax({
                     type: "post",
                     url: "addComments",
                     data: {
-                        goodsId:gid,
-                        goodsText:_this.goodsCom
+                        goodsId: gid,
+                        goodsText: _this.goodsCom
                     },
-                    success:function (data) {
-                        if("ok"===data){
-                            _this.goodsCom="";
+                    success: function (data) {
+                        if ("ok" === data) {
+                            _this.goodsCom = "";
                             $.ajax({
-                                url:'getAllGoodsByUser',
-                                type:'get',
-                                dataType:'json',
-                                data:{
-                                    gid:gid
+                                url: 'getAllGoodsByUser',
+                                type: 'get',
+                                dataType: 'json',
+                                data: {
+                                    gid: gid
                                 },
-                                success:function (data) {
-                                    _this.goodsText=data
+                                success: function (data) {
+                                    _this.goodsText = data
                                 }
                             });
                             _this.$message({
                                 message: '评论成功！谢谢您！',
                                 type: 'success'
                             });
-                        }else {
+                        } else {
                             _this.$message({
                                 message: '评论失败，您还没有登录，请登录后在评论！',
                                 type: 'warning'
@@ -209,16 +224,16 @@
                     }
                 })
             },
-            addCart:function(id){
-                let _this=this
+            addCart: function (id) {
+                let _this = this
                 $.ajax({
-                    url:'addCart',
-                    type:'get',
-                    data:{
-                        id:id,
+                    url: 'addCart',
+                    type: 'get',
+                    data: {
+                        id: id,
                     },
-                    success:function (data) {
-                        if (data==="no"){
+                    success: function (data) {
+                        if (data === "no") {
                             const loading = _this.$loading({
                                 lock: true,
                                 text: '对不起您没有登录！请登录！',
@@ -228,7 +243,7 @@
                             setTimeout(() => {
                                 loading.close();
                             }, 1000);
-                        }else {
+                        } else {
                             _this.$notify({
                                 title: '成功',
                                 message: '添加购物车成功！',
@@ -238,37 +253,37 @@
                     }
                 })
             },
-            getUserId:function (gid,uid) {
+            getUserId: function (gid, uid) {
                 this.getOtherGoods(uid)
-                let _this=this
+                let _this = this
                 $.ajax({
-                    url:'getAllGoodsByUser',
-                    type:'get',
-                    dataType:'json',
-                    data:{
-                        gid:gid
+                    url: 'getAllGoodsByUser',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        gid: gid
                     },
-                    success:function (data) {
-                        _this.goodsText=data
+                    success: function (data) {
+                        _this.goodsText = data
                     }
                 })
             },
-            getOtherGoods:function (uid) {
-                let _this=this
+            getOtherGoods: function (uid) {
+                let _this = this
                 $.ajax({
-                    url:'getGoodsByUid',
-                    type:'get',
-                    dataType:'json',
-                    data:{
-                        uid:uid
+                    url: 'getGoodsByUid',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        uid: uid
                     },
-                    success:function (data) {
-                        _this.otherGoods=data
+                    success: function (data) {
+                        _this.otherGoods = data
                     }
                 })
             }
         },
-        mounted:function(){
+        mounted: function () {
         }
     })
 </script>

@@ -1,28 +1,33 @@
-*{
+* {
     padding: 0;
     margin: 0;
 }
-.cart_title{
+
+.cart_title {
     width: 100%;
     height: 200px;
     margin: auto;
 }
-.cart_title .swiper01{
+
+.cart_title .swiper01 {
     width: 100%;
     height: 100%;
 }
-.cart_title .swiper01 .swiper-wrapper .swiper-slide img{
+
+.cart_title .swiper01 .swiper-wrapper .swiper-slide img {
     width: 100%;
     height: 100%;
 }
-.search_box{
+
+.search_box {
     width: 60%;
     height: 40px;
     margin: auto;
     margin-top: 30px;
     background-color: yellow;
 }
-.cartContext{
+
+.cartContext {
     width: 60%;
     height: 550px;
     margin: auto;

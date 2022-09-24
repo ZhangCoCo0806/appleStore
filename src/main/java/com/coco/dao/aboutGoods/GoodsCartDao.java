@@ -12,14 +12,16 @@ import java.util.List;
 public interface GoodsCartDao {
     /**
      * 商品添加购物车
+     *
      * @param goodsId 商品id
-     * @param userId 用户id
+     * @param userId  用户id
      * @return 受影响记录数
      */
-    int addCart(@Param("gid") int goodsId,@Param("uid") int userId);
+    int addCart(@Param("gid") int goodsId, @Param("uid") int userId);
 
     /**
      * 根据用户id显示购物车
+     *
      * @param uid 用户id
      * @return 购物车商品信息
      */
@@ -27,13 +29,15 @@ public interface GoodsCartDao {
 
     /**
      * 显示购物车
+     *
      * @param uid 用户id
      * @return 购物车商品信息
      */
-    List<GoodsCartShow02> showCart02(@Param("uid") int uid,@Param("name") String goodsName);
+    List<GoodsCartShow02> showCart02(@Param("uid") int uid, @Param("name") String goodsName);
 
     /**
      * 根据购物车中商品的编号删除商品
+     *
      * @param cid 购物车中商品的编号
      * @return 受影响记录数
      */
@@ -41,14 +45,16 @@ public interface GoodsCartDao {
 
     /**
      * 商品购买，下订单
+     *
      * @param goodsId 商品id
-     * @param userId 买家id
+     * @param userId  买家id
      * @return 受影响记录数
      */
-    int buyGoods(@Param("gid") int goodsId,@Param("uid") int userId);
+    int buyGoods(@Param("gid") int goodsId, @Param("uid") int userId);
 
     /**
      * 修改购物车中是否下单
+     *
      * @param cartId 购物车中的id
      * @return 受影响记录数
      */
@@ -56,6 +62,7 @@ public interface GoodsCartDao {
 
     /**
      * 订单查看
+     *
      * @param uid 用户编号
      * @return 订单信息
      */

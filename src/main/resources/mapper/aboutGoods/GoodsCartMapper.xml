@@ -14,16 +14,17 @@
         group by gid
     </select>
     <select id="showCart02" resultType="com.coco.model.dto.GoodsCartShow02">
-        select gc.id gid,g.id goodsId,g.goodsName goodsName,gi.imgUrl imgUrl,g.goodsPrice goodsPrice,g.goodsDate goodsDate,g.goodsStart goodsStart,u.userAccount userAccount,u.phone phone,gc.isSuccess isSuccess
+        select gc.id gid,g.id goodsId,g.goodsName goodsName,gi.imgUrl imgUrl,g.goodsPrice goodsPrice,g.goodsDate
+        goodsDate,g.goodsStart goodsStart,u.userAccount userAccount,u.phone phone,gc.isSuccess isSuccess
         from goodscart gc,goods g,goodsimage gi,user u
         where gc.goodsId=g.id
-          and gc.goodsId=gi.goodsId
-          and g.goodsByUserId=u.id
-          and gc.userId=#{uid}
+        and gc.goodsId=gi.goodsId
+        and g.goodsByUserId=u.id
+        and gc.userId=#{uid}
         <if test="name!=null">
             and g.goodsName like concat('%',#{name},'%')
         </if>
-            group by gid;
+        group by gid;
     </select>
     <delete id="deleteGoodsInCart">
         delete from goodscart

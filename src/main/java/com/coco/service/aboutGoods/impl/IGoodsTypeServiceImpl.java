@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+
 @Service
 public class IGoodsTypeServiceImpl implements IGoodsTypeService {
     @Resource
     private GoodsTypeDao goodsTypeDao;
+
     @Override
     public List<GoodsType> getAllGoodsType() {
         return goodsTypeDao.getAllGoodsType();

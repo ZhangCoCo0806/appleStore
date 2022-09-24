@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AllArgsConstructor
 public class UserInfos {
     private Integer id;
-    @DateTimeFormat(pattern ="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private java.sql.Date birth;
     private Integer age;
     private String sex;
