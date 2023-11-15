@@ -140,6 +140,7 @@ public class AboutGoods {
     @ApiOperation("商品详情接口")
     @RequestMapping("/getGoodsById")
     public String getGoodsById(@RequestParam("gid") Integer goodsId, Model model) {
+        System.out.println("coco come to here......");
         model.addAttribute("goodsInfosById", goodsService.getGoodsByGid(goodsId));
         return "aboutGoods/goodsInfoPage";
     }

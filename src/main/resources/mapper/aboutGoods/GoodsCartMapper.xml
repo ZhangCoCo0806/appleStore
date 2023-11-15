@@ -22,7 +22,8 @@
         and g.goodsByUserId=u.id
         and gc.userId=#{uid}
         <if test="name!=null">
-            and g.goodsName like concat('%',#{name},'%')
+--             and g.goodsName like concat('%',#{name},'%')
+            and g.goodsName like "%"#{name}"%"
         </if>
         group by gid;
     </select>

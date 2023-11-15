@@ -15,6 +15,7 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
+        <docker.image.prefix>coco</docker.image.prefix>
     </properties>
     <dependencies>
 
@@ -104,6 +105,31 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.0.0</version>
+
+                <configuration>
+                    <!--远程Docker的地址-->
+                    <dockerHost>http://114.55.64.40:2375</dockerHost>
+                    <!--镜像名称，前缀/项目名-->
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <!--<imageTags>
+                        <imageTag>latest</imageTag>
+                    </imageTags>-->
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+
+
         </plugins>
     </build>
 

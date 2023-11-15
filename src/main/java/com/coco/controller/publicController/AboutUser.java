@@ -48,6 +48,14 @@ public class AboutUser {
         return "aboutUser/login";
     }
 
+    @GetMapping("/testSession")
+    @ResponseBody
+    public String testSession(HttpSession session){
+        Object userLoginName = session.getAttribute("userLoginName");
+        System.out.println(userLoginName);
+        return (String) userLoginName;
+    }
+
     /**
      * 用户登录验证接口
      *
